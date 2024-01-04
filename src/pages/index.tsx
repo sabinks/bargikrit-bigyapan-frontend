@@ -1,6 +1,7 @@
 import { backedApiUrl } from '@/api/constants';
 import axios from 'axios'
 import Zoom from 'react-medium-image-zoom'
+import { bree } from './_app';
 
 export default function Home({ quotes, domain }: any) {
 
@@ -12,8 +13,11 @@ export default function Home({ quotes, domain }: any) {
         return src;
     }
     return (
-        <main className={`container mx-auto`}>
-            <div className="grid grid-cols-4 gap-4">
+        <main className={`container mx-auto my-8`}>
+            <div className={`text-center text-5xl py-8 font-bold tracking-wider ${bree.className}`}>
+                <h2>Quote Buckets</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {
                     quotes.map((quote: any, index: number) => {
                         return <ImageZoom key={index} src={`${domain}/${quote.filename}`} alt={"Name"} zoom="500" />
