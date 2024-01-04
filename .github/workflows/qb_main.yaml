@@ -1,0 +1,30 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Live App
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: ${{secrets.SSH_HOST}}
+        key: ${{secrets.SSH_KEY}}
+        username: ${{secrets.SSH_USERNAME}}
+        
+        script: |
+          cd /var/www/beautiful-quotes/live/frontend
+          git checkout .
+          git reset --hard origin/main
+          git pull
+          export NVM_DIR=~/.nvm
+          source ~/.nvm/nvm.sh
+          nvm use 18.17.0
+          npm i
+          npm run build
+          echo 'Building app'
+          pm2 restart quotebuckets_nextjs
+          echo 'Build successful'
