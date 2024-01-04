@@ -16,14 +16,14 @@ jobs:
         username: ${{secrets.SSH_USERNAME}}
         
         script: |
-          cd /var/www/beautiful-quotes/live/frontend
+          cd /var/www/quote-buckets/live/frontend
           git checkout .
           git reset --hard origin/main
           git pull
           export NVM_DIR=~/.nvm
           source ~/.nvm/nvm.sh
           nvm use 18.17.0
-          npm i
+          npm i 
           npm run build
           echo 'Building app'
           pm2 restart quotebuckets_nextjs
