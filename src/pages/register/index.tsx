@@ -5,6 +5,7 @@ import UserSignUp from './UserSignUp'
 import { classNames } from '../../../utils';
 import Link from 'next/link';
 import { BASE_URL } from '@/constants';
+import Image from 'next/image';
 
 export default function Register() {
     // const [searchParams] = useSearchParams();
@@ -35,11 +36,10 @@ export default function Register() {
             <div className="flex items-center w-1/3 justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                 <div className="mx-auto w-full max-w-sm lg:w-96">
                     <div >
-                        <img
+                        <Image
                             className="h-24 w-auto"
-                            src={`/assets/bb-250.png`}
-                            alt='Bargikrit Bigyapan Logo'
-                            width={150} height={150}
+                            src="/assets/bb-250.png"
+                            alt="Logo"
                         />
                         <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
                             Sign in to your account

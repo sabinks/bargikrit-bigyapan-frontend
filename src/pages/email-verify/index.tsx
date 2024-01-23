@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "../../../component";
 import { useRouter } from "next/router";
 import { apiClient } from "../../../api";
+import Image from "next/image";
 
 
 export default function MailVerification() {
@@ -36,10 +37,10 @@ export default function MailVerification() {
         <div className='w-full h-screen border flex items-center'>
             <div className='mx-auto w-full max-w-sm'>
                 <div className="flex space-x-5 items-center">
-                    <img
-                        className='h-12 w-auto'
-                        src='https://freesvg.org/img/student_hat_1.png'
-                        alt='Workflow'
+                    <Image
+                        className="h-12 w-auto"
+                        src="/assets/bb-250.png"
+                        alt="Logo"
                     />
                     <h5 className='text-3xl font-extrabold text-gray-900'>
                         Account verified

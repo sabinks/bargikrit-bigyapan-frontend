@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { APP_NAME } from "@/constants";
 import { montserrat, nunitoSans, playFair, poppins } from "@/fonts";
+import Image from "next/image";
 
 // const SocialLogin = dynamic(
 //     () => import("../../../components/socialLogin"),
@@ -67,10 +68,10 @@ export default function Login() {
                         <div>
                             <Link href={'/'}>
                                 <div className="flex flex-row gap-x-4 items-center">
-                                    <img
+                                    <Image
                                         className="h-24 w-auto"
-                                        src="assets/bb-500.png"
-                                        alt="Workflow"
+                                        src="/assets/bb-250.png"
+                                        alt="Logo"
                                     />
                                     <h2 className={`text-4xl tracking-wider font-extrabold text-secondary ${montserrat.className}`}>
                                         {APP_NAME}
