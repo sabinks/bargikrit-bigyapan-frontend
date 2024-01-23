@@ -12,6 +12,8 @@ import { searchUser } from "../api";
 import io from 'socket.io-client';
 import { APP_NAME } from "@/constants";
 import { poppins } from "@/fonts";
+import Image from "next/image";
+import { setCookie } from "cookies-next";
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 
 const navigation = [
@@ -105,29 +107,29 @@ export default function AuthLayout({ props }: any) {
     //     }
     // }, [user_id])
 
-    const { mutate } = useMutation<any, Error>(logout,
-        {
-            onSuccess: () => {
-                signout(() => {
-                    router.push('/login')
-                });
-            },
-            onError: (err: any) => {
-                console.log("logout Error: ", err);
-            },
-        }
-    );
+    // const { mutate } = useMutation<any, Error>(logout,
+    //     {
+    //         onSuccess: () => {
+    //             signout(() => {
+
+    //             });
+    //         },
+    //         onError: (err: any) => {
+    //             console.log("logout Error: ", err);
+    //         },
+    //     }
+    // );
     // useEffect(() => {
     //     if (!checkSubset(['Client'], roles) && query != "") {
     //         refetchSearch()
     //     }
     // }, [query])
 
-    const { data: searchdata, refetch: refetchSearch }: any = useQuery([query], searchUser,
-        {
-            enabled: query != "" ? true : false
-        }
-    )
+    // const { data: searchdata, refetch: refetchSearch }: any = useQuery([query], searchUser,
+    //     {
+    //         enabled: query != "" ? true : false
+    //     }
+    // )
 
 
 
@@ -135,6 +137,12 @@ export default function AuthLayout({ props }: any) {
         setQuery("")
         router.push(`${role.toLocaleLowerCase()}/${id}/profile`)
 
+    }
+
+    function handleSignout() {
+        setCookie('token', '')
+        setCookie('role', '')
+        router.push('/login')
     }
 
     return (
@@ -264,10 +272,12 @@ export default function AuthLayout({ props }: any) {
                     <div className='flex flex-col  flex-grow pt-5 bg-primary overflow-y-auto'>
                         <Link href="/">
                             <div className='flex items-center flex-shrink-0 px-2'>
-                                <img
+                                <Image
                                     className='h-8 w-auto'
                                     src='/assets/bb-250.png'
-                                    alt={APP_NAME}
+                                    alt={APP_NAME ? APP_NAME : ''}
+                                    width="100"
+                                    height="100"
                                 />
                                 <p className='font-extrabold text-secondary px-3 text-xl'>
                                     {APP_NAME}
@@ -445,7 +455,7 @@ export default function AuthLayout({ props }: any) {
                                                                     active ? "bg-secondary text-white" : "",
                                                                     "block px-4 py-2 text-sm text-gray-700 cursor-pointer rounded-b-md"
                                                                 )} onClick={() => {
-                                                                    mutate()
+                                                                    handleSignout()
                                                                 }}>{item.name}</span>
 
                                                             )}

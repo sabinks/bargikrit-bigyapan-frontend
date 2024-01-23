@@ -45,6 +45,8 @@ export default function ForgotPassword() {
                                 className="h-12 w-auto"
                                 src="/assets/bb-250.png"
                                 alt="Logo"
+                                width="100"
+                                height="100"
                             />
                             <h2 className='mt-6 text-3xl font-extrabold text-gray-900'>
                                 Forgot Password

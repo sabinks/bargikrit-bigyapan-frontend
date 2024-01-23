@@ -62,8 +62,6 @@ export default function Home({ data }: any) {
 
 export async function getServerSideProps(context: any) {
     const { data } = await apiClient.get(`/next/advertisements`);
-    console.log(data);
-
     return {
         props: { data }
     }

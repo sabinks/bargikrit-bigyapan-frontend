@@ -8,13 +8,13 @@ import ChangeUserPassword from './changeUserPassword'
 
 
 const multipleTabData = [
-    { label: "Change Password", slug: 'change-password', role: ['Super Admin', 'Admin', 'Client', 'Partner'] },
-    { label: "User Details", slug: 'user-details', role: ['Admin', 'Client', 'Partner', 'Super Admin'] },
-    { label: "Bank Details", slug: 'bank-details', role: ['Client', 'Partner'] },
+    { label: "Change Password", slug: 'change-password', role: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'] },
+    // { label: "User Details", slug: 'user-details', role: ['Admin', 'Client', 'Partner', 'Super Admin'] },
+    // { label: "Bank Details", slug: 'bank-details', role: ['Client', 'Partner'] },
     // { label: "Testimonial", slug: 'testimonial', role: ['Client', 'Partner'] },
 ]
 export default function Profile() {
-    const [navState, setNavState] = useState('user-details')
+    const [navState, setNavState] = useState('change-password')
     // const { roles }: any = useAuth()
 
     return (
@@ -25,7 +25,7 @@ export default function Profile() {
                 {
                     multipleTabData.map(({ label, slug, role }) => (
                         <div key={label}
-                            className={`px-4 py-1.5 cursor-pointer border-b rounded-t-md ${slug == navState ? 'bg-secondary text-white' : 'bg-accent2'}`}
+                            className={`px-4 py-1.5 cursor-pointer border-b rounded-t-md ${slug == navState ? 'bg-accent1 text-white' : 'bg-secondary'}`}
                             onClick={() => setNavState(slug)}>
                             {label}
                         </div>

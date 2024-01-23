@@ -40,6 +40,8 @@ export default function Register() {
                             className="h-24 w-auto"
                             src="/assets/bb-250.png"
                             alt="Logo"
+                            width="100"
+                            height="100"
                         />
                         <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
                             Sign in to your account
@@ -85,10 +87,12 @@ export default function Register() {
                 </div>
             </div>
             <div className="hidden lg:block relative w-0 flex-1 contrast-50">
-                <img
+                <Image
                     className="absolute inset-0 h-full w-full object-cover"
                     src="/assets/market-5000694_1920.png"
-                    alt=""
+                    alt="Advertisement"
+                    width="1000"
+                    height="1000"
                 />
             </div>
         </div >

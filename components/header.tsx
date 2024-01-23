@@ -14,6 +14,7 @@ import { useAuth } from '../hooks/auth';
 import { useMutation } from '@tanstack/react-query';
 import { logout } from '../api/auth';
 import Image from 'next/image';
+import { setCookie } from 'cookies-next';
 function Header() {
     const { isAuthenticated, signout } = useAuth()
     const router = useRouter()
@@ -35,6 +36,11 @@ function Header() {
             },
         }
     );
+    const handleLogout = () => {
+        setCookie('role', '')
+        setCookie('token', '')
+        router.reload()
+    }
     return (
         <div>
             <nav className="flex md:hidden items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -45,6 +51,8 @@ function Header() {
                             className="h-8 w-auto"
                             src="/assets/bb-250.png"
                             alt=""
+                            width="100"
+                            height="100"
                         />
                     </a>
                 </div>
@@ -143,7 +151,7 @@ function Header() {
                                 }
                                 {
                                     isAuthenticated ?
-                                        <span className="px-4 py-1 rounded-xl w-max place-self-en hover:text-white hover:drop-shadow-xl hover:cursor-pointer transition delay-50 duration-500" onClick={() => mutate()}>Logout</span>
+                                        <span className="px-4 py-1 rounded-xl w-max place-self-en hover:text-white hover:drop-shadow-xl hover:cursor-pointer transition delay-50 duration-500" onClick={() => handleLogout()}>Logout</span>
                                         :
                                         <span className='pl-2'>
                                             <div className="flex space-x-2 px-4 py-1 rounded-xl w-max place-self-en hover:text-white hover:drop-shadow-xl hover:cursor-pointer transition delay-50 duration-500"
@@ -152,7 +160,7 @@ function Header() {
                                                     router.push("/login")
                                                 }} >
                                                 <UserIcon className="w-4" />
-                                                <span>Login In</span>
+                                                <span>Login</span>
                                             </div>
                                         </span>
                                 }
@@ -163,10 +171,8 @@ function Header() {
                                             <UserIcon className="w-4" />
                                             <span>Sign Up</span>
                                         </div>
-
                                     </Link>
                                 }
-
                             </div>
                         </div>
                     </div>
@@ -180,6 +186,8 @@ function Header() {
                                 className="h-8 w-auto"
                                 src="/assets/bb-250.png"
                                 alt=""
+                                width="100"
+                                height="100"
                             />
                             <h1 className={`text-secondary tracking-wider font-semibold text-3xl ${montserrat.className}`}>Bargikrit Bigyapan</h1>
                         </div>

@@ -35,8 +35,6 @@ export default function Login() {
         onSuccess: (data: any) => {
 
             const { role, token } = data;
-            sessionStorage.setItem('token', token)
-            sessionStorage.setItem('role', role)
             setCookie("token", token);
             setCookie("role", role)
             // setCookie("permissions", JSON.stringify(permissions))
@@ -72,6 +70,8 @@ export default function Login() {
                                         className="h-24 w-auto"
                                         src="/assets/bb-250.png"
                                         alt="Logo"
+                                        width="100"
+                                        height="100"
                                     />
                                     <h2 className={`text-4xl tracking-wider font-extrabold text-secondary ${montserrat.className}`}>
                                         {APP_NAME}
@@ -102,7 +102,7 @@ export default function Login() {
                                         name="password"
                                         placeholder=""
                                         type={isPassword ? "password" : "text"}
-                                        value={state.email}
+                                        value={state.password}
                                         onChange={(e: { target: { value: string } }) =>
                                             setState({ ...state, password: e.target.value })
                                         }
@@ -149,10 +149,12 @@ export default function Login() {
                     </div>
                 </div>
                 <div className="hidden lg:block relative w-0 flex-1 contrast-50">
-                    <img
+                    <Image
                         className="absolute inset-0 h-full w-full object-cover"
-                        src="assets/market-5000694_1920.png"
-                        alt=""
+                        src="/assets/market-5000694_1920.png"
+                        alt="Advertisement"
+                        width="1000"
+                        height="1000"
                     />
                 </div>
             </div>

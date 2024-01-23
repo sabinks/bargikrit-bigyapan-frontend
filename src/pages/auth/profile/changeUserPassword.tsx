@@ -3,19 +3,22 @@ import React, { useState } from 'react'
 import { Button, Input } from '../../../../component'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import { changePassword } from '../../../../api/auth'
+import { setCookie } from 'cookies-next'
+import { useRouter } from 'next/router'
 
 
 function ChangeUserPassword() {
+    const router = useRouter();
 
     const [user, setUser] = useState<any>({
-        current_password: '',
+        currentPassword: '',
         password: '',
-        password_confirmation: ''
+        passwordConfirmation: ''
     })
     const [showPasswords, setShowPasswords] = useState<any>({
-        current_password: true,
+        currentPassword: true,
         password: true,
-        password_confirmation: true
+        passwordConfirmation: true
     })
     const [errors, setErrors] = useState<any>([])
 
@@ -26,7 +29,11 @@ function ChangeUserPassword() {
                 setErrors(data)
             }
         },
-        onSuccess: () => setErrors("")
+        onSuccess: () => {
+            setCookie('token', '')
+            setCookie('role', '')
+            router.push('/login')
+        }
     })
 
     const handleInputChange = (e: any) => {
@@ -50,19 +57,19 @@ function ChangeUserPassword() {
                 <div className="text-sm font-semibold">Current Password</div>
                 <div className="relative w-full items-center">
                     <Input
-                        name='current_password'
-                        value={user?.current_password}
-                        type={showPasswords?.current_password ? 'password' : 'text'}
+                        name='currentPassword'
+                        value={user?.currentPassword}
+                        type={showPasswords?.currentPassword ? 'password' : 'text'}
                         onChange={handleInputChange}
                     />
                     {
-                        showPasswords.current_password ?
-                            <EyeIcon className="w-5 mr-2 cursor-pointer absolute top-2 right-0" onClick={() => togglePassword('current_password')} />
+                        showPasswords.currentPassword ?
+                            <EyeIcon className="w-5 mr-2 cursor-pointer absolute top-2 right-0" onClick={() => togglePassword('currentPassword')} />
                             :
-                            <EyeSlashIcon className="w-5 mr-2 cursor-pointer absolute top-2 right-0" onClick={() => togglePassword('current_password')} />
+                            <EyeSlashIcon className="w-5 mr-2 cursor-pointer absolute top-2 right-0" onClick={() => togglePassword('currentPassword')} />
                     }
                 </div>
-                <div className="text-red-500 text-sm">{errors?.current_password}</div>
+                <div className="text-red-500 text-sm">{errors?.currentPassword}</div>
             </div>
             <div>
                 <div className="text-sm font-semibold">New Password</div>
@@ -87,20 +94,20 @@ function ChangeUserPassword() {
                 <div className="text-sm font-semibold">Confirm  Password</div>
                 <div className="relative w-full items-center">
                     <Input
-                        name='password_confirmation'
-                        value={user?.password_confirmation}
-                        type={showPasswords?.password_confirmation ? 'password' : 'text'}
+                        name='passwordConfirmation'
+                        value={user?.passwordConfirmation}
+                        type={showPasswords?.passwordConfirmation ? 'password' : 'text'}
                         onChange={handleInputChange}
                     />
                     {
-                        showPasswords?.password_confirmation ?
-                            <EyeIcon className="w-5 mr-2 cursor-pointer absolute top-2 right-0" onClick={() => togglePassword('password_confirmation')} />
+                        showPasswords?.passwordConfirmation ?
+                            <EyeIcon className="w-5 mr-2 cursor-pointer absolute top-2 right-0" onClick={() => togglePassword('passwordConfirmation')} />
                             :
-                            <EyeSlashIcon className="w-5 mr-2 cursor-pointer absolute top-2 right-0" onClick={() => togglePassword('password_confirmation')} />
+                            <EyeSlashIcon className="w-5 mr-2 cursor-pointer absolute top-2 right-0" onClick={() => togglePassword('passwordConfirmation')} />
 
                     }
                 </div>
-                <div className="text-red-500 text-sm">{errors?.password_confirmation}</div>
+                <div className="text-red-500 text-sm">{errors?.passwordConfirmation}</div>
             </div>
 
             <Button label='Update' loading={isLoading} className='w-full' onClick={() => mutate(user)} />

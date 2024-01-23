@@ -41,6 +41,8 @@ export default function MailVerification() {
                         className="h-12 w-auto"
                         src="/assets/bb-250.png"
                         alt="Logo"
+                        width="100"
+                        height="100"
                     />
                     <h5 className='text-3xl font-extrabold text-gray-900'>
                         Account verified
