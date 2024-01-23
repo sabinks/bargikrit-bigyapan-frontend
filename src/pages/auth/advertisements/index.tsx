@@ -34,7 +34,7 @@ export default function Advertisements() {
     const [edit, setEdit] = useState(false)
 
     const { isLoading, data, refetch, isFetching } = useQuery(
-        ["advertisements", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 2],
+        ["advertisements", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 10],
         getQueryData, {
         onSuccess: (data) => {
             setTableData(data.content);
