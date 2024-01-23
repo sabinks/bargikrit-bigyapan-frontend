@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { useAuth } from '../hooks/auth';
 import { useMutation } from '@tanstack/react-query';
 import { logout } from '../api/auth';
+import Image from 'next/image';
 function Header() {
     const { isAuthenticated, signout } = useAuth()
     const router = useRouter()
@@ -40,7 +41,7 @@ function Header() {
                 <div className="flex lg:flex-1">
                     <a href="#" className="-m-1.5 p-1.5">
                         <span className="sr-only">{APP_NAME}</span>
-                        <img
+                        <Image
                             className="h-8 w-auto"
                             src="/assets/bb-250.png"
                             alt=""
@@ -99,7 +100,7 @@ function Header() {
                                         key={item.name}
                                         href={item.href}
                                         onClick={(e: any) => setMobileMenuOpen(false)}
-                                        className="-mx-3 block px-3 py-2 text-gray-light tracking-wide text-base text-gray-900 hover:bg-gray-50 hover:bg-primary hover:text-white transition duration-300"
+                                        className="-mx-3 block px-3 py-2 text-gray-light tracking-wide text-base text-gray-900 hover:bg-primary hover:text-white transition duration-300"
                                     >
                                         {item.name}
                                     </a>
