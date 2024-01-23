@@ -176,8 +176,8 @@ function Header() {
                 <div className="container mx-auto">
                     <div className="flex justify-between items-center ">
                         <div className="flex items-center gap-x-2">
-                            <img
-                                className="h-10 w-auto"
+                            <Image
+                                className="h-8 w-auto"
                                 src="/assets/bb-250.png"
                                 alt=""
                             />
