@@ -108,7 +108,7 @@ function Header() {
                                         key={item.name}
                                         href={item.href}
                                         onClick={(e: any) => setMobileMenuOpen(false)}
-                                        className="-mx-3 block px-3 py-2 text-gray-light tracking-wide text-base text-gray-900 hover:bg-primary hover:text-white transition duration-300"
+                                        className="-mx-3 block px-3 py-2 tracking-wide text-base text-gray-dark hover:bg-primary hover:text-white transition duration-300"
                                     >
                                         {item.name}
                                     </a>
