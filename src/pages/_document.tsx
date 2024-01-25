@@ -7,7 +7,7 @@ export default function Document() {
     return (
         <Html lang="en">
             <Head >
-                <title>{APP_NAME}</title>
+                {/* <title>{APP_NAME}</title> */}
                 <meta property="og:description" content={`${APP_NAME}, advertisement house, bargikrit bigyapan, advertisement, promote business, create job`} key="description" />
                 <link rel="icon" href="/assets/bb-250.png" type="image/png" sizes="32x32" />
             </Head>

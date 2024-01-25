@@ -9,8 +9,10 @@ export const showAdvertisement = async (data: any) => {
     return await apiClient.get(`/advertisements/${id}`);
 };
 export const updateAdvertisement = async (state: any) => {
-    const { id, name, data, advertisementTypeId, districtId, provinceId, countryId } = state
-    return await apiClient.put(`/advertisements/${id}`, { name, data, advertisementTypeId, districtId, provinceId, countryId });
+    const { id, name, data, advertisementTypeId, districtId, provinceId, countryId, companyName, email, phone } = state
+    return await apiClient.put(`/advertisements/${id}`, {
+        name, data, advertisementTypeId, districtId, provinceId, countryId, companyName, email, phone,
+    });
 };
 
 export const deleteAdvertisement = async (data: any) => {

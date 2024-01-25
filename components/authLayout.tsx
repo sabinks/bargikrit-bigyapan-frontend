@@ -18,6 +18,13 @@ const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 
 const navigation = [
     {
+        name: "Dashboard",
+        href: '/auth/dashboard',
+        icon: HomeIcon,
+        roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'],
+        permission: ''
+    },
+    {
         name: "Advertisements",
         href: '/auth/advertisements',
         icon: HomeIcon,
@@ -26,31 +33,31 @@ const navigation = [
     },
     {
         name: "Admin",
-        href: '/auth/admin',
+        href: '/auth/admins',
         icon: AcademicCapIcon,
-        roles: ['Super Admin',],
-        permission: 'menu-admin'
+        roles: ['SUPERADMIN',],
+        permission: ''
     },
     {
         name: "Partner",
-        href: '/auth/partner ',
+        href: '/auth/partners',
         icon: HomeIcon,
-        roles: ['Super Admin', 'Admin', 'Subagency', 'Client'],
-        permission: 'menu-agent'
+        roles: ['SUPERADMIN', 'ADMIN'],
+        permission: ''
     },
     {
-        name: "Member",
-        href: '/auth/user ',
+        name: "Users",
+        href: '/auth/users ',
         icon: UserCircleIcon,
-        roles: ['Super Admin', 'Admin', 'Subagency'],
-        permission: 'menu-client'
+        roles: ['SUPERADMIN', 'ADMIN'],
+        permission: ''
     },
     {
         name: "Role",
         href: '/auth/role',
         icon: BuildingLibraryIcon,
-        roles: ['Super Admin'],
-        permission: 'menu-role'
+        roles: ['SUPERADMIN'],
+        permission: ''
     },
 
     {
@@ -60,7 +67,6 @@ const navigation = [
         roles: ['Super Admin', 'Client'],
         permission: 'menu-favirate'
     },
-
     {
         name: "Account",
         href: '/auth/account',
@@ -77,7 +83,8 @@ const userNavigation = [
 ];
 
 export default function AuthLayout({ props }: any) {
-    const { roles, signout, permissions, show, user, user: { user_id }, access_token }: any = useAuth();
+    const { roles, signout, permissions, show, user, user: { name }, access_token }: any = useAuth();
+    console.log(roles);
 
     const router = useRouter();
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -216,7 +223,7 @@ export default function AuthLayout({ props }: any) {
                                             <nav className='px-2 space-y-1'>
                                                 {
                                                     navigation.map((item: any) => (
-                                                        show(item?.permission) &&
+                                                        // show(item?.permission) &&
                                                         <Link
                                                             key={item.name}
                                                             href={item.href}
@@ -292,8 +299,9 @@ export default function AuthLayout({ props }: any) {
                                         {
                                             navigation.map(
                                                 (item: any) => (
-                                                    show(item?.permission) &&
-                                                    <Link
+                                                    checkSubset(item.roles, roles) &&
+                                                    // show(item?.permission) &&
+                                                    < Link
                                                         key={item.name}
                                                         href={item.href}
                                                         className={
@@ -413,7 +421,8 @@ export default function AuthLayout({ props }: any) {
 
                                 {/* Profile dropdown */}
                                 <Menu as='div' className='ml-6 relative'>
-                                    <div>
+                                    <div className="flex items-center gap-x-4">
+                                        <h1 className="font-bold text-gray-dark">{name}</h1>
                                         <Menu.Button className='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cerulean-500'>
                                             <span className='sr-only'>Open user menu</span>
                                             <img
@@ -474,7 +483,7 @@ export default function AuthLayout({ props }: any) {
                         {props}
                     </main>
                 </div>
-            </div>
+            </div >
             {/* <ToastContainer /> */}
         </>
     );

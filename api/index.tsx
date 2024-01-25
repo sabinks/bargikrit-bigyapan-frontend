@@ -34,8 +34,6 @@ export const forgotPassword = async (email: string) => {
 
 export const getQueryData = async (state: any) => {
     const [name, query, sortby, order, page, pagination, publish] = state?.queryKey
-    console.log(query);
-
     let pub = ''
     let assign = ''
     if (publish) {
@@ -69,6 +67,31 @@ export const getDistrictsByProvince = async (value: any) => {
     const { id } = value
     const response = await apiClient.get(`/provinces/${id}/districts`);
     return response;
+}
+export const getDocumentTypeList = async (value: any) => {
+    const { id } = value
+    const { data } = await apiClient.get(`/document-types`);
+    return data;
+}
+export const uploadPartnerDocuments = async (value: any) => {
+    console.log(value);
+
+    const formData: any = new FormData()
+    const { documentTypeId, images } = value
+
+    if (images) {
+        const keys = Object.keys(images);
+        keys.forEach((key, i) => {
+            formData.append(`images`, images[key])
+        });
+    }
+    formData.append('documentTypeId', documentTypeId)
+    const response = await apiClient.post(`/documents-submission`, formData, {
+        headers: {
+            'Content-Type': "multipart/form-data"
+        }
+    });
+    return response
 }
 export const getSingeQueryData = async (data: any) => {
     const [name, query, sortby, order, page, pagination, id] = data?.queryKey
@@ -117,7 +140,28 @@ export const searchUser = async (data: any) => {
     const response = await apiClient.get(`/user-list?search=${query}`);
     return response
 };
-
+export const userActiveStatusChange = async (id: number, status: boolean) => {
+    const response = await apiClient.post(`/user-status-change`,
+        {
+            id,
+            status,
+        });
+    return response;
+};
+export const userStatusChange = async (data: any) => {
+    const { id, status } = data
+    await apiClient.post(`/user-status-change/${id}`,
+        {
+            status,
+        });
+};
+export const userCanPublishChange = async (data: any) => {
+    const { id, status } = data
+    await apiClient.post(`/user-can-publish/${id}`,
+        {
+            status,
+        });
+};
 apiClient.interceptors.response.use(
     function (response) {
         const { status, data } = response;
@@ -130,9 +174,9 @@ apiClient.interceptors.response.use(
         return response;
     },
     function (error) {
-
         const { status, data } = error.response;
-        if (status == 403 || status == 404 || status == 409) {
+
+        if (status == 400 || status == 403 || status == 404 || status == 409) {
             toast.error(data.message, { autoClose: 1500 });
         }
         if (status == 401) {

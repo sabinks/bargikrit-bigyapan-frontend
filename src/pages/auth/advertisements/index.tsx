@@ -18,7 +18,7 @@ const initialState = {
     content: "",
 };
 export default function Advertisements() {
-    const { roles, user: { email } } = useAuth()
+    const { roles, user: { email, canPublish } } = useAuth()
     const [query, setQuery] = useState<string>("");
     const [sorting, setSorting] = useState<SortingState>([{
         id: 'createdAt',
@@ -201,15 +201,18 @@ export default function Advertisements() {
         <>
             <div className='flex flex-row justify-between items-center'>
                 <PageTitle title='Advertisement' />
-                <Button
-                    label='Add Advertisement'
-                    buttonType=""
-                    onClick={() => {
-                        toggleIsVisible(true);
-                        setState(initialState);
-                        setEdit(false)
-                    }}
-                />
+                {
+                    (checkSubset(['SUPERADMIN', 'ADMIN'], roles) || canPublish) &&
+                    <Button
+                        label='Add Advertisement'
+                        buttonType=""
+                        onClick={() => {
+                            toggleIsVisible(true);
+                            setState(initialState);
+                            setEdit(false)
+                        }}
+                    />
+                }
             </div>
             <div className='flex flex-col sm:px-6 lg:px-8'>
                 <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>

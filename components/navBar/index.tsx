@@ -186,17 +186,7 @@ export default function NavBar() {
                     </Link>
                 </div> */}
 
-                <div >
-                    <Link href="/auth/properties"
-                        className={classNames(
-                            "px-4 hover:text-secondary text-lg hover:font-bold mx-2",
-                            pathname === "property"
-                                ? "border-b-2 text-secondary border-secondary font-bold pb-1"
-                                : "text-black"
-                        )}>
-                        Dashboard
-                    </Link>
-                </div>
+
 
             </div>
         </div>

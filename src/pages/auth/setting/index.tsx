@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { getList } from '../../../../api'
 import { useAuth } from '../../../../hooks/auth'
-import { updateInfo } from '../../../../api/daludai'
+// import { updateInfo } from '../../../../api/daludai'
 import { APP_NAME } from '@/constants'
 
 export default function Setting() {
@@ -19,13 +19,13 @@ export default function Setting() {
         enabled: isAuthenticated
     })
 
-    const { mutate, isLoading } = useMutation(updateInfo, {
-        onError: ({ response }: any) => {
-            if (response.status == 422) {
-                setError(response.data)
-            }
-        }
-    })
+    // const { mutate, isLoading } = useMutation(updateInfo, {
+    //     onError: ({ response }: any) => {
+    //         if (response.status == 422) {
+    //             setError(response.data)
+    //         }
+    //     }
+    // })
 
     const handleChange = (e: any) => {
         let { name, type, value, files } = e.target
@@ -113,12 +113,12 @@ export default function Setting() {
                     onChange={handleChange}
                 />
 
-                <Button
+                {/* <Button
                     label='Update'
                     className='w-full'
                     onClick={() => mutate(state)}
                     loading={isLoading}
-                />
+                /> */}
             </div>
 
 

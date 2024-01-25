@@ -21,8 +21,22 @@ export function overFlowText(str: string, num: number) {
 }
 
 export const checkSubset = (parentArray: string[], subsetArray: []) => {
+    if (parentArray.length == 0 && subsetArray.length == 0) {
+        return false
+    }
     return subsetArray.every((el) => {
         return parentArray.includes(el)
     })
+    return false
 }
-export const booleanCheck = (check: any) => Boolean(parseInt(check))
+export const booleanCheck = (check: any) => {
+    if (typeof check == "string") {
+        if (check == 'true')
+            return true
+        return false
+    } else if (typeof check == "number") {
+        return Boolean(check)
+    } else {
+        return check
+    }
+}

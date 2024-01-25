@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { apiClient } from "../api";
-import { checkSubset } from "../utils";
+import { booleanCheck, checkSubset } from "../utils";
 import { getCookie, deleteCookie, setCookie } from "cookies-next";
 import { getUser } from "../api/auth";
+import { cookies } from "next/dist/client/components/headers";
 
 interface UserType {
     name: string;
     email: string;
+    canPublish: false;
 }
 
 interface AuthContextType {
@@ -28,7 +30,9 @@ interface AuthContextType {
 export const AuthContext = React.createContext<AuthContextType>(null!);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+
     const isTokenPresent: any = getCookie("token");
+    console.log(isTokenPresent?.value);
     const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false);
     const [access_token, setAccessToken] = React.useState<string>(isTokenPresent);
     const [roles, setRoles] = React.useState<any>([]);
@@ -36,6 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = React.useState<UserType>({
         email: "",
         name: "",
+        canPublish: false
     });
 
     useEffect(() => {
@@ -45,15 +50,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             getRolePermissionList();
         }
     }, [access_token]);
+    useEffect(() => {
+        isTokenPresent && setIsAuthenticated(true)
+    }, [isTokenPresent])
+
 
 
     const getRolePermissionList = async () => {
         apiClient.defaults.headers.common["Authorization"] = `${access_token}`;
         let { status, data } = await apiClient.post("get-user");
         if (status == 200) {
-            let { email, name, role } = data
+            let { email, name, role, canPublish } = data
             setUser(prev => ({
-                ...prev, name, email
+                ...prev, name, email, canPublish: booleanCheck(canPublish)
             }))
             setRoles([role]);
             setIsAuthenticated(true)

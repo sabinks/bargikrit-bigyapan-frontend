@@ -6,10 +6,14 @@ export function middleware(request: NextRequest) {
     const redirectUrl = process.env.NEXT_PUBLIC_BASE_URL as string;
     let islogin = request.cookies.get("token");
     const role = request.cookies.get("role");
-
     const routes = [
-        { roles: ['SUPERADMIN', 'ADMIN', 'subagency', 'client', 'agent'], startPath: /\/auth\/dashboard/ },
-        { roles: ['SUPERADMIN', 'ADMIN', 'subagency', 'client', 'agent'], startPath: /\/auth\/advertisements/ },
+        { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], startPath: /\/auth\/dashboard/ },
+        { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], startPath: /\/auth\/advertisements/ },
+        { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/partners/ },
+        { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/users/ },
+        { roles: ['SUPERADMIN'], startPath: /\/auth\/admins/ },
+
+
 
         // { roles: ['SUPERADMIN', 'ADMIN', 'subagency'], startPath: /\/auth\/properties\/\d+\/assign-property/ },
         // { roles: ['SUPERADMIN', 'ADMIN', 'subagency', 'agent'], startPath: /\/auth\/properties\/\d+\/inspection-form/ },
@@ -31,6 +35,7 @@ export function middleware(request: NextRequest) {
             if (!roles.includes(role.value)) {
                 return false
             }
+            return true
         }
     })
     if (authorized?.includes(false)) {

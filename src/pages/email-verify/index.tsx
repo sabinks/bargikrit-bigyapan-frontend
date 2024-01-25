@@ -5,24 +5,23 @@ import { useRouter } from "next/router";
 import { apiClient } from "../../../api";
 import Image from "next/image";
 
-
 export default function MailVerification() {
     const router = useRouter();
-    const { id, verification_token } = router?.query
+    const { id, token } = router?.query
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     useEffect(() => {
-        if (id && verification_token) {
+        if (id && token) {
             handleVerifyMail()
         }
-    }, [id, verification_token])
+    }, [id, token])
 
     const handleVerifyMail = async () => {
         try {
             setLoading(true)
             let res = await apiClient({
                 method: 'GET',
-                url: `/email/verify/${id}/${verification_token}`,
+                url: `/email/verify/${id}/${token}`,
             })
             setLoading(false)
         } catch (error: any) {

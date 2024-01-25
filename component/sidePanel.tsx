@@ -94,7 +94,7 @@ export default function SidePanel({
                                                 <div className="ml-3 h-7 flex items-center">
                                                     <button
                                                         type="button"
-                                                        className="bg-primary1 rounded-md secondary hover:text-white focus:outline-none"
+                                                        className="bg-primary1 rounded-md secondary hover:text-accent1 focus:outline-none"
                                                         onClick={onClose}
                                                     >
                                                         <span className="sr-only">Close panel</span>

@@ -11,7 +11,7 @@ import Search from "../../../../component/search";
 import AdminForm from "./admin-form";
 import { useAuth } from "../../../../hooks/auth";
 
-export default function Admin() {
+export default function Admins() {
     const { isAuthenticated } = useAuth()
 
     const [query, setQuery] = useState<string>("");

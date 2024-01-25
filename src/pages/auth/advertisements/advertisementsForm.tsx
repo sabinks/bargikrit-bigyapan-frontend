@@ -66,48 +66,102 @@ export default function AdvertisementsForm({ state, setState, error }: any) {
     }
 
     return (
-        <div className='space-y-2'>
-            <Input
-                name="name"
-                label='Advertisement Name'
-                placeholder=''
-                type="text"
-                value={state?.name}
-                onChange={(e: any) => setState({ ...state, name: e.target.value })}
-            />
-            <p className='text-red-400 text-sm'>{error?.name}</p>
+        <div className='space-y-4 mb-4'>
+            <div className="border rounded-md p-2 space-y-2 bg-gray-light">
+                <div className="">
+                    <Input
+                        name="companyName"
+                        label='Company Name'
+                        placeholder=''
+                        type="text"
+                        value={state?.companyName}
+                        onChange={(e: any) => setState({ ...state, companyName: e.target.value })}
+                    />
+                    <p className='text-red-400 text-sm'>{error?.name}</p>
+                </div>
+                <div className="">
+                    <Input
+                        name="name"
+                        label='Advertisement Name'
+                        placeholder=''
+                        type="text"
+                        value={state?.name}
+                        onChange={(e: any) => setState({ ...state, name: e.target.value })}
+                    />
+                    <p className='text-red-400 text-sm'>{error?.name}</p>
+                </div>
+            </div>
 
-            <Dropdown label='Advertisement Type' data={adsType} selectedValue={state?.advertisementType} onChange={(advertisementType: any) => {
-                setState((prev: any) => ({
-                    ...prev, advertisementType: advertisementType, advertisementTypeId: advertisementType?.id
-                }))
-            }} />
-            <p className='text-red-400 text-sm'>{error?.advertisementTypeId}</p>
+            <div className="border rounded-md p-2 space-y-4 bg-gray-light">
+                <div className="">
+                    <Dropdown label='Advertisement Type' data={adsType} selectedValue={state?.advertisementType} onChange={(advertisementType: any) => {
+                        setState((prev: any) => ({
+                            ...prev, advertisementType: advertisementType, advertisementTypeId: advertisementType?.id
+                        }))
+                    }} />
+                    <p className='text-red-400 text-sm'>{error?.advertisementTypeId}</p>
+                </div>
 
-            <Dropdown label='Country' data={countries} selectedValue={state?.country} onChange={(country: any) => {
-                handleCountrySelected(country);
-            }} />
-            <p className='text-red-400 text-sm'>{error?.countryId}</p>
+                <div className="">
+                    <Dropdown label='Country' data={countries} selectedValue={state?.country} onChange={(country: any) => {
+                        handleCountrySelected(country);
+                    }} />
+                    <p className='text-red-400 text-sm'>{error?.countryId}</p>
+                </div>
+                <div className="">
+                    <Dropdown label='Province' data={provinces} selectedValue={state?.province} onChange={(province: any) => {
+                        handleProviceSelected(province);
+                    }} />
+                    <p className='text-red-400 text-sm'>{error?.provinceId}</p>
+                </div>
 
-            <Dropdown label='Province' data={provinces} selectedValue={state?.province} onChange={(province: any) => {
-                handleProviceSelected(province);
-            }} />
-            <p className='text-red-400 text-sm'>{error?.provinceId}</p>
+                <div className="">
+                    <Dropdown label='District' data={districts} selectedValue={state?.district} onChange={(district: any) => {
+                        setState((prev: any) => ({
+                            ...prev, district, districtId: district?.id
+                        }))
+                    }} />
+                    <p className='text-red-400 text-sm'>{error?.districtId}</p>
+                </div>
+            </div>
+            <div className="border rounded-md p-2">
 
-            <Dropdown label='District' data={districts} selectedValue={state?.district} onChange={(district: any) => {
-                setState((prev: any) => ({
-                    ...prev, district, districtId: district?.id
-                }))
-            }} />
-            <p className='text-red-400 text-sm'>{error?.districtId}</p>
+                <div className="">
+                    <Editor
+                        label='Content'
+                        value={state?.data ? state?.data : ""}
+                        onChange={onEditorContentChanged}
+                        defaultValue={state?.data}
+                    />
+                    <p className='text-red-400 text-sm'>{error?.data}</p>
+                </div>
+            </div>
 
-            <Editor
-                label='Content'
-                value={state?.data ? state?.data : ""}
-                onChange={onEditorContentChanged}
-                defaultValue={state?.data}
-            />
-            <p className='text-red-400 text-sm'>{error?.data}</p>
+            <div className="border rounded-md p-2 bg-gray-light">
+                <h1 className=''>Footer</h1>
+                <div className="">
+                    <Input
+                        name="email"
+                        label='Email'
+                        placeholder=''
+                        type="text"
+                        value={state?.email}
+                        onChange={(e: any) => setState({ ...state, email: e.target.value })}
+                    />
+                    <p className='text-red-400 text-sm'>{error?.email}</p>
+                </div>
+                <div className="">
+                    <Input
+                        name="phone"
+                        label='Phone'
+                        placeholder=''
+                        type="text"
+                        value={state?.phone}
+                        onChange={(e: any) => setState({ ...state, phone: e.target.value })}
+                    />
+                    <p className='text-red-400 text-sm'>{error?.phone}</p>
+                </div>
+            </div>
 
         </div>
     )

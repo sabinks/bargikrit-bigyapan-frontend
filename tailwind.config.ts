@@ -20,7 +20,7 @@ const config: Config = {
                 info: '#64748b',
                 submit: '#3b82f6',
                 'gray-dark': '#21272a',
-                'gray-light': '#697077',
+                'gray-light': '#e5e7eb',
                 red: {
                     50: "#fff1f1",
                     100: "#ffd7d9",

@@ -64,10 +64,10 @@ export default function Editor(props: EditorProps) {
     };
 
     return (
-        <div className="">
+        <div className="h-96">
             <label className="block text-sm font-semibold text-gray-700">{props?.label}</label>
             <ReactQuill
-                className="h-64 overflow-y-visible mt-1"
+                className="h-72 overflow-y-visible mt-1"
                 // ref={reactQuillRef}
                 theme="snow"
                 placeholder="Fill advertisement information here..."
