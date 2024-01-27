@@ -59,7 +59,7 @@ export default function Button({
             buttonTypeClass = "rounded-full text-white bg-submit";
             break;
         default:
-            buttonTypeClass = "p-1.5 rounded-md bg-primary text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600";
+            buttonTypeClass = "p-1.5 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600";
             break;
     }
 
@@ -74,7 +74,7 @@ export default function Button({
                     buttonTypeClass,
                     labelOnLeft ? " justify-start" : " justify-center",
                     // label ? "px-2" : "",
-                    // className
+                    className
                 )}
                 {...props}
             >

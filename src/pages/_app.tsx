@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-multi-carousel/lib/styles.css';
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { NextResponse } from "next/server";
+import { ApplicationProvider } from "../../context/application";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -45,12 +46,15 @@ export default function App({ Component, pageProps }: AppProps) {
             <QueryClientProvider client={queryClient}>
                 {/* <GoogleOAuthProvider clientId={"902325181054-s9o11078ph5fgbqsljntfm3oinsmjbov.apps.googleusercontent.com"}> */}
                 <AuthProvider>
-                    {
-                        router.pathname.startsWith("/auth") ?
-                            <AuthLayout props={<Component {...pageProps} />} /> :
-                            pages.includes(router.pathname) ? <Component {...pageProps} /> :
-                                <Layout props={<Component {...pageProps} />} />
-                    }
+                    <ApplicationProvider>
+
+                        {
+                            router.pathname.startsWith("/auth") ?
+                                <AuthLayout props={<Component {...pageProps} />} /> :
+                                pages.includes(router.pathname) ? <Component {...pageProps} /> :
+                                    <Layout props={<Component {...pageProps} />} />
+                        }
+                    </ApplicationProvider>
                 </AuthProvider>
                 {/* </GoogleOAuthProvider>; */}
 

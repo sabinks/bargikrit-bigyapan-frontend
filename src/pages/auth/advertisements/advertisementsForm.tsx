@@ -58,8 +58,8 @@ export default function AdvertisementsForm({ state, setState, error }: any) {
         if (tempProvince && tempProvince[0]?.districtList) {
             setState((prev: any) => ({
                 ...prev, province, provinceId: province?.id,
-                district: tempProvince[0].districtList[0],
-                districtId: tempProvince[0].districtList[0].id
+                district: tempProvince[0].districtList.length > 0 ? tempProvince[0].districtList[0] : null,
+                districtId: tempProvince[0].districtList.length > 0 ? tempProvince[0].districtList[0].id : 0
             }))
             setDistricts(tempProvince[0].districtList)
         }

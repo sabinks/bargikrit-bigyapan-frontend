@@ -191,10 +191,10 @@ function Header() {
                             />
                             <h1 className={`text-secondary tracking-wider font-semibold text-3xl ${montserrat.className}`}>Bargikrit Bigyapan</h1>
                         </div>
-                        <div className={`flex items-center text-gray-light ${montserratRegular.className}`}>
-                            <Link href="/" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary py-5 px-5 transition duration-200 cursor-pointer">HOME</Link>
+                        <div className={`flex items-center text-gray-dark ${montserratRegular.className}`}>
+                            <Link href="/" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary py-5 px-5 transition duration-300 cursor-pointer">HOME</Link>
                             {/* <Link href="/about-us" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-t-yellow-600 hover:outline-t-4 py-5 px-5 transition duration-200 cursor-pointer">ABOUT US</Link> */}
-                            <Link href="/contact-us" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary hover:outline-t-4 py-5 px-5 transition duration-200 cursor-pointer">CONTACT US</Link>
+                            <Link href="/contact-us" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary hover:outline-t-4 py-5 px-5 transition duration-300 cursor-pointer">CONTACT US</Link>
                         </div>
                     </div>
                 </div>
