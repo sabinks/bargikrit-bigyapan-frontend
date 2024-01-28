@@ -110,7 +110,7 @@ function ChangeUserPassword() {
                 <div className="text-red-500 text-sm">{errors?.passwordConfirmation}</div>
             </div>
 
-            <Button label='Update' loading={isLoading} className='w-full' onClick={() => mutate(user)} />
+            <Button buttonType='' label='Update' loading={isLoading} className='w-full' onClick={() => mutate(user)} />
         </div>
     )
 }

@@ -9,6 +9,7 @@ interface UserType {
     name: string;
     email: string;
     canPublish: false;
+    contactNumber: string;
 }
 
 interface AuthContextType {
@@ -25,6 +26,7 @@ interface AuthContextType {
     user: UserType;
     can: Function;
     show: Function;
+    getUserDetails: Function;
 }
 
 export const AuthContext = React.createContext<AuthContextType>(null!);
@@ -39,29 +41,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = React.useState<UserType>({
         email: "",
         name: "",
-        canPublish: false
+        canPublish: false,
+        contactNumber: ''
     });
+    useEffect(() => {
+        // getUserDetails()
+    }, [])
 
     useEffect(() => {
         if (access_token && isAuthenticated) {
             // setCookie('token', 'access_token')
             // setCookie('role', roles[0])
-            getRolePermissionList();
+            getUserDetails();
         }
     }, [access_token]);
     useEffect(() => {
         isTokenPresent && setIsAuthenticated(true)
     }, [isTokenPresent])
 
-
-
-    const getRolePermissionList = async () => {
+    const getUserDetails = async () => {
         apiClient.defaults.headers.common["Authorization"] = `${access_token}`;
         let { status, data } = await apiClient.post("get-user");
         if (status == 200) {
-            let { email, name, role, canPublish } = data
+            let { email, name, role, canPublish, contactNumber } = data
             setUser(prev => ({
-                ...prev, name, email, canPublish: booleanCheck(canPublish)
+                ...prev, name, email, canPublish: booleanCheck(canPublish), contactNumber
             }))
             setRoles([role]);
             setIsAuthenticated(true)
@@ -119,7 +123,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         user,
         can,
         show,
-
+        getUserDetails
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

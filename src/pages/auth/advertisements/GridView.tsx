@@ -13,7 +13,7 @@ import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
 import Loading from "../../../../component/loading";
 import { Button, PageTitle, SidePanel } from "../../../../component";
 import { checkSubset } from "../../../../utils";
-import { addAdvertisement, deleteAdvertisement, updateAdvertisement } from "../../../../api/advertisement";
+import { addAdvertisement, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "../../../../api/advertisement";
 import AdvertisementsForm from "./advertisementsForm";
 
 const initialState = {
@@ -106,10 +106,28 @@ export default function GridView({ }: any) {
             },
         }
     );
-
+    useQuery(['advertisements', adsId], showAdvertisement, {
+        onSuccess: (res) => {
+            const { name, data, id, advertisementType, country, province, district, companyName, email, contactNumber } = res.data
+            setState({
+                name: name, id: id, data: data, companyName, email, contactNumber,
+                advertisementType, advertisementTypeId: advertisementType?.id,
+                country, countryId: country?.id,
+                province, provinceId: province?.id,
+                district, districtId: district?.id,
+            })
+            setEdit(true)
+            toggleIsVisible(!isVisible)
+            setAdsId(0)
+        },
+        enabled: adsId ? true : false
+    })
     const { mutate: mutateDeleteAdvertisement } = useMutation(deleteAdvertisement, {
         onSuccess: () => refetch()
     })
+    const handleClick = (id: number) => {
+        setAdsId(id)
+    }
 
     return (
         <div className="container mx-auto my-12">
@@ -133,7 +151,7 @@ export default function GridView({ }: any) {
                 {
                     advertisements?.map((advertisement: any, index: number) => {
                         return <div className="" key={index}>
-                            <AdvertisementCard advertisement={advertisement} />
+                            <AdvertisementCard advertisement={advertisement} handleClick={handleClick} refetch={loadData} isFrontPage={false} />
                         </div>
                     })
                 }
@@ -157,7 +175,7 @@ export default function GridView({ }: any) {
                 primaryButtonLoading={creatingAdvertisement || updatingAdvertisement}
             >
                 <Suspense fallback='loading'>
-                    <AdvertisementsForm state={state} setState={setState} error={formerrors} />
+                    <AdvertisementsForm state={state} setState={setState} error={formerrors} edit={edit} />
                 </Suspense>
             </SidePanel>
         </div>

@@ -8,7 +8,7 @@ import { userRegisterForm } from '../../../api';
 
 export default function PartnerSignUp({ partnerType }: any) {
     const router = useRouter()
-    const [state, setState] = useState<any>({ data: { mobile: '' } })
+    const [state, setState] = useState<any>({ data: { contactNumber: '' } })
     const [error, setError] = useState<any>()
     // const [partnerId, setPartnerId] = useState<any>()
     const [showPasswords, setShowPasswords] = useState<any>({
@@ -55,16 +55,16 @@ export default function PartnerSignUp({ partnerType }: any) {
     return (
         <div className='space-y-2'>
             <div className="">
-                <Input type='text' label="Name" name="name" onChange={handleChange} placeholder='' value={state?.name} />
+                <Input type='text' label="Company Name" name="name" onChange={handleChange} placeholder='' value={state?.name} />
                 <p className="text-red-400 text-sm">{error?.name}</p>
             </div>
             <div className="">
-                <Input type='text' label="Email" name="email" onChange={handleChange} placeholder='' value={state?.email} />
+                <Input type='text' label="Company Email" name="email" onChange={handleChange} placeholder='' value={state?.email} />
                 <p className="text-red-400 text-sm">{error?.email}</p>
             </div>
             <div className="">
-                <Input type='text' label="Mobile" name="mobile" onChange={handleChange} placeholder='' value={state?.mobile} />
-                <p className="text-red-400 text-sm">{error?.mobile}</p>
+                <Input type='text' label="Company Contact Number" name="contactNumber" onChange={handleChange} placeholder='' value={state?.contactNumber} />
+                <p className="text-red-400 text-sm">{error?.contactNumber}</p>
             </div>
             <div className="pb-4">
                 <div className="text-sm font-semibold">New Password</div>

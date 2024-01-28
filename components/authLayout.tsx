@@ -32,6 +32,13 @@ const navigation = [
         permission: ''
     },
     {
+        name: "Advertisement Type",
+        href: '/auth/advertisement-type',
+        icon: HomeIcon,
+        roles: ['SUPERADMIN', 'ADMIN'],
+        permission: ''
+    },
+    {
         name: "Advertisements",
         href: '/auth/member/advertisements',
         icon: HomeIcon,

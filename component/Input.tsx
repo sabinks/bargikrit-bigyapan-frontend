@@ -87,7 +87,7 @@ const Input = ({
                             placeholder={placeholder}
                             autoComplete="off"
                             className={classNames(className,
-                                "appearance-none w-full px-3 py-1 border border-primary rounded-md shadow-sm placeholder-gray-800 focus:outline-none focus:ring-primaryGreen focus:border-primaryGreen sm:text-sm")}
+                                "appearance-none w-full px-3 py-2 border border-primary rounded-md shadow-sm placeholder-gray-800 focus:outline-none focus:ring-primaryGreen focus:border-primaryGreen sm:text-sm")}
                         />
                         <div className="py-1">
                             {error && <p className="text-red-500 text-xs ">{error}

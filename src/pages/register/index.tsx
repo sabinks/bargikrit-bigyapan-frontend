@@ -33,23 +33,24 @@ export default function Register() {
 
     return (
         <div className="min-h-screen flex">
-            <div className="flex items-center w-1/3 justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+            <div className="flex items-center w-full xl:w-1/3 justify-center px-12 py-12">
                 <div className="mx-auto w-full max-w-sm lg:w-96">
-                    <div >
-                        <Image
-                            className="h-24 w-auto"
-                            src="/assets/bb-250.png"
-                            alt="Logo"
-                            width="100"
-                            height="100"
-                        />
-                        <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-                            Sign in to your account
-                        </h2>
-                    </div>
+                    <Link href={'/'}>
+                        <div >
+                            <Image
+                                className="h-24 w-auto"
+                                src="/assets/bb-250.png"
+                                alt="Logo"
+                                width="100"
+                                height="100"
+                            />
+                            <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
+                                Sign in to your account
+                            </h2>
+                        </div>
+                    </Link>
 
                     <div className='mt-8'>
-
                         <div className='' >
                             <div className="pb-2 rounded-md ">
                                 <div className="flex flex-row mb-2">

@@ -23,7 +23,7 @@ const initialState = {
     content: "",
 };
 export default function Advertisements() {
-    const { roles, user: { email, canPublish } } = useAuth()
+    const { roles, user: { email, canPublish, name, contactNumber } } = useAuth()
     const { appState, setAppState } = useApplication()
     return (
         <div className="space-y-2">

@@ -43,9 +43,9 @@ export default function ListingView() {
 
     useQuery(['advertisements', adsId], showAdvertisement, {
         onSuccess: (res) => {
-            const { name, data, id, advertisementType, country, province, district, } = res.data
+            const { name, data, id, advertisementType, country, province, district, companyName, email, contactNumber } = res.data
             setState({
-                name: name, id: id, data: data,
+                name: name, id: id, data: data, companyName, email, contactNumber,
                 advertisementType, advertisementTypeId: advertisementType?.id,
                 country, countryId: country?.id,
                 province, provinceId: province?.id,
@@ -250,7 +250,7 @@ export default function ListingView() {
                     primaryButtonLoading={creatingAdvertisement || updatingAdvertisement}
                 >
                     <React.Suspense fallback='loading'>
-                        <AdvertisementsForm state={state} setState={setState} error={formerrors} />
+                        <AdvertisementsForm state={state} setState={setState} error={formerrors} edit={edit} />
                     </React.Suspense>
                 </SidePanel>
             </div>

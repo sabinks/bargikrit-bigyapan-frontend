@@ -31,6 +31,9 @@ export const changePassword = async (data: any) => {
     const response = await apiClient.post(`/change-password`, data);
     return response.data;
 };
+export const changeUserDetail = async (data: any) => {
+    await apiClient.post(`/set-user`, data);
+};
 
 export const getUser = async () => {
     const response = await apiClient.get('/get-user');

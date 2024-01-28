@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import { getCountries, getProvinces, getProvincesByCountryId } from '../../../../api/'
 import { getAdvertisementTypes } from '../../../../api/advertisement';
 import Dropdown from '../../../../component/dropDown';
 import Editor from '../../../../component/editor';
 import { Input } from '../../../../component';
+import { useAuth } from '../../../../hooks/auth';
 
-export default function AdvertisementsForm({ state, setState, error }: any) {
+export default function AdvertisementsForm({ state, setState, error, edit }: any) {
+    const { roles, user: { email, name, contactNumber }, getUserDetails } = useAuth()
     const [adsType, setAdsType] = useState<any>([])
     const [countries, setCountries] = useState<any>([])
     const [provinces, setProvinces] = useState<any>([])
@@ -21,6 +23,15 @@ export default function AdvertisementsForm({ state, setState, error }: any) {
             setAdsType(data)
         }
     })
+    useEffect(() => {
+        getUserDetails()
+        if (!edit) {
+            setState((prev: any) => ({
+                ...prev, companyName: name, email, contactNumber
+            }))
+        }
+    }, [email, name, contactNumber])
+
     useQuery(
         ["countries"],
         getCountries, {
@@ -77,7 +88,7 @@ export default function AdvertisementsForm({ state, setState, error }: any) {
                         value={state?.companyName}
                         onChange={(e: any) => setState({ ...state, companyName: e.target.value })}
                     />
-                    <p className='text-red-400 text-sm'>{error?.name}</p>
+                    <p className='text-red-400 text-sm'>{error?.companyName}</p>
                 </div>
                 <div className="">
                     <Input
@@ -152,17 +163,16 @@ export default function AdvertisementsForm({ state, setState, error }: any) {
                 </div>
                 <div className="">
                     <Input
-                        name="phone"
-                        label='Phone'
+                        name="contactNumber"
+                        label='Contact Number'
                         placeholder=''
                         type="text"
-                        value={state?.phone}
-                        onChange={(e: any) => setState({ ...state, phone: e.target.value })}
+                        value={state?.contactNumber}
+                        onChange={(e: any) => setState({ ...state, contactNumber: e.target.value })}
                     />
-                    <p className='text-red-400 text-sm'>{error?.phone}</p>
+                    <p className='text-red-400 text-sm'>{error?.contactNumber}</p>
                 </div>
             </div>
-
         </div>
     )
 }

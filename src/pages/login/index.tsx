@@ -61,7 +61,7 @@ export default function Login() {
     return (
         <>
             <div className="min-h-screen flex">
-                <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+                <div className="flex items-center w-full xl:w-1/3 justify-center px-12 py-12">
                     <div className="mx-auto w-full max-w-sm lg:w-96">
                         <div>
                             <Link href={'/'}>

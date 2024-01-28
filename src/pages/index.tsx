@@ -10,6 +10,7 @@ import AdvertisementCard from "../../components/AdvertisementCard";
 import AdvertisementListing from "../../component/AdvertisementListing";
 import { SortingState } from "@tanstack/react-table";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
+import Loading from "@/components/loading";
 
 const ParsedContent = dynamic(() => import('../../components/innerhtml'), { ssr: false })
 
@@ -93,11 +94,13 @@ export default function Home({ data }: any) {
                 {
                     advertisements?.map((advertisement: any, index: number) => {
                         return <div className="" key={index}>
-                            <AdvertisementCard advertisement={advertisement} />
+                            <AdvertisementCard advertisement={advertisement} isFrontPage={true} />
                         </div>
                     })
                 }
-
+                {
+                    isFetching && <Loading />
+                }
             </main>
         </div>
     );

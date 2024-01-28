@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { PageTitle } from '../../../../component'
 // import BankDetail from './bankDetails'
 import ChangeUserPassword from './changeUserPassword'
+import ChangeUserDetail from './changeUserDetail'
 // import ChangeAdminDetail from './changeAdminDetail'
 
 
@@ -9,7 +10,7 @@ import ChangeUserPassword from './changeUserPassword'
 
 const multipleTabData = [
     { label: "Change Password", slug: 'change-password', role: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'] },
-    // { label: "User Details", slug: 'user-details', role: ['Admin', 'Client', 'Partner', 'Super Admin'] },
+    { label: "User Details", slug: 'change-user-detail', role: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'] },
     // { label: "Bank Details", slug: 'bank-details', role: ['Client', 'Partner'] },
     // { label: "Testimonial", slug: 'testimonial', role: ['Client', 'Partner'] },
 ]
@@ -25,7 +26,7 @@ export default function Profile() {
                 {
                     multipleTabData.map(({ label, slug, role }) => (
                         <div key={label}
-                            className={`px-4 py-1.5 cursor-pointer border-b rounded-t-md ${slug == navState ? 'bg-accent1 text-white' : 'bg-secondary'}`}
+                            className={`px-4 py-1.5 cursor-pointer border-b rounded-t-md ${slug == navState ? 'bg-accent1 text-white font-bold' : 'bg-secondary'}`}
                             onClick={() => setNavState(slug)}>
                             {label}
                         </div>
@@ -38,6 +39,7 @@ export default function Profile() {
                 {/* {navState == 'user-details' && checkSubset(['Client'], roles) && <ChangeClientDetail />}
                 {navState == 'user-details' && checkSubset(['Partner'], roles) && <ChangePartnerDetail />} */}
                 {navState == 'change-password' && <ChangeUserPassword />}
+                {navState == 'change-user-detail' && <ChangeUserDetail />}
             </div>
         </div>
 

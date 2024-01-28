@@ -70,8 +70,8 @@ export default function UserSignUp() {
                 <p className="text-red-400 text-sm">{error?.email}</p>
             </div>
             <div className="">
-                <Input type='text' label="Mobile" name="mobile" onChange={handleChange} placeholder='' value={state?.mobile} />
-                <p className="text-red-400 text-sm">{error?.mobile}</p>
+                <Input type='text' label="Contact Number" name="contactNumber" onChange={handleChange} placeholder='' value={state?.contactNumber} />
+                <p className="text-red-400 text-sm">{error?.contactNumber}</p>
             </div>
             <div className="pb-4">
                 <label className={"block text-sm font-semibold text-gray-700"}>
