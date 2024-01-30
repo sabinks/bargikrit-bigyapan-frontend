@@ -19,8 +19,8 @@ const config: Config = {
                 warning: '#eab308',
                 info: '#64748b',
                 submit: '#3b82f6',
-                'gray-dark': '#21272a',
-                'gray-light': '#e5e7eb',
+                'gray-dark': '#5A5A5A',
+                'gray-light': '#D3D3D3',
                 red: {
                     50: "#fff1f1",
                     100: "#ffd7d9",

@@ -16,6 +16,7 @@ import Dropdown from "../../component/dropDown";
 import { Button, Input } from "../../component";
 import { getAdvertisementTypes } from "../../api/advertisement";
 import { getNextQueryData } from "@/api/frontend";
+import { useDebounce } from "use-debounce";
 
 const ParsedContent = dynamic(() => import('../../components/innerhtml'), { ssr: false })
 
@@ -30,9 +31,10 @@ export default function Home({ }: any) {
     const [pagination, setPagination] = useState<any>({
         totalPages: 0
     })
+    const [text] = useDebounce(appState?.search, 300);
     const [advertisements, setAdvertisements] = useState<any>([])
     const { isLoading, refetch, isFetching } = useQuery(
-        ["next/advertisements", query, 'createdAt', sorting[0].desc ? 'DESC' : 'ASC', page, 5, appState?.selectedAdvertisementType?.name, appState?.selectedCountry?.name, appState?.selectedProvince?.name],
+        ["next/advertisements", query, 'createdAt', sorting[0].desc ? 'DESC' : 'ASC', page, 5, appState?.selectedAdvertisementType?.name, appState?.selectedCountry?.name, appState?.selectedProvince?.name, appState?.search],
         getNextQueryData, {
         onSuccess: (data) => {
             setAdvertisements((prev: any) => ([
@@ -45,13 +47,12 @@ export default function Home({ }: any) {
 
     useEffect(() => {
         loadAdvertisements()
-    }, [appState?.selectedProvince, appState?.selectedCountry, appState?.selectedAdvertisementType])
+    }, [appState?.selectedProvince, appState?.selectedCountry, appState?.selectedAdvertisementType, text])
 
     const loadAdvertisements = async () => {
         const { selectedCountry, selectedProvince, selectedAdvertisementType } = appState
-        console.log(selectedAdvertisementType);
 
-        const { data } = await apiClient.get(`/next/advertisements?advertisementType=${selectedAdvertisementType?.name}&country=${selectedCountry?.name}&province=${selectedProvince?.name}&pageSize=10&offset=0`);
+        const { data } = await apiClient.get(`/next/advertisements?advertisementType=${selectedAdvertisementType?.name}&country=${selectedCountry?.name}&province=${selectedProvince?.name}&search=${text}&pageSize=10&offset=0`);
         setAdvertisements((prev: any) => ([...data?.content]))
 
         setPage(data?.pageable.pageNumber)
@@ -88,7 +89,7 @@ export default function Home({ }: any) {
     }
     const handleResetClick = () => {
         setAppState((prev: any) => ({
-            ...prev, selectedProvince: null, selectedAdvertisementType: null
+            ...prev, selectedProvince: null, selectedAdvertisementType: null, search: ''
         }))
     }
 
@@ -97,7 +98,12 @@ export default function Home({ }: any) {
             <div className="mb-4">
                 <div className="flex flex-col lg:flex-row lg:items-end justify-between md:gap-x-4 space-y-2 lg:space-y-0">
                     <div className=" lg:w-[3000px]">
-                        <Input label="Search" placeholder="Search advertisement" name="search" type="text" onChange={(e: any) => console.log(e.target.value)} />
+                        <Input label="Search" placeholder="Search advertisement" name="searchAdvertisement" type="text" value={appState?.search} onChange={(e: any) => {
+                            setAppState((prev: any) => ({
+                                ...prev, search: e.target.value
+                            }))
+                        }
+                        } />
                     </div>
                     <Dropdown label="Select Advertisement Type" selectedValue={appState?.selectedAdvertisementType} data={appState?.advertisementTypes} onChange={(advertisement: any) => {
                         setAppState((prev: any) => ({

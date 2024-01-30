@@ -84,11 +84,11 @@ const Input = ({
                             onChange={onChange}
                             name={name}
                             value={value}
-                            defaultValue={""}
+                            defaultValue=""
                             placeholder={placeholder}
                             autoComplete="off"
                             className={classNames(className,
-                                "appearance-none w-full px-3 py-2 border border-primary rounded-md shadow-sm placeholder-gray-800 focus:outline-none sm:text-sm")}
+                                "appearance-none w-full px-3 py-2 border border-primary rounded-md shadow-sm placeholder-gray-light focus:outline-none sm:text-sm")}
                         />
                         <div className="">
                             {error && <p className="text-red-500 text-xs ">{error}

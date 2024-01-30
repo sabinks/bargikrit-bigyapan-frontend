@@ -12,6 +12,7 @@ interface StateType {
     selectedProvince: any;
     advertisementTypes: any;
     selectedAdvertisementType: any;
+    search: string;
 }
 
 interface ApplicationType {
@@ -33,6 +34,7 @@ export function ApplicationProvider({ children }: { children: React.ReactNode })
         selectedProvince: {},
         advertisementTypes: [],
         selectedAdvertisementType: null,
+        search: ''
     });
     useEffect(() => {
         const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
