@@ -44,7 +44,7 @@ export default function Dropdown({
                         )}
                         <div className='relative mt-1'>
                             <Listbox.Button
-                                className='relative w-full  cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-sm border border-gray-300  focus:outline-none  sm:text-sm '
+                                className='relative w-full  cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-sm border border-primary  focus:outline-none  sm:text-sm '
                                 {...props}
                             >
                                 <span className='block truncate'>

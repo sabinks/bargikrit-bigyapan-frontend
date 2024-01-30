@@ -66,10 +66,15 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
     function handleProviceSelected(province: any) {
         setDistricts([])
         const tempProvince = provinces.filter((data: any) => data.id == province.id)
+        console.log(provinces);
+        setState((prev: any) => ({
+            ...prev, province, provinceId: province?.id
+        }))
+        console.log(tempProvince);
+
         if (tempProvince && tempProvince[0]?.districtList) {
             setState((prev: any) => ({
-                ...prev, province, provinceId: province?.id,
-                district: tempProvince[0].districtList.length > 0 ? tempProvince[0].districtList[0] : null,
+                ...prev, district: tempProvince[0].districtList.length > 0 ? tempProvince[0].districtList[0] : null,
                 districtId: tempProvince[0].districtList.length > 0 ? tempProvince[0].districtList[0].id : 0
             }))
             setDistricts(tempProvince[0].districtList)

@@ -26,7 +26,7 @@ export const advertisementStatusChange = async (data: any) => {
             status,
         });
 };
-export const getAdvertisementTypes = async (data: any) => {
+export const getAdvertisementTypes = async () => {
     const response = await apiClient.get(`/advertisement-type`);
     return response.data;
 }

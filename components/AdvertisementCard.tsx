@@ -8,6 +8,7 @@ import CheckBox from '../component/checkbox'
 import { useMutation } from '@tanstack/react-query'
 import { advertisementStatusChange } from '../api/advertisement'
 import { MdEmail } from 'react-icons/md'
+import { FaSms } from 'react-icons/fa'
 
 function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = false }: any) {
     const { roles, user: { email } } = useAuth()
@@ -59,13 +60,14 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                         <span className='bg-secondary px-4 py-1 text-white rounded-xl text-sm'>Category: {advertisement?.advertisementType?.name}</span>
                     </div>
 
-                    <div className="flex md:justify-between pt-4">
+                    <div className="flex md:justify-between pt-2">
                         <p className=''>Province: {advertisement?.province?.name}</p>
                         <p className=''>District: {advertisement?.district?.name}</p>
                     </div>
-                    <div className="flex justify-between text-xs">
-                        <a href={`mailto:${advertisement?.email}`} className='flex items-center'><MdEmail className='w-4' /> {advertisement?.email}</a>
-                        <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center'><PhoneIcon className='w-4' /> {advertisement?.contactNumber}</a>
+                    <div className="flex flex-col justify-between space-y-1 text-xs">
+                        <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-4' /> {advertisement?.email}</a>
+                        <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-4' /> {advertisement?.contactNumber}</a>
+                        <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-4' /> {advertisement?.contactNumber}</a>
                     </div>
                 </div>
             </div >

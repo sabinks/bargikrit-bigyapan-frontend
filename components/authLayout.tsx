@@ -28,7 +28,7 @@ const navigation = [
         name: "Advertisements",
         href: '/auth/advertisements',
         icon: HomeIcon,
-        roles: ['SUPERADMIN', 'ADMIN', 'PARTNER'],
+        roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'],
         permission: ''
     },
     {
@@ -38,13 +38,13 @@ const navigation = [
         roles: ['SUPERADMIN', 'ADMIN'],
         permission: ''
     },
-    {
-        name: "Advertisements",
-        href: '/auth/member/advertisements',
-        icon: HomeIcon,
-        roles: ['USER'],
-        permission: ''
-    },
+    // {
+    //     name: "Advertisements",
+    //     href: '/auth/member/advertisements',
+    //     icon: HomeIcon,
+    //     roles: ['USER'],
+    //     permission: ''
+    // },
     {
         name: "Admin",
         href: '/auth/admins',
@@ -74,20 +74,20 @@ const navigation = [
         permission: ''
     },
 
-    {
-        name: "Favorite",
-        href: '/auth/favirate',
-        icon: StarIcon,
-        roles: ['Super Admin', 'Client'],
-        permission: 'menu-favirate'
-    },
-    {
-        name: "Account",
-        href: '/auth/account',
-        icon: CircleStackIcon,
-        roles: ['Super Admin', 'Admin', 'Subagency'],
-        permission: 'menu-account'
-    },
+    // {
+    //     name: "Favorite",
+    //     href: '/auth/favirate',
+    //     icon: StarIcon,
+    //     roles: ['Super Admin', 'Client'],
+    //     permission: 'menu-favirate'
+    // },
+    // {
+    //     name: "Account",
+    //     href: '/auth/account',
+    //     icon: CircleStackIcon,
+    //     roles: ['Super Admin', 'Admin', 'Subagency'],
+    //     permission: 'menu-account'
+    // },
 ];
 
 

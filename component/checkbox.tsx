@@ -21,7 +21,7 @@ export default function CheckBox({
                 name={labelId}
                 type='checkbox'
                 className={classNames(
-                    "h-4 w-4 text-primary1 focus:ring-transparent border-gray-300 rounded cursor-pointer",
+                    "h-4 w-4 text-primary1 focus:ring-transparent border-primary rounded cursor-pointer",
                     className,
                 )}
                 {...props}

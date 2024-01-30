@@ -45,8 +45,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className={`${roboto.variable}`}>
             <QueryClientProvider client={queryClient}>
                 {/* <GoogleOAuthProvider clientId={"902325181054-s9o11078ph5fgbqsljntfm3oinsmjbov.apps.googleusercontent.com"}> */}
-                <AuthProvider>
-                    <ApplicationProvider>
+                <ApplicationProvider>
+                    <AuthProvider>
 
                         {
                             router.pathname.startsWith("/auth") ?
@@ -54,8 +54,8 @@ export default function App({ Component, pageProps }: AppProps) {
                                 pages.includes(router.pathname) ? <Component {...pageProps} /> :
                                     <Layout props={<Component {...pageProps} />} />
                         }
-                    </ApplicationProvider>
-                </AuthProvider>
+                    </AuthProvider>
+                </ApplicationProvider>
                 {/* </GoogleOAuthProvider>; */}
 
                 <ToastContainer />

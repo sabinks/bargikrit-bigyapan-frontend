@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { apiClient } from "../api";
-import { booleanCheck, checkSubset } from "../utils";
-import { getCookie, deleteCookie, setCookie } from "cookies-next";
-import { getUser } from "../api/auth";
-import { cookies } from "next/dist/client/components/headers";
+import { getCountries } from "../api";
+import { getNextAdvertisementTypes } from "../src/api/frontend";
 
 interface StateType {
     advertisementView: string;
     advertisementViewToggle: boolean;
+    country: string;
+    countries: any;
+    selectedCountry: any;
+    provinces: any;
+    selectedProvince: any;
+    advertisementTypes: any;
+    selectedAdvertisementType: any;
 }
 
 interface ApplicationType {
@@ -18,15 +22,51 @@ interface ApplicationType {
 export const ApplicationContext = React.createContext<ApplicationType>(null!);
 
 export function ApplicationProvider({ children }: { children: React.ReactNode }) {
+
     const [appState, setAppState] = React.useState<any>({
-        advertisementView: 'grid',
-        advertisementViewToogle: false
+        advertisementView: 'listing',
+        advertisementViewToogle: false,
+        country: '',
+        countries: [],
+        selectedCountry: {},
+        provices: [],
+        selectedProvince: {},
+        advertisementTypes: [],
+        selectedAdvertisementType: null,
     });
-
-
+    useEffect(() => {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        let zone = ['Asia/Kathmandu', 'Asia/Katmandu']
+        let country = 'Nepal'
+        if (zone.includes(timeZone)) {
+            country = 'Nepal'
+        } else {
+            country = "Australia"
+        }
+        setAppState((prev: any) => ({
+            ...prev, country
+        }))
+    }, [])
+    useEffect(() => {
+        loadCountries()
+    }, [])
+    const loadCountries = async () => {
+        let data = await getCountries()
+        setAppState((prev: any) => ({
+            ...prev, countries: data
+        }))
+    }
+    useEffect(() => {
+        loadAdsType()
+    }, [])
+    const loadAdsType = async () => {
+        let data = await getNextAdvertisementTypes()
+        setAppState((prev: any) => ({
+            ...prev, advertisementTypes: data
+        }))
+    }
     const value = {
         appState, setAppState
-
     };
 
     return <ApplicationContext.Provider value={value}>{children}</ApplicationContext.Provider>;

@@ -33,14 +33,14 @@ export const forgotPassword = async (email: string) => {
 
 
 export const getQueryData = async (state: any) => {
-    const [name, query, sortby, order, page, pagination, publish] = state?.queryKey
+    const [name, query, sortby, order, page, pagination, publish, advertisementType, country, province] = state?.queryKey
     let pub = ''
     let assign = ''
     if (publish) {
         pub = `&publish=${publish}`
     }
-    let url = query ? `/${name}?pageSize=${pagination}&offset=${page}&order=${order}&search=${query}` :
-        `/${name}?pageSize=${pagination}&offset=${page}&sort=${order}&sortBy=${sortby}`
+    let url = query ? `/${name}?pageSize=${pagination}&offset=${page}&order=${order}&search=${query}&advertisementType=${advertisementType}&country=${country}&province=${province}` :
+        `/${name}?pageSize=${pagination}&offset=${page}&sort=${order}&sortBy=${sortby}&advertisementType=${advertisementType}&country=${country}&province=${province}`
     const { data } = await apiClient.get(url);
     return data
 };
@@ -52,6 +52,10 @@ export const getCountries = async () => {
 }
 export const getProvincesByCountryId = async (value: any) => {
     const [query, id] = value.queryKey
+    const { data } = await apiClient.get(`/countries/${id}/provinces`)
+    return data;
+}
+export const listProvincesByCountryId = async (id: number) => {
     const { data } = await apiClient.get(`/countries/${id}/provinces`)
     return data;
 }

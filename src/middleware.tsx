@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
         { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], startPath: /\/auth\/dashboard/ },
         { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], startPath: /\/auth\/advertisements/ },
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/advertisement-type/ },
-        { roles: ['PARTNER', 'USER'], startPath: /\/auth\/members\/advertisements/ },
+        // { roles: ['PARTNER', 'USER'], startPath: /\/auth\/members\/advertisements/ },
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/partners/ },
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/users/ },
         { roles: ['SUPERADMIN'], startPath: /\/auth\/admins/ },
