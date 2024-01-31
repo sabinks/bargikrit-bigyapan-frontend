@@ -79,7 +79,7 @@ const Input = ({
                 </div>
             }
             {
-                ["text", "email"].includes(type) &&
+                ["text", "email", "password", "phone"].includes(type) &&
                 <div>
                     <input
                         {...rest}
