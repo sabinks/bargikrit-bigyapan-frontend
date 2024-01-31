@@ -2,8 +2,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 
 import { SortingState, createColumnHelper } from "@tanstack/react-table";
-import Search from "../../../../component/search";
-import { Button, Input, NewTable, PageTitle, SidePanel, Table } from "../../../../component";
+import Search from "../../../components/search";
+import { Button, Input, NewTable, PageTitle, SidePanel, Table } from "../../../components";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { addRole, deleteRole, listRole, showRole, updateRole } from "../../../../api/role";
 import Link from "next/link";

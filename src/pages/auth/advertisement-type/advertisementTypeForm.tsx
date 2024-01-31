@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Input } from '../../../../component'
+import { Input } from '../../../components'
 
 export default function AdvertisementTypeForm({ state, setState, error }: any) {
     const handleChange = (e: any) => {

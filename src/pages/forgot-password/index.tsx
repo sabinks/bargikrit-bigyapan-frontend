@@ -3,8 +3,8 @@ import * as React from "react";
 import { useState } from "react";
 import { apiClient } from "../../../api";
 import { useRouter } from "next/router";
-import { Button, Input } from "../../../component";
-import ErrorMessage from "../../../component/error_message";
+import { Button, Input } from "../../components";
+import ErrorMessage from "../../components/error_message";
 import Image from "next/image";
 
 

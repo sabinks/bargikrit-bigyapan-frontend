@@ -34,7 +34,7 @@ export function ApplicationProvider({ children }: { children: React.ReactNode })
         selectedProvince: {},
         advertisementTypes: [],
         selectedAdvertisementType: null,
-        search: ''
+        search: ""
     });
     useEffect(() => {
         const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone

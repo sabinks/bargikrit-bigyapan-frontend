@@ -6,19 +6,19 @@ import dynamic from 'next/dynamic'
 import { useAuth } from "../../hooks/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import AdvertisementCard from "../../components/AdvertisementCard";
-import AdvertisementListing from "../../component/AdvertisementListing";
 import { SortingState } from "@tanstack/react-table";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
 import Loading from "@/components/loading";
 import { useApplication } from "../../hooks/application";
-import Dropdown from "../../component/dropDown";
-import { Button, Input } from "../../component";
+import Button from "@/components/Button";
 import { getAdvertisementTypes } from "../../api/advertisement";
 import { getNextQueryData } from "@/api/frontend";
 import { useDebounce } from "use-debounce";
+import AdvertisementCard from "@/components/AdvertisementCard";
+import Dropdown from "@/components/dropDown";
+import { Input } from "../components";
 
-const ParsedContent = dynamic(() => import('../../components/innerhtml'), { ssr: false })
+// const ParsedContent = dynamic(() => import('../../components/innerhtml'), { ssr: false })
 
 export default function Home({ }: any) {
     const { appState, setAppState } = useApplication()
@@ -94,10 +94,10 @@ export default function Home({ }: any) {
     }
 
     return (
-        <div className="container mx-auto my-12">
+        <div className="container mx-auto my-8">
             <div className="mb-4">
-                <div className="flex flex-col lg:flex-row lg:items-end justify-between md:gap-x-4 space-y-2 lg:space-y-0">
-                    <div className=" lg:w-[3000px]">
+                <div className="flex flex-col lg:flex-row lg:items-end md:gap-x-4 space-y-2 lg:space-y-0">
+                    <div className=" lg:w-1/3">
                         <Input label="Search" placeholder="Search advertisement" name="searchAdvertisement" type="text" value={appState?.search} onChange={(e: any) => {
                             setAppState((prev: any) => ({
                                 ...prev, search: e.target.value
@@ -105,25 +105,30 @@ export default function Home({ }: any) {
                         }
                         } />
                     </div>
-                    <Dropdown label="Select Advertisement Type" selectedValue={appState?.selectedAdvertisementType} data={appState?.advertisementTypes} onChange={(advertisement: any) => {
-                        setAppState((prev: any) => ({
-                            ...prev, selectedAdvertisementType: advertisement
-                        }))
-                    }} />
 
-                    <Dropdown label="Select Country" selectedValue={appState?.selectedCountry} data={appState?.countries} onChange={(country: any) => {
-                        setAppState((prev: any) => ({
-                            ...prev, selectedCountry: country, selectedProvince: null
-                        }))
-                    }} />
-                    <Dropdown label="Select Province/State" selectedValue={appState?.selectedProvince} data={appState?.provinces} onChange={(province: any) => {
-                        setAppState((prev: any) => ({
-                            ...prev, selectedProvince: province
-                        }))
-                    }} />
-                    <Button label="Reset" buttonType="warning" onClick={(e: any) => {
-                        handleResetClick()
-                    }} />
+                    <div className="w-full lg:w-2/3">
+                        <div className="flex items-end space-x-2">
+                            <Dropdown label="Select Advertisement Type" selectedValue={appState?.selectedAdvertisementType} data={appState?.advertisementTypes} onChange={(advertisement: any) => {
+                                setAppState((prev: any) => ({
+                                    ...prev, selectedAdvertisementType: advertisement
+                                }))
+                            }} />
+
+                            <Dropdown label="Select Country" selectedValue={appState?.selectedCountry} data={appState?.countries} onChange={(country: any) => {
+                                setAppState((prev: any) => ({
+                                    ...prev, selectedCountry: country, selectedProvince: null
+                                }))
+                            }} />
+                            <Dropdown label="Select Province/State" selectedValue={appState?.selectedProvince} data={appState?.provinces} onChange={(province: any) => {
+                                setAppState((prev: any) => ({
+                                    ...prev, selectedProvince: province
+                                }))
+                            }} />
+                            <Button label="Reset" buttonType="warning" onClick={(e: any) => {
+                                handleResetClick()
+                            }} />
+                        </div>
+                    </div>
                 </div>
             </div>
             <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">

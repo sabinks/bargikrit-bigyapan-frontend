@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Input } from '../../../../component';
-import Editor from '../../../../component/editor'
+import { Input } from '../../../components';
+import Editor from '../../../components/editor'
 import { useQuery } from '@tanstack/react-query';
 import { getAdvertisementTypes } from '../../../../api/advertisement';
-import Dropdown from '../../../../component/dropDown';
+import Dropdown from '../../../components/dropDown';
 import { getProvinces } from '../../../../api';
 
 export default function AdvertisementsForm({ state, setState, error }: any) {

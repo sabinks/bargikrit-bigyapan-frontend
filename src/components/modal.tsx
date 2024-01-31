@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import { classNames } from '../utils'
+import { classNames } from '../../utils'
 import Button from './Button'
 
 

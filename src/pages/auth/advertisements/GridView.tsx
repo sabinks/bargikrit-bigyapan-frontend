@@ -6,15 +6,15 @@ import dynamic from 'next/dynamic'
 import { useAuth } from "../../../../hooks/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import AdvertisementCard from "../../../../components/AdvertisementCard";
-import AdvertisementListing from "../../../../component/AdvertisementListing";
 import { SortingState } from "@tanstack/react-table";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
-import Loading from "../../../../component/loading";
-import { Button, PageTitle, SidePanel } from "../../../../component";
+import { PageTitle, SidePanel } from "../../../components";
+import Button from '@/components/Button'
 import { checkSubset } from "../../../../utils";
 import { addAdvertisement, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "../../../../api/advertisement";
 import AdvertisementsForm from "./advertisementsForm";
+import AdvertisementCard from "@/components/AdvertisementCard";
+import Loading from "@/components/loading";
 
 const initialState = {
     name: "",

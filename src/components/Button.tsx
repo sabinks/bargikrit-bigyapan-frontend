@@ -1,5 +1,5 @@
 import React from "react";
-import { classNames } from "../utils/index";
+import { classNames } from "../../utils/index";
 
 type ButtonProps = {
     type?: "button" | "submit" | "reset";

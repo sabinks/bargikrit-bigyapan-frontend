@@ -4,10 +4,10 @@ import React from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { deleteById, getQueryData, showQueryData, toggleIsActive } from "../../../../api";
 import { addAdmin } from "../../../../api/admin";
-import { Button, CheckBox, NewTable, PageTitle, SidePanel } from "../../../../component";
+import { Button, CheckBox, NewTable, PageTitle, SidePanel } from "../../../components";
 import Link from "next/link";
 import { PencilSquareIcon, TrashIcon, UserIcon } from "@heroicons/react/24/outline";
-import Search from "../../../../component/search";
+import Search from "../../../components/search";
 import AdminForm from "./admin-form";
 import { useAuth } from "../../../../hooks/auth";
 

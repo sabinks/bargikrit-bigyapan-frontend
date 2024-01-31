@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { CheckBox, Input } from '../../../../component'
+import { CheckBox, Input } from '../../../components'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 

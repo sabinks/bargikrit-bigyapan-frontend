@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useAuth } from "../../../hooks/auth";
-import { Button, CheckBox, Input } from "../../../component";
+import { Button, CheckBox, Input } from "../../components";
 import Link from "next/link";
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { userLogin } from "../../../api/auth";

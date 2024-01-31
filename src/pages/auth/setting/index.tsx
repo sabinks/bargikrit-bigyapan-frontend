@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Input, PageTitle } from '../../../../component'
+import { Button, Input, PageTitle } from '../../../components'
 import Image from 'next/image'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { getList } from '../../../../api'

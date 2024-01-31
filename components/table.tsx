@@ -10,7 +10,7 @@ import {
     useReactTable
 } from "@tanstack/react-table";
 import * as React from "react";
-import Button from "../component/Button";
+import Button from "../src/components/Button";
 
 export default function Table({
     data,

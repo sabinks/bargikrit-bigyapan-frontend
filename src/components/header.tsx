@@ -10,11 +10,11 @@ import { montserrat, montserratRegular } from '@/fonts';
 import { APP_NAME, BASE_URL } from '@/constants';
 import { UserIcon, UserPlusIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
-import { useAuth } from '../hooks/auth';
 import { useMutation } from '@tanstack/react-query';
-import { logout } from '../api/auth';
 import Image from 'next/image';
 import { setCookie } from 'cookies-next';
+import { useAuth } from '../../hooks/auth';
+import { logout } from '../../api/auth';
 function Header() {
     const { isAuthenticated, signout } = useAuth()
     const router = useRouter()
@@ -68,10 +68,11 @@ function Header() {
                 </div>
                 <div className="hidden lg:flex lg:gap-x-12">
                     {navigation.map((item) => (
-                        <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+                        <Link key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
                             {item.name}
-                        </a>
+                        </Link>
                     ))}
+
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
@@ -104,15 +105,17 @@ function Header() {
                         <div className="-my-6 divide-y divide-gray-500/10">
                             <div className="space-y-2 py-4">
                                 {navigation.map((item) => (
-                                    <a
+                                    <Link
                                         key={item.name}
                                         href={item.href}
                                         onClick={(e: any) => setMobileMenuOpen(false)}
                                         className="-mx-3 block px-3 py-2 tracking-wide text-base text-gray-dark hover:bg-primary hover:text-white transition duration-300"
                                     >
                                         {item.name}
-                                    </a>
+                                    </Link>
                                 ))}
+                                <Link href="/login" className="-mx-3 block px-3 py-2 tracking-wide text-base text-gray-dark hover:bg-primary hover:text-white transition duration-300">Login</Link>
+                                <Link href="/register" className="-mx-3 block px-3 py-2 tracking-wide text-base text-gray-dark hover:bg-primary hover:text-white transition duration-300">Register</Link>
                             </div>
                             {/* <div className="py-6">
                                 <a
@@ -126,14 +129,14 @@ function Header() {
                     </div>
                 </Dialog.Panel>
             </Dialog>
-            <div className="hidden lg:flex bg-primary py-3">
+            <div className="hidden md:flex bg-primary py-3">
                 <div className="container mx-auto">
                     <div className="flex justify-between items-center">
                         <div className="flex md:space-x-4 divide-x divide-white text-white">
                             <div className=""><FaFacebookF className=" hover:text-[#316FF6] transition duration-300 cursor-pointer" /></div>
-                            <div className="pl-4"><FaTwitter className=" hover:text-[#1DA1F2] transition duration-300 cursor-pointer" /></div>
-                            <div className="pl-4"><FaInstagram className=" hover:text-pink-600 transition duration-300 cursor-pointer" /></div>
-                            <div className="pl-4"><FaYoutube className=" hover:text-[#CD201F] transition duration-300 cursor-pointer" /> </div>
+                            {/* <div className="pl-4"><FaTwitter className=" hover:text-[#1DA1F2] transition duration-300 cursor-pointer" /></div> */}
+                            {/* <div className="pl-4"><FaInstagram className=" hover:text-pink-600 transition duration-300 cursor-pointer" /></div>
+                            <div className="pl-4"><FaYoutube className=" hover:text-[#CD201F] transition duration-300 cursor-pointer" /> </div> */}
                         </div>
                         <div className={`flex md:space-x-2 text-sm text-white`}>
                             <div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMobile /><span className='pl-2'> +977 9861168333</span></div>

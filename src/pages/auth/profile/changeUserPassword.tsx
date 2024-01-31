@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import React, { useState } from 'react'
-import { Button, Input } from '../../../../component'
+import { Button, Input } from '../../../components'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
 import { changePassword } from '../../../../api/auth'
 import { setCookie } from 'cookies-next'

@@ -5,7 +5,7 @@ import Link from "next/link";
 import dynamic from 'next/dynamic'
 import { useAuth } from "../../../../../hooks/auth";
 import { useQuery } from "@tanstack/react-query";
-import AdvertisementCard from "../../../../../components/AdvertisementCard";
+import AdvertisementCard from "../../../../components/AdvertisementCard";
 import { SortingState } from "@tanstack/react-table";
 
 

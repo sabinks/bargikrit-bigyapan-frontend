@@ -1,9 +1,9 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import Footer from './footer'
-import Header from './header'
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
-const NavBar = dynamic(() => import('./navBar'), { ssr: false })
+// const NavBar = dynamic(() => import('./navBar'), { ssr: false })
 
 export default function Layout({ props }: any) {
     return (
@@ -14,7 +14,7 @@ export default function Layout({ props }: any) {
                 <div className='px-3'>{props}</div>
             </div>
             <Footer />
-        </div>
+        </div >
     )
 }
 

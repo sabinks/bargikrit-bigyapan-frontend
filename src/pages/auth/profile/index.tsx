@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PageTitle } from '../../../../component'
+import { PageTitle } from '../../../components'
 // import BankDetail from './bankDetails'
 import ChangeUserPassword from './changeUserPassword'
 import ChangeUserDetail from './changeUserDetail'

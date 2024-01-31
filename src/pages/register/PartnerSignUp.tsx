@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useMutation, useQuery } from "@tanstack/react-query";
-import Input from '../../../component/Input';
+import Input from '../../components/Input';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
-import Button from '../../../component/Button';
+import Button from '../../components/Button';
 import { useRouter } from 'next/router';
 import { userRegisterForm } from '../../../api';
 

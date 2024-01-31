@@ -16,10 +16,11 @@ import {
 } from 'react-social-login-buttons'
 
 import { useMutation } from '@tanstack/react-query';
-import { loginSocial } from '../api/auth';
 import { setCookie } from 'cookies-next';
-import { useAuth } from '../hooks/auth';
+
 import { useRouter } from 'next/router';
+import { useAuth } from '../../hooks/auth';
+import { loginSocial } from '../../api/auth';
 
 export default function SocialLogin() {
     const { signin } = useAuth();

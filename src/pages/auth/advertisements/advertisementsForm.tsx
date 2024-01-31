@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import { getCountries, getProvinces, getProvincesByCountryId } from '../../../../api/'
 import { getAdvertisementTypes } from '../../../../api/advertisement';
-import Dropdown from '../../../../component/dropDown';
-import Editor from '../../../../component/editor';
-import { Input } from '../../../../component';
+import Dropdown from "@/components/dropDown";
+import { Input } from '../../../components';
 import { useAuth } from '../../../../hooks/auth';
+import Editor from '@/components/editor';
 
 export default function AdvertisementsForm({ state, setState, error, edit }: any) {
     const { roles, user: { email, name, contactNumber }, getUserDetails } = useAuth()

@@ -1,4 +1,4 @@
-import { CheckBox, NewTable, PageTitle } from "../../../../component";
+import { CheckBox, NewTable, PageTitle } from "../../../components";
 import { useState } from "react";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import React from "react";
@@ -8,10 +8,10 @@ import { useAuth } from "../../../../hooks/auth";
 import { getQueryData } from "../../../../api";
 import { checkSubset } from "../../../../utils";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import Search from "../../../../component/search";
+import Search from "../../../components/search";
 import AdvertisementsForm from "./advertisementsForm";
-import SidePanel from "../../../../component/sidePanel";
-import Button from "../../../../component/Button";
+import SidePanel from "../../../components/sidePanel";
+import Button from "../../../components/Button";
 
 const initialState = {
     name: "",

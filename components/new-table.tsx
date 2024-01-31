@@ -11,7 +11,7 @@ import * as React from "react";
 import { ArrowUpIcon, ArrowDownIcon, ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { classNames } from "../utils";
 import ReactPaginate from "react-paginate";
-import Spinner from "../component/spinner";
+import Spinner from "@/components/spinner";
 
 export default function NewTable({
     data,

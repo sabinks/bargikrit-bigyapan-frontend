@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react'
 import { useAuth } from '../../../../hooks/auth'
-import { Button, Input } from '../../../../component';
-import Dropdown from '../../../../component/dropDown';
+import { Button, Input } from '../../../components';
+import Dropdown from '../../../components/dropDown';
 import { ja } from 'date-fns/locale';
 import { useQuery } from '@tanstack/react-query';
 import { getDocumentTypeList, uploadPartnerDocuments } from '../../../../api';

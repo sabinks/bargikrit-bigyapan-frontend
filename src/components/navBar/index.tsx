@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useState } from "react";
 import React from "react";
 import { useRouter } from "next/router";
-import { classNames } from "../../utils";
 import {
     ArrowLeftCircleIcon,
     Bars3Icon,
@@ -13,10 +12,12 @@ import {
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 import dynamic from 'next/dynamic'
-import { useAuth } from "../../hooks/auth";
 import { useMutation } from "@tanstack/react-query";
-import { logout } from "../../api/auth";
+
 import NewButton from "../new-button";
+import { logout } from "../../../api/auth";
+import { classNames } from "../../../utils";
+import { useAuth } from "../../../hooks/auth";
 
 
 // const Userlog = dynamic(() => import('../userlog'), { ssr: false })

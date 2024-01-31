@@ -1,5 +1,5 @@
 import { HTMLInputTypeAttribute } from "react";
-import { camalize, classNames } from "../utils";
+import { camalize, classNames } from "../../utils";
 
 type InputProps = {
     label?: string;

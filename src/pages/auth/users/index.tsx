@@ -1,11 +1,11 @@
-import { Button, CheckBox, NewTable, PageTitle, SidePanel } from "../../../../component";
+import { Button, CheckBox, NewTable, PageTitle, SidePanel } from "../../../components";
 import { useState } from "react";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import React from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { deleteById, getQueryData, userStatusChange } from "../../../../api";
 import AdvertisementForm from "./advertisementsForm";
-import Search from "../../../../component/search";
+import Search from "../../../components/search";
 import { checkSubset } from "../../../../utils";
 import { useAuth } from "../../../../hooks/auth";
 import { addAdvertisement, advertisementStatusChange, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "../../../../api/advertisement";

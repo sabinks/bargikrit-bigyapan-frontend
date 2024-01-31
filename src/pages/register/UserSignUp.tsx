@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { userRegisterForm } from "../../../api";
 import { useRouter } from "next/router";
-import Input from "../../../component/Input";
+import Input from "../../components/Input";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import Button from "../../../component/Button";
+import Button from "../../components/Button";
 import { classNames } from "../../../utils";
 
 export default function UserSignUp() {

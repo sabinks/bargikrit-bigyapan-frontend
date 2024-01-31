@@ -7,8 +7,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import Image from "next/image";
 import { sendContact } from "../../../api";
 import { playFair } from "@/fonts";
-import Input from "../../../component/Input";
-import Button from "../../../component/Button";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
 const inter = Inter({ subsets: ['latin'] })
 
 interface ContactType {
