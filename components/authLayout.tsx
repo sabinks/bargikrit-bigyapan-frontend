@@ -8,7 +8,7 @@ import Link from "next/link";
 import { AcademicCapIcon, BanknotesIcon, Bars3Icon, BookmarkIcon, BookmarkSlashIcon, BookmarkSquareIcon, BuildingLibraryIcon, ChatBubbleBottomCenterIcon, ChatBubbleLeftIcon, ChatBubbleLeftRightIcon, CircleStackIcon, Cog6ToothIcon, HomeIcon, MagnifyingGlassCircleIcon, MagnifyingGlassIcon, StarIcon, UserCircleIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { usePathname } from 'next/navigation';
 import { logout } from "../api/auth";
-import { searchUser } from "../api";
+import { searchUser } from "../src/api";
 import io from 'socket.io-client';
 import { APP_NAME } from "@/constants";
 import { poppins } from "@/fonts";

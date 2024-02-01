@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { apiClient } from "../../../api";
+import { apiClient } from "../../api";
 import { Button, Input } from "../../components";
 import ErrorMessage from "../../components/error_message";
 import { useRouter } from "next/router";

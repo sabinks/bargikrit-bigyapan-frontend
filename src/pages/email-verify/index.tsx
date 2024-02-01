@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { Button } from "../../components";
 import { useRouter } from "next/router";
-import { apiClient } from "../../../api";
+import { apiClient } from "../../api";
 import Image from "next/image";
 
 export default function MailVerification() {

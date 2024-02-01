@@ -5,9 +5,9 @@ import React from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { addAdvertisement, advertisementStatusChange, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "../../../../api/advertisement";
 import { useAuth } from "../../../../hooks/auth";
-import { getQueryData } from "../../../../api";
+import { getQueryData } from "../../../api";
 import { checkSubset } from "../../../../utils";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Search from "../../../components/search";
 import AdvertisementsForm from "./advertisementsForm";
 import SidePanel from "../../../components/sidePanel";
@@ -147,16 +147,16 @@ export default function ListingView() {
         columnHelper.accessor((row: any) => row.id, {
             id: "actions",
             cell: (info: any) => {
-                const { id, user } = info?.row.original
+                const { id, user, publish } = info?.row.original
 
                 return (
                     <div className='flex items-center space-x-2'>
                         {
-                            (checkSubset(["SUPERADMIN", "ADMIN"], roles) || user?.email == email) &&
+                            (checkSubset(["SUPERADMIN", "ADMIN"], roles) || (user?.email == email && !publish)) &&
                             <Button
                                 label=''
                                 buttonType="primary"
-                                icon={<PencilIcon className="w-5" />}
+                                icon={<PencilSquareIcon className="w-5" />}
                                 onClick={() => handleClick(id)}
                                 tooltipMsg="Edit Advertisement"
                             />

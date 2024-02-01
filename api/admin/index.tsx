@@ -1,4 +1,4 @@
-import { apiClient } from "..";
+import { apiClient } from "../../src/api";
 
 export const addAdmin = async (data: any) => {
     const { id, route } = data

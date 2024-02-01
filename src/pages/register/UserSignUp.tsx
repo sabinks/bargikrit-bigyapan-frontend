@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { userRegisterForm } from "../../../api";
+import { userRegisterForm } from "../../api";
 import { useRouter } from "next/router";
 import Input from "../../components/Input";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";

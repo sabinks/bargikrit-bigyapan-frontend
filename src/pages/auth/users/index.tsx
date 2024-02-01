@@ -3,7 +3,7 @@ import { useState } from "react";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import React from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { deleteById, getQueryData, userStatusChange } from "../../../../api";
+import { deleteById, getQueryData, userStatusChange } from "../../../api";
 import AdvertisementForm from "./advertisementsForm";
 import Search from "../../../components/search";
 import { checkSubset } from "../../../../utils";

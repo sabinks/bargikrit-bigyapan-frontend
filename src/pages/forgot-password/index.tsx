@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import * as React from "react";
 import { useState } from "react";
-import { apiClient } from "../../../api";
+import { apiClient } from "../../api";
 import { useRouter } from "next/router";
 import { Button, Input } from "../../components";
 import ErrorMessage from "../../components/error_message";

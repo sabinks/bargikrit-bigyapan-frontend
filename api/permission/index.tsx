@@ -1,4 +1,4 @@
-import { apiClient } from "..";
+import { apiClient } from "../../src/api";
 
 export const listPermission = async () => {
     const response = await apiClient.get(`/permission`);

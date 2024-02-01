@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
-import { getCountries, getProvinces, getProvincesByCountryId } from '../../../../api/'
+import { getCountries, getProvinces, getProvincesByCountryId } from '../../../api'
 import { getAdvertisementTypes } from '../../../../api/advertisement';
 import Dropdown from "@/components/dropDown";
 import { Input } from '../../../components';

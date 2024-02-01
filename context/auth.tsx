@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { apiClient } from "../api";
+import { apiClient } from "../src/api";
 import { booleanCheck, checkSubset } from "../utils";
 import { getCookie, deleteCookie, setCookie } from "cookies-next";
 import { getUser } from "../api/auth";

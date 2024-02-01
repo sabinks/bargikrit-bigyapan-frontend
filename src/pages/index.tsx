@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { apiClient, getCountries, getList, getProvincesByCountryId, getQueryData, listProvincesByCountryId, showQueryData } from "../../api";
+import { apiClient, getCountries, getList, getProvincesByCountryId, getQueryData, listProvincesByCountryId, showQueryData } from "../api";
 import Link from "next/link";
 import dynamic from 'next/dynamic'
 import { useAuth } from "../../hooks/auth";

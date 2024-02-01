@@ -2,7 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { deleteCookie } from "cookies-next";
-import { logout } from "./auth";
+import { logout } from "../../api/auth";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 

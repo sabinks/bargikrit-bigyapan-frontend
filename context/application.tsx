@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getCountries } from "../api";
+import { getCountries } from "../src/api";
 import { getNextAdvertisementTypes } from "../src/api/frontend";
 
 interface StateType {

@@ -1,4 +1,4 @@
-import { apiClient } from "..";
+import { apiClient } from "../../src/api";
 
 export const userFavirote = async (data: any) => {
     return await apiClient.post(`/user-favorite`, data);

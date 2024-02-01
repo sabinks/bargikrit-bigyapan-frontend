@@ -9,6 +9,7 @@ import AuthLayout from "../../components/authLayout";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-multi-carousel/lib/styles.css';
+import 'react-medium-image-zoom/dist/styles.css'
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { NextResponse } from "next/server";
 import { ApplicationProvider } from "../../context/application";

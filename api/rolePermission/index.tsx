@@ -1,4 +1,4 @@
-import { apiClient } from "..";
+import { apiClient } from "../../src/api";
 
 export const getAssginPermission = async (id: number) => {
     const response = await apiClient.get(`/role-permission/${id}`);

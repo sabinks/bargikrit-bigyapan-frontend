@@ -5,7 +5,7 @@ import React from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { addAdvertisement, advertisementStatusChange, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "../../../../api/advertisement";
 import { useAuth } from "../../../../hooks/auth";
-import { getQueryData } from "../../../../api";
+import { getQueryData } from "../../../api";
 import { checkSubset } from "../../../../utils";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Search from "../../../components/search";

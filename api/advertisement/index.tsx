@@ -1,4 +1,4 @@
-import { apiClient } from "..";
+import { apiClient } from "../../src/api";
 
 export const addAdvertisement = async (data: any) => {
     return await apiClient.post(`/advertisements`, data, {

@@ -7,7 +7,7 @@ import { Button, Input, NewTable, PageTitle, SidePanel, Table } from "../../../c
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { addRole, deleteRole, listRole, showRole, updateRole } from "../../../../api/role";
 import Link from "next/link";
-import { getQueryData, showQueryData } from "../../../../api";
+import { getQueryData, showQueryData } from "../../../api";
 import { useAuth } from "../../../../hooks/auth";
 
 export default function Role() {

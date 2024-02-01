@@ -4,7 +4,7 @@ import Input from '../../components/Input';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import Button from '../../components/Button';
 import { useRouter } from 'next/router';
-import { userRegisterForm } from '../../../api';
+import { userRegisterForm } from '../../api';
 
 export default function PartnerSignUp({ partnerType }: any) {
     const router = useRouter()

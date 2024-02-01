@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Head from "next/head";
 import { Dialog, Transition } from '@headlessui/react'
 import Image from "next/image";
-import { sendContact } from "../../../api";
+import { sendContact } from "../../api";
 import { playFair } from "@/fonts";
 import Input from "../../components/Input";
 import Button from "../../components/Button";

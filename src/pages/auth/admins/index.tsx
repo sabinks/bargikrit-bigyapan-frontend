@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import React from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { deleteById, getQueryData, showQueryData, toggleIsActive } from "../../../../api";
+import { deleteById, getQueryData, showQueryData, toggleIsActive } from "../../../api";
 import { addAdmin } from "../../../../api/admin";
 import { Button, CheckBox, NewTable, PageTitle, SidePanel } from "../../../components";
 import Link from "next/link";

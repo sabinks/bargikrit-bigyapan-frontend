@@ -4,7 +4,7 @@ import Editor from '../../../components/editor'
 import { useQuery } from '@tanstack/react-query';
 import { getAdvertisementTypes } from '../../../../api/advertisement';
 import Dropdown from '../../../components/dropDown';
-import { getProvinces } from '../../../../api';
+import { getProvinces } from '../../../api';
 
 export default function AdvertisementsForm({ state, setState, error }: any) {
     const [adsType, setAdsType] = useState<any>([])

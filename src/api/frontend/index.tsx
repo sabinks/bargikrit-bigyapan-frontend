@@ -1,4 +1,4 @@
-import { apiClient } from "../../../api";
+import { apiClient } from "..";
 
 export const getNextAdvertisementTypes = async () => {
     const response = await apiClient.get(`/next/advertisement-type`);

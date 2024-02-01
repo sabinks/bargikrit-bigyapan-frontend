@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Suspense, useEffect, useState } from "react";
-import { apiClient, getList, getQueryData, showQueryData } from "../../../../api";
+import { apiClient, getList, getQueryData, showQueryData } from "../../../api";
 import Link from "next/link";
 import dynamic from 'next/dynamic'
 import { useAuth } from "../../../../hooks/auth";

@@ -1,4 +1,4 @@
-import { apiClient } from "..";
+import { apiClient } from "../../src/api";
 
 export const userLogin = async (data: any) => {
     const { email, password } = data
