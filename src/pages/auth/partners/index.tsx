@@ -1,11 +1,15 @@
 import { Button, CheckBox, NewTable, PageTitle, SidePanel } from "../../../components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import React from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { deleteById, getQueryData, userCanPublishChange, userStatusChange } from "../../../api";
 import Search from "../../../components/search";
 import { useAuth } from "../../../../hooks/auth";
+import { getPartnerDocumentsByUserId } from "@/api/dashboard";
+import { DocumentIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { apiClient, getQueryData, userCanPublishChange, userStatusChange } from "@/api";
+import Modal from "@/components/modal";
+import { ImageZoom } from "../dashboard/PartnerDashboard";
 
 const initialState = {
     name: "",
@@ -21,14 +25,12 @@ export default function Clients() {
         desc: true
     }])
     const [page, setPage] = useState<number>(0);
-    const [adsId, setAdsId] = useState<number>(0)
+    const [partnerId, setPartnerId] = useState<number>(0)
     const columnHelper = createColumnHelper<any>();
-    const [isVisible, toggleIsVisible] = React.useState(false);
     const [tableData, setTableData] = React.useState<any>([]);
-    const [formerrors, setFormErrors] = React.useState<any>({});
-    const [state, setState] = useState<any>(initialState)
-    const [edit, setEdit] = useState(false)
-
+    const [documentList, setDocumentList] = useState<any>([])
+    const [images, setImages] = useState<any>([])
+    const [visibleModal, setVisibleModal] = useState<boolean>(false)
     const { isLoading, data: response, refetch, isFetching } = useQuery(
         ["partners", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 5],
         getQueryData, {
@@ -37,14 +39,32 @@ export default function Clients() {
         }
     })
 
-    // useQuery(['advertisements', adsId], showAdvertisement, {
-    //     onSuccess: (res) => {
-    //         const { name, data, id, advertisementType, advertisementTypeId, district, province } = res.data
-    //         setState({ name: name, id: id, data: data, advertisementType, advertisementTypeId: advertisementType?.id, district, districtId: district?.id, province, provinceId: province?.id })
-    //         setAdsId(0)
-    //     },
-    //     enabled: adsId ? true : false
-    // })
+    useQuery(['partner-document', partnerId], getPartnerDocumentsByUserId, {
+        onSuccess: (data) => {
+            setDocumentList(data)
+            setPartnerId(0)
+        },
+        enabled: partnerId ? true : false
+    })
+    useEffect(() => {
+        if (documentList.length) {
+            setImages([])
+            for (let index = 0; index < documentList.length; index++) {
+                const element = documentList[index];
+                loadImages(element?.documentName)
+            }
+        }
+    }, [documentList])
+    const loadImages = async (filename: string) => {
+        try {
+            const { data } = await apiClient.get(`partner-document/${filename}`)
+            setImages((prev: any) => (
+                [...prev, { filename, data }]
+            ))
+        } catch (error) {
+            console.log('error occured for image fetch');
+        }
+    }
     // const { isLoading: creatingAdvertisement, mutate } = useMutation<any, Error>(addAdvertisement,
     //     {
     //         onSuccess: () => {
@@ -82,11 +102,10 @@ export default function Clients() {
     //     onSuccess: () => refetch()
     // })
 
-    // const handleClick = (id: number) => {
-    //     setAdsId(id)
-    //     setEdit(true)
-    //     toggleIsVisible(!isVisible)
-    // }
+    const handleClick = (id: number) => {
+        setPartnerId(id)
+        setVisibleModal(true)
+    }
     const columns = [
         columnHelper.accessor((row: any) => row, {
             id: "name",
@@ -122,32 +141,32 @@ export default function Clients() {
             cell: ({ row }) => row.original.createdAt,
             header: "Created At",
         }),
-        // columnHelper.accessor((row: any) => row.id, {
-        //     id: "actions",
-        //     cell: (info: any) => {
-        //         const { id } = info?.row.original
-        //         return (
-        //             <div className='flex items-center space-x-2'>
-        //                 <Button
-        //                     label=''
-        //                     buttonType="success"
-        //                     icon={<PencilIcon className="w-5" />}
-        //                     onClick={() => handleClick(id)}
-        //                     tooltipMsg="Edit Advertisement"
-        //                 />
-        //                 {/* {
-        //                     <Button
-        //                         label=''
-        //                         buttonType="danger"
-        //                         icon={<TrashIcon className="w-5" />}
-        //                         onClick={() => mutateDeleteAdvertisement({ id })}
-        //                         tooltipMsg="Delete Advertisement"
-        //                     />
-        //                 } */}
-        //             </div>
-        //         );
-        //     },
-        // }),
+        columnHelper.accessor((row: any) => row.id, {
+            id: "actions",
+            cell: (info: any) => {
+                const { id } = info?.row.original
+                return (
+                    <div className='flex items-center space-x-2'>
+                        <Button
+                            label=''
+                            buttonType="success"
+                            icon={<DocumentIcon className="w-5" />}
+                            onClick={() => handleClick(id)}
+                            tooltipMsg="Edit Advertisement"
+                        />
+                        {/* {
+                            <Button
+                                label=''
+                                buttonType="danger"
+                                icon={<TrashIcon className="w-5" />}
+                                onClick={() => mutateDeleteAdvertisement({ id })}
+                                tooltipMsg="Delete Advertisement"
+                            />
+                        } */}
+                    </div>
+                );
+            },
+        }),
     ];
     const handleActiveStatusChange = (e: any, id: number) => {
         const { checked } = e.target
@@ -214,26 +233,31 @@ export default function Clients() {
                         </div>
                     </div>
                 </div>
+                <Modal isVisible={visibleModal}
+                    isButtonVisible={true}
+                    isPrimaryButtonVisible={false}
+                    secondaryButtonLabel="Close"
+                    onClose={() => {
+                        setPartnerId(0)
+                        setVisibleModal(false)
+                    }}
+                >
+                    <div className="py-2">
+                        <h1 className='font-bold text-2xl mb-4'>Partner Documents</h1>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                            {
+                                images && images.map((image: any) => {
+                                    return <div className="flex flex-row justify-center">
+                                        <ImageZoom className='object-contain' src={`data:image/jpeg;base64,${image?.data}`} width={400} height={400} alt="Documents" />
+                                    </div>
+                                })
+                            }
+                        </div>
+                    </div>
+                </Modal>
             </div>
-            {/* <SidePanel
-                isVisible={isVisible}
-                onClose={() => {
-                    toggleIsVisible(!isVisible);
-                    setFormErrors({});
-                }}
-                wide="4xl"
-                title={edit ? 'Edit Advertisement' : 'Add Advertisement'}
-                primaryButtonAction={() => {
-                    setFormErrors({});
-                    state?.id ? update(state) :
-                        mutate(state)
-                }}
-                primaryButtonLoading={creatingAdvertisement || updatingAdvertisement}
-            >
-                <React.Suspense fallback='loading'>
-                    <AdvertisementForm state={state} setState={setState} error={formerrors} />
-                </React.Suspense>
-            </SidePanel> */}
+
+
         </>
     )
 }

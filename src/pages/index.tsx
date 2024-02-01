@@ -1,24 +1,15 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { apiClient, getCountries, getList, getProvincesByCountryId, getQueryData, listProvincesByCountryId, showQueryData } from "../api";
-import Link from "next/link";
-import dynamic from 'next/dynamic'
-import { useAuth } from "../../hooks/auth";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
+import { apiClient, listProvincesByCountryId } from "../api";
+import { useQuery } from "@tanstack/react-query";
 import { SortingState } from "@tanstack/react-table";
-import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
 import Loading from "@/components/loading";
 import { useApplication } from "../../hooks/application";
 import Button from "@/components/Button";
-import { getAdvertisementTypes } from "../../api/advertisement";
 import { getNextQueryData } from "@/api/frontend";
 import { useDebounce } from "use-debounce";
 import AdvertisementCard from "@/components/AdvertisementCard";
 import Dropdown from "@/components/dropDown";
 import { Input } from "../components";
-
-// const ParsedContent = dynamic(() => import('../../components/innerhtml'), { ssr: false })
 
 export default function Home({ }: any) {
     const { appState, setAppState } = useApplication()
@@ -96,8 +87,8 @@ export default function Home({ }: any) {
     return (
         <div className="container mx-auto my-8">
             <div className="mb-4">
-                <div className="flex flex-col lg:flex-row lg:items-end md:gap-x-4 space-y-2 lg:space-y-0">
-                    <div className=" lg:w-1/3">
+                <div className="flex flex-col">
+                    <div className="w-full">
                         <Input label="Search" placeholder="Search advertisement" name="searchAdvertisement" type="text" value={appState?.search} onChange={(e: any) => {
                             setAppState((prev: any) => ({
                                 ...prev, search: e.target.value
@@ -106,7 +97,7 @@ export default function Home({ }: any) {
                         } />
                     </div>
 
-                    <div className="w-full lg:w-2/3">
+                    <div className="w-full">
                         <div className="flex items-end space-x-2">
                             <Dropdown label="Select Advertisement Type" selectedValue={appState?.selectedAdvertisementType} data={appState?.advertisementTypes} onChange={(advertisement: any) => {
                                 setAppState((prev: any) => ({

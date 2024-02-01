@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { Roboto, Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "../../components/layout";
 import { AuthProvider } from "../../context/auth";
@@ -10,8 +10,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-multi-carousel/lib/styles.css';
 import 'react-medium-image-zoom/dist/styles.css'
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { NextResponse } from "next/server";
+// import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ApplicationProvider } from "../../context/application";
 
 const roboto = Roboto({
@@ -20,11 +19,6 @@ const roboto = Roboto({
     variable: '--font-roboto',
 });
 
-const inter = Inter({
-    subsets: ["latin"],
-    weight: ["400"],
-    variable: '--font-inter',
-});
 
 export const queryClient = new QueryClient({
     defaultOptions: {

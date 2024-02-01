@@ -8,6 +8,7 @@ import Button from './Button'
 export default function Modal({
     isVisible = false,
     isButtonVisible = true,
+    isPrimaryButtonVisible = true,
     primaryButtonLabel = "Confirm",
     primaryButtonAction,
     secondaryButtonLabel = "Cancel",
@@ -18,7 +19,8 @@ export default function Modal({
     children
 }: {
     isVisible: boolean,
-    isButtonVisible?: boolean
+    isButtonVisible?: boolean,
+    isPrimaryButtonVisible?: boolean,
     primaryButtonLabel?: string,
     primaryButtonAction?: () => void,
     secondaryButtonLabel?: string,
@@ -84,15 +86,18 @@ export default function Modal({
                                     <div className="mt-2">
                                         {children}
                                     </div>
-                                    {
-                                        isButtonVisible &&
-                                        <div className="flex justify-end gap-3">
+                                    <div className="flex justify-end gap-3">
+                                        {
+                                            isButtonVisible && isPrimaryButtonVisible &&
                                             <Button
                                                 label={primaryButtonLabel}
                                                 type={primaryButtonAction ? "submit" : "button"}
                                                 // buttonType="secondary"
                                                 onClick={primaryButtonAction}
                                             />
+                                        }
+                                        {
+                                            isButtonVisible &&
 
                                             <Button
                                                 label={secondaryButtonLabel}
@@ -101,8 +106,8 @@ export default function Modal({
                                                 onClick={secondaryButtonAction ? secondaryButtonAction : onClose}
                                             />
 
-                                        </div>
-                                    }
+                                        }
+                                    </div>
 
                                     {/* </form> */}
                                 </Dialog.Panel>
