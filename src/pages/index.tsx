@@ -85,16 +85,25 @@ export default function Home({ }: any) {
     }
 
     return (
-        <div className="container mx-auto my-8">
+        <div className="container mx-auto mb-8">
             <div className="mb-4">
                 <div className="flex flex-col">
-                    <div className="w-full">
-                        <Input label="Search" placeholder="Search advertisement" name="searchAdvertisement" type="text" value={appState?.search} onChange={(e: any) => {
-                            setAppState((prev: any) => ({
-                                ...prev, search: e.target.value
-                            }))
-                        }
-                        } />
+                    <div className="flex flex-row items-end space-x-2">
+                        <div className="w-full">
+                            <Input label="Search" placeholder="Search advertisement" name="searchAdvertisement" type="text" value={appState?.search} onChange={(e: any) => {
+                                setAppState((prev: any) => ({
+                                    ...prev, search: e.target.value
+                                }))
+                            }
+                            } />
+                        </div>
+                        <div className="">
+                            <div className="flex md:hidden">
+                                <Button label="Reset" buttonType="warning" onClick={(e: any) => {
+                                    handleResetClick()
+                                }} />
+                            </div>
+                        </div>
                     </div>
 
                     <div className="w-full">
@@ -115,9 +124,11 @@ export default function Home({ }: any) {
                                     ...prev, selectedProvince: province
                                 }))
                             }} />
-                            <Button label="Reset" buttonType="warning" onClick={(e: any) => {
-                                handleResetClick()
-                            }} />
+                            <div className="hidden md:flex">
+                                <Button label="Reset" buttonType="warning" onClick={(e: any) => {
+                                    handleResetClick()
+                                }} />
+                            </div>
                         </div>
                     </div>
                 </div>

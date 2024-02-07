@@ -25,7 +25,7 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
     );
 
     return (
-        <div className="p-3 bg-white">
+        <div className="p-2 bg-white">
             <div className="relative">
                 <div className="absolute right-2 -bottom-10">
                     <div className="flex space-x-2">
@@ -54,17 +54,17 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                     {/* <h1>{advertisement?.data}</h1> */}
                     <div className="">
                         <h1 className={`${montserrat.className} py-4 text-3xl`}>{advertisement?.companyName}</h1>
-                        <h3 className='text-center bg-gray-dark text-white py-2 rounded-tr-2xl rounded-bl-2xl'>{advertisement?.name}</h3>
+                        <h3 className='text-center bg-gray-dark text-white py-1 rounded-tr-2xl rounded-bl-2xl'>{advertisement?.name}</h3>
 
-                        <div dangerouslySetInnerHTML={{ __html: advertisement?.data }}></div>
+                        <div dangerouslySetInnerHTML={{ __html: advertisement?.data }} className='py-4'></div>
                         <span className='bg-secondary px-4 py-1 text-white rounded-xl text-sm'>Category: {advertisement?.advertisementType?.name}</span>
                     </div>
 
                     <div className="flex md:justify-between pt-2">
                         <p className=''>Province: {advertisement?.province?.name}</p>
-                        <p className=''>District: {advertisement?.district?.name}</p>
+                        {/* <p className=''>District: {advertisement?.district?.name}</p> */}
                     </div>
-                    <div className="flex flex-col justify-between space-y-1 text-xs">
+                    <div className="flex flex-col xl:flex-row justify-between space-y-1 text-xs">
                         <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-4' /> {advertisement?.email}</a>
                         <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-4' /> {advertisement?.contactNumber}</a>
                         <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-4' /> {advertisement?.contactNumber}</a>

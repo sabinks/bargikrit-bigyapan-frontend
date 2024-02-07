@@ -15,8 +15,10 @@ import Image from 'next/image';
 import { setCookie } from 'cookies-next';
 import { useAuth } from '../../hooks/auth';
 import { logout } from '../../api/auth';
+import { useApplication } from '../../hooks/application';
 function Header() {
     const { isAuthenticated, signout } = useAuth()
+    const { appState: { country } } = useApplication()
     const router = useRouter()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navigation = [
@@ -139,8 +141,8 @@ function Header() {
                             <div className="pl-4"><FaYoutube className=" hover:text-[#CD201F] transition duration-300 cursor-pointer" /> </div> */}
                         </div>
                         <div className={`flex md:space-x-2 text-sm text-white`}>
-                            <div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMobile /><span className='pl-2'> +977 9861168333</span></div>
-                            <div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><span className='pl-2'>admin@bargikritbigyapan.com</span></div>
+                            <div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMobile /><span className='pl-2'> {country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}</span></div>
+                            < div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><span className='pl-2'>admin@bargikritbigyapan.com</span></div>
                             {/* <div className="flex items-center pl-2 hover:cursor-pointer hover:text-gray-dark transition duration-500"><FaLocationPin /><span className='pl-2'> 1234 Elm Street</span></div> */}
                             <div className="flex items-center pl-2 hover:cursor-pointer transition duration-500">
                                 {isAuthenticated &&

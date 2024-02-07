@@ -111,7 +111,7 @@ export default function NavBar() {
                                 <Link href="/register">
                                     <div className="flex space-x-2 border-2 px-4 py-1 rounded-xl w-max place-self-end  hover:bg-secondary hover:text-white hover:drop-shadow-xl hover:cursor-pointer transition delay-50 duration-500" >
                                         <UserPlusIcon className="w-5" />
-                                        <span>Sign Up</span>
+                                        <span>Sign Up123</span>
                                     </div>
 
                                 </Link>
