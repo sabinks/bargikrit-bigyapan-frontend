@@ -64,10 +64,12 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                         <p className=''>Province: {advertisement?.province?.name}</p>
                         {/* <p className=''>District: {advertisement?.district?.name}</p> */}
                     </div>
-                    <div className="flex flex-col xl:flex-row justify-between space-y-1 text-xs">
+                    <div className="flex flex-col justify-between space-y-1 text-xs">
                         <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-4' /> {advertisement?.email}</a>
-                        <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-4' /> {advertisement?.contactNumber}</a>
-                        <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-4' /> {advertisement?.contactNumber}</a>
+                        <div className="flex flex-row justify-between gap-x-2">
+                            <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-4' /> {advertisement?.contactNumber}</a>
+                            <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-4' /> {advertisement?.contactNumber}</a>
+                        </div>
                     </div>
                 </div>
             </div >
