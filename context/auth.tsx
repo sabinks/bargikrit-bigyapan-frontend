@@ -34,6 +34,8 @@ export const AuthContext = React.createContext<AuthContextType>(null!);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const isTokenPresent: any = getCookie("token");
+    console.log(isTokenPresent);
+
     const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false);
     const [access_token, setAccessToken] = React.useState<string>(isTokenPresent);
     const [roles, setRoles] = React.useState<any>([]);
@@ -48,15 +50,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         // getUserDetails()
     }, [])
 
+    // useEffect(() => {
+    //     if (access_token && isAuthenticated) {
+    //         getUserDetails();
+    //     }
+    // }, [access_token]);
     useEffect(() => {
-        if (access_token && isAuthenticated) {
-            // setCookie('token', 'access_token')
-            // setCookie('role', roles[0])
+        if (isTokenPresent) {
+            setIsAuthenticated(true)
             getUserDetails();
+            setAccessToken(isTokenPresent);
         }
-    }, [access_token]);
-    useEffect(() => {
-        isTokenPresent && setIsAuthenticated(true)
     }, [isTokenPresent])
 
     const getUserDetails = async () => {
