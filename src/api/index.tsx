@@ -34,6 +34,8 @@ export const forgotPassword = async (email: string) => {
 
 export const getQueryData = async (state: any) => {
     const [name, query, sortby, order, page, pagination, publish, advertisementType, country, province] = state?.queryKey
+    console.log(page);
+
     let pub = ''
     let assign = ''
     if (publish) {
@@ -47,7 +49,7 @@ export const getQueryData = async (state: any) => {
 
 
 export const getCountries = async () => {
-    const { data } = await apiClient.get('/countries');
+    const { data } = await apiClient.get('/countries-list');
     return data;
 }
 export const getProvincesByCountryId = async (value: any) => {

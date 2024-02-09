@@ -13,6 +13,7 @@ export function middleware(request: NextRequest) {
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/partners/ },
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/users/ },
         { roles: ['SUPERADMIN'], startPath: /\/auth\/admins/ },
+        { roles: ['SUPERADMIN'], startPath: /\/auth\/countries/ },
     ]
     if (!islogin) {
         if (request.nextUrl.pathname.startsWith("/auth")) {

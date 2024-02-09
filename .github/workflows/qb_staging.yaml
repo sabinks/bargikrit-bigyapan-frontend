@@ -2,7 +2,7 @@ name: Build & Deploy
 
 on:
   push:
-    branches: [ "staging1" ]
+    branches: [ "staging" ]
 
 jobs:
   deploy:
@@ -17,7 +17,7 @@ jobs:
         
         script: |
           cd /var/www/bargikrit-bigyapan/staging/frontend
-          git checkout .
+          git checkout staging
           git reset --hard origin/staging
           git pull
           export NVM_DIR=~/.nvm
@@ -25,6 +25,6 @@ jobs:
           nvm use 18.17.0
           npm i 
           npm run build
-          echo 'Building Staging App'
-          pm2 restart bbigyapan_staging_nextjs
+          echo 'Building App'
+          #pm2 restart bbigyapan_staging_nextjs
           echo 'Build successful'

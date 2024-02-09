@@ -60,6 +60,13 @@ const navigation = [
         permission: ''
     },
     {
+        name: "Country",
+        href: '/auth/countries',
+        icon: HomeIcon,
+        roles: ['SUPERADMIN', 'ADMIN'],
+        permission: ''
+    },
+    {
         name: "Users",
         href: '/auth/users ',
         icon: UserCircleIcon,
@@ -98,7 +105,6 @@ const userNavigation = [
 
 export default function AuthLayout({ props }: any) {
     const { roles, signout, permissions, show, user, user: { name }, access_token }: any = useAuth();
-    console.log(roles);
 
     const router = useRouter();
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);

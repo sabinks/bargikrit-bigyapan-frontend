@@ -25,7 +25,11 @@ export default function Home({ }: any) {
     const [text] = useDebounce(appState?.search, 300);
     const [advertisements, setAdvertisements] = useState<any>([])
     const { isLoading, refetch, isFetching } = useQuery(
-        ["next/advertisements", query, 'createdAt', sorting[0].desc ? 'DESC' : 'ASC', page, 5, appState?.selectedAdvertisementType?.name, appState?.selectedCountry?.name, appState?.selectedProvince?.name, appState?.search],
+        ["next/advertisements", query, 'createdAt', sorting[0].desc ? 'DESC' : 'ASC', page, 5,
+            appState?.selectedAdvertisementType?.name,
+            appState?.selectedCountry?.name,
+            appState?.selectedProvince?.name,
+            appState?.search],
         getNextQueryData, {
         onSuccess: (data) => {
             setAdvertisements((prev: any) => ([
@@ -106,20 +110,21 @@ export default function Home({ }: any) {
                         </div>
                     </div>
 
-                    <div className="w-full">
-                        <div className="flex items-end space-x-2">
-                            <Dropdown label="Select Advertisement Type" selectedValue={appState?.selectedAdvertisementType} data={appState?.advertisementTypes} onChange={(advertisement: any) => {
+                    <div className="w-full flex flex-col md:flex-row md:space-x-2">
+                        <div className="md:w-full">
+                            <Dropdown label="Select Ads Type" selectedValue={appState?.selectedAdvertisementType} data={appState?.advertisementTypes} onChange={(advertisement: any) => {
                                 setAppState((prev: any) => ({
                                     ...prev, selectedAdvertisementType: advertisement
                                 }))
                             }} />
-
-                            <Dropdown label="Select Country" selectedValue={appState?.selectedCountry} data={appState?.countries} onChange={(country: any) => {
+                        </div>
+                        <div className="w-full flex items-end space-x-2">
+                            <Dropdown label="Country" selectedValue={appState?.selectedCountry} data={appState?.countries} onChange={(country: any) => {
                                 setAppState((prev: any) => ({
                                     ...prev, selectedCountry: country, selectedProvince: null
                                 }))
                             }} />
-                            <Dropdown label="Select Province/State" selectedValue={appState?.selectedProvince} data={appState?.provinces} onChange={(province: any) => {
+                            <Dropdown label="Province/State" selectedValue={appState?.selectedProvince} data={appState?.provinces} onChange={(province: any) => {
                                 setAppState((prev: any) => ({
                                     ...prev, selectedProvince: province
                                 }))
