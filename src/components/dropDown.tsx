@@ -77,13 +77,13 @@ export default function Dropdown({
                                             {({ selected }) => (
                                                 <div className="">
                                                     <span
-                                                        className={`block truncate pl-4 ${selected ? "font-medium" : "font-normal"
+                                                        className={`block truncate pl-6 ${selected ? "font-medium" : "font-normal"
                                                             }`}
                                                     >
                                                         {person.name}
                                                     </span>
                                                     {selected ? (
-                                                        <span className='absolute inset-y-0 left-0 flex items-center pl-4 text-secondary'>
+                                                        <span className='absolute inset-y-0 left-0 flex items-center text-secondary'>
                                                             <CheckIcon
                                                                 className='h-5 w-5'
                                                                 aria-hidden='true'

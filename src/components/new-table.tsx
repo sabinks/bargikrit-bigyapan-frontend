@@ -55,7 +55,7 @@ export default function NewTable({
         // getSortedRowModel: getSortedRowModel(),
         getCoreRowModel: getCoreRowModel(),
     });
-    const [currentPage, setCurrentPage] = React.useState<number>(Page)
+    const [currentPage, setCurrentPage] = React.useState<number>(Page + 1)
     const rlength = data.length
     const hlength = table.getHeaderGroups()
     return (
