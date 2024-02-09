@@ -41,12 +41,13 @@ export default function Home({ }: any) {
     })
 
     useEffect(() => {
-        loadAdvertisements()
+        if (appState?.selectedProvince?.hasOwnProperty('name') || appState?.selectedCountry?.hasOwnProperty('name') || appState?.selectedAdvertisementType || text) {
+            loadAdvertisements()
+        }
     }, [appState?.selectedProvince, appState?.selectedCountry, appState?.selectedAdvertisementType, text])
 
     const loadAdvertisements = async () => {
         const { selectedCountry, selectedProvince, selectedAdvertisementType } = appState
-
         const { data } = await apiClient.get(`/next/advertisements?advertisementType=${selectedAdvertisementType?.name}&country=${selectedCountry?.name}&province=${selectedProvince?.name}&search=${text}&pageSize=10&offset=0`);
         setAdvertisements((prev: any) => ([...data?.content]))
 
