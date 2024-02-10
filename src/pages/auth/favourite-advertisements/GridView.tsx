@@ -1,18 +1,13 @@
 import Image from "next/image";
-import { Suspense, useEffect, useState } from "react";
-import { apiClient, getList, getQueryData, showQueryData } from "../../../api";
-import Link from "next/link";
-import dynamic from 'next/dynamic'
+import { useEffect, useState } from "react";
+import { apiClient, getQueryData } from "../../../api";
 import { useAuth } from "../../../../hooks/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
 import { SortingState } from "@tanstack/react-table";
-import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
-import { PageTitle, SidePanel } from "../../../components";
+import { PageTitle } from "../../../components";
 import Button from '@/components/Button'
 import { checkSubset } from "../../../../utils";
 import { addAdvertisement, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "../../../../api/advertisement";
-import AdvertisementsForm from "./advertisementsForm";
 import AdvertisementCard from "@/components/AdvertisementCard";
 import Loading from "@/components/loading";
 
@@ -44,7 +39,7 @@ export default function GridView({ }: any) {
     }, [])
 
     const loadData = async () => {
-        const { data } = await apiClient.get(`/advertisements?pageSize=10&offset=0`);
+        const { data } = await apiClient.get(`/favourite-advertisements?pageSize=10&offset=0`);
         setAdvertisements(data?.content)
         setPage(data?.pageable.pageNumber)
         setPagination((prev: any) => ({
@@ -53,7 +48,7 @@ export default function GridView({ }: any) {
     }
 
     const { isLoading, refetch, isFetching } = useQuery(
-        ["advertisements", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 10],
+        ["favourite-advertisements", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 10],
         getQueryData, {
         onSuccess: (data) => {
             setAdvertisements((prev: any) => ([
@@ -74,38 +69,7 @@ export default function GridView({ }: any) {
         }
     }
 
-    const { isLoading: creatingAdvertisement, mutate } = useMutation<any, Error>(addAdvertisement,
-        {
-            onSuccess: () => {
-                loadData();
-                toggleIsVisible(false);
-            },
-            onError: (err: any) => {
-                const { status, data } = err.response;
-                if (status == 422) {
-                    setFormErrors(data);
-                } else {
-                    console.log("Course Form Error: ", err);
-                }
-            },
-        }
-    );
-    const { mutate: update, isLoading: updatingAdvertisement } = useMutation<any, Error>(updateAdvertisement,
-        {
-            onSuccess: () => {
-                refetch();
-                toggleIsVisible(false);
-            },
-            onError: (err: any) => {
-                const { status, data } = err.response;
-                if (status == 422) {
-                    setFormErrors(data);
-                } else {
-                    console.log("Course Form Error: ", err);
-                }
-            },
-        }
-    );
+
     useQuery(['advertisements', adsId], showAdvertisement, {
         onSuccess: (res) => {
             const { name, data, id, advertisementType, country, province, district, companyName, email, contactNumber } = res.data
@@ -159,25 +123,6 @@ export default function GridView({ }: any) {
                     isFetching && <Loading />
                 }
             </main>
-            <SidePanel
-                isVisible={isVisible}
-                onClose={() => {
-                    toggleIsVisible(!isVisible);
-                    setFormErrors({});
-                }}
-                wide="2xl"
-                title={edit ? 'Edit Advertisement' : 'Add Advertisement'}
-                primaryButtonAction={() => {
-                    setFormErrors({});
-                    state?.id ? update(state) :
-                        mutate(state)
-                }}
-                primaryButtonLoading={creatingAdvertisement || updatingAdvertisement}
-            >
-                <Suspense fallback='loading'>
-                    <AdvertisementsForm state={state} setState={setState} error={formerrors} edit={edit} />
-                </Suspense>
-            </SidePanel>
         </div>
     );
 }

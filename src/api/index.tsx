@@ -168,6 +168,13 @@ export const userCanPublishChange = async (data: any) => {
             status,
         });
 };
+export const userFavouriteAdsChange = async (data: any) => {
+    const { id, status } = data
+    await apiClient.post(`/advertisement/${id}/favourite`,
+        {
+            status,
+        });
+};
 apiClient.interceptors.response.use(
     function (response) {
         const { status, data } = response;

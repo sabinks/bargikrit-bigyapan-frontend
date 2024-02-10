@@ -31,6 +31,13 @@ const navigation = [
         roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'],
         permission: ''
     },
+    // {
+    //     name: "Favourite",
+    //     href: '/auth/favourite-advertisements',
+    //     icon: StarIcon,
+    //     roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'],
+    //     permission: ''
+    // },
     {
         name: "Advertisement Type",
         href: '/auth/advertisement-type',

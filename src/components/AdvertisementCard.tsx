@@ -2,21 +2,34 @@ import { montserrat, nunitoSans } from '@/fonts'
 import React from 'react'
 import { checkSubset } from '../../utils'
 import { useAuth } from '../../hooks/auth'
-import { PencilIcon, PhoneIcon } from '@heroicons/react/24/outline'
+import { PencilIcon, PhoneIcon, StarIcon } from '@heroicons/react/24/outline'
 import Button from '@/components/Button'
 import CheckBox from './checkbox'
 import { useMutation } from '@tanstack/react-query'
 import { advertisementStatusChange } from '../../api/advertisement'
 import { MdEmail } from 'react-icons/md'
 import { FaSms } from 'react-icons/fa'
+import { userFavouriteAdsChange } from '@/api'
+import { BsFillStarFill, BsStarFill } from 'react-icons/bs'
 
 function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = false }: any) {
-    const { roles, user: { email } } = useAuth()
+    const { roles, user: { email }, isAuthenticated } = useAuth()
     const handleAdsPublishStatus = (e: any, id: number) => {
         const { checked } = e.target
         changeAdsPublishStatus({ id, status: checked })
     }
     const { mutate: changeAdsPublishStatus }: any = useMutation<any>(advertisementStatusChange,
+        {
+            onSuccess: () => {
+                refetch();
+            }
+        }
+    );
+    const handleFavouriteClick = (status: boolean, id: number) => {
+
+        mutateUserFavouriteChange({ id, status })
+    }
+    const { mutate: mutateUserFavouriteChange }: any = useMutation<any>(userFavouriteAdsChange,
         {
             onSuccess: () => {
                 refetch();
@@ -33,7 +46,7 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                             (!isFrontPage && (checkSubset(["SUPERADMIN", "ADMIN"], roles) || advertisement?.user?.email == email)) &&
                             <Button
                                 label=''
-                                buttonType=""
+                                buttonType="none"
                                 icon={<PencilIcon className="w-4" />}
                                 onClick={() => handleClick(advertisement?.id)}
                                 tooltipMsg="Edit Advertisement"
@@ -51,9 +64,24 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
             </div>
             <div className='  border-4 border-black shadow-xl hover:shadow-2xl transition duration-500 p-4 pl-8 cursor-pointer shadow-indigo-100 hover:shadow-indigo-300' id="advertisement-card">
                 <div className="space-y-4" key={advertisement?.id}>
-                    {/* <h1>{advertisement?.data}</h1> */}
                     <div className="">
-                        <h1 className={`${montserrat.className} py-4 text-3xl`}>{advertisement?.companyName}</h1>
+                        <div className="flex items-center justify-between">
+                            <div className=""></div>
+                            <h1 className={`${montserrat.className} py-4 text-3xl`}>{advertisement?.companyName}</h1>
+                            <div className="">
+                                {
+                                    isAuthenticated &&
+                                    <Button
+                                        label=''
+                                        buttonType="none"
+                                        icon={advertisement?.favourite ? <BsFillStarFill className="w-5 text-secondary" /> : <StarIcon className="w-5" />}
+                                        className=''
+                                        onClick={(e: any) => handleFavouriteClick(!advertisement?.favourite, advertisement?.id)}
+                                        tooltipMsg="Edit Advertisement"
+                                    />
+                                }
+                            </div>
+                        </div>
                         <h3 className='text-center bg-gray-dark text-white py-1 rounded-tr-2xl rounded-bl-2xl'>{advertisement?.name}</h3>
 
                         <div dangerouslySetInnerHTML={{ __html: advertisement?.data }} className='py-4'></div>

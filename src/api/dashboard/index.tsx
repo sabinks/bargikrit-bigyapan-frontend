@@ -12,3 +12,6 @@ export const getPartnerDocumentsByUserId = async (query: any) => {
     const { data } = await apiClient.get(`/partner-documents/${id}`)
     return data;
 }
+export const userFavouriteAds = async () => {
+    return await apiClient.get('favourite-ads')
+}

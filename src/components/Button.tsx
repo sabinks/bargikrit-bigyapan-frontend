@@ -13,6 +13,7 @@ type ButtonProps = {
     | "warning"
     | "submit"
     | "info"
+    | "none"
     | "";
     loading?: boolean;
     label?: string;
@@ -57,6 +58,9 @@ export default function Button({
             break;
         case "submit":
             buttonTypeClass = "rounded-full text-white bg-submit";
+            break;
+        case "none":
+            buttonTypeClass = "rounded-full hover:text-secondary";
             break;
         default:
             buttonTypeClass = "p-1.5 rounded-md bg-primary text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600";

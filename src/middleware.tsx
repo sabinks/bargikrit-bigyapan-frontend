@@ -9,6 +9,7 @@ export function middleware(request: NextRequest) {
     const routes = [
         { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], startPath: /\/auth\/dashboard/ },
         { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], startPath: /\/auth\/advertisements/ },
+        // { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], startPath: /\/auth\/favourite-advertisements/ },
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/advertisement-type/ },
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/partners/ },
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/users/ },
