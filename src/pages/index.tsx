@@ -88,6 +88,15 @@ export default function Home({ }: any) {
             ...prev, selectedProvince: null, selectedAdvertisementType: null, search: ''
         }))
     }
+    const handleFavCheck = (id: number, status: boolean) => {
+        let advertisementsTemp = advertisements.map((ad: any) => {
+            if (ad.id == id) {
+                return { ...ad, favourite: status }
+            }
+            return ad
+        })
+        setAdvertisements(advertisementsTemp)
+    }
 
     return (
         <div className="container mx-auto mb-8">
@@ -143,7 +152,7 @@ export default function Home({ }: any) {
                 {
                     advertisements?.map((advertisement: any, index: number) => {
                         return <div className="" key={index}>
-                            <AdvertisementCard advertisement={advertisement} isFrontPage={true} />
+                            <AdvertisementCard advertisement={advertisement} isFrontPage={true} handleFavCheck={handleFavCheck} />
                         </div>
                     })
                 }

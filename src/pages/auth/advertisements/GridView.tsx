@@ -128,6 +128,15 @@ export default function GridView({ }: any) {
     const handleClick = (id: number) => {
         setAdsId(id)
     }
+    const handleFavCheck = (id: number, status: boolean) => {
+        let advertisementsTemp = advertisements.map((ad: any) => {
+            if (ad.id == id) {
+                return { ...ad, favourite: status }
+            }
+            return ad
+        })
+        setAdvertisements(advertisementsTemp)
+    }
 
     return (
         <div className="container mx-auto my-12">
@@ -151,7 +160,7 @@ export default function GridView({ }: any) {
                 {
                     advertisements?.map((advertisement: any, index: number) => {
                         return <div className="" key={index}>
-                            <AdvertisementCard advertisement={advertisement} handleClick={handleClick} refetch={loadData} isFrontPage={false} />
+                            <AdvertisementCard advertisement={advertisement} handleClick={handleClick} isFrontPage={false} handleFavCheck={handleFavCheck} />
                         </div>
                     })
                 }

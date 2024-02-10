@@ -34,8 +34,6 @@ export const forgotPassword = async (email: string) => {
 
 export const getQueryData = async (state: any) => {
     const [name, query, sortby, order, page, pagination, publish, advertisementType, country, province] = state?.queryKey
-    console.log(page);
-
     let pub = ''
     let assign = ''
     if (publish) {

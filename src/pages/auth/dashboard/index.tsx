@@ -7,7 +7,6 @@ import UserDashboard from './UserDashboard';
 
 function Index() {
     const { roles } = useAuth()
-    console.log(roles);
     return (
         <div>
             {

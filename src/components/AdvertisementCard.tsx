@@ -12,7 +12,7 @@ import { FaSms } from 'react-icons/fa'
 import { userFavouriteAdsChange } from '@/api'
 import { BsFillStarFill, BsStarFill } from 'react-icons/bs'
 
-function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = false }: any) {
+function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = false, handleFavCheck }: any) {
     const { roles, user: { email }, isAuthenticated } = useAuth()
     const handleAdsPublishStatus = (e: any, id: number) => {
         const { checked } = e.target
@@ -26,13 +26,12 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
         }
     );
     const handleFavouriteClick = (status: boolean, id: number) => {
-
         mutateUserFavouriteChange({ id, status })
     }
     const { mutate: mutateUserFavouriteChange }: any = useMutation<any>(userFavouriteAdsChange,
         {
-            onSuccess: () => {
-                refetch();
+            onSuccess: (res, variable: any) => {
+                handleFavCheck(variable?.id, variable?.status)
             }
         }
     );
