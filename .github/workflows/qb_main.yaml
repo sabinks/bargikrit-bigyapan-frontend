@@ -16,7 +16,7 @@ jobs:
         username: ${{secrets.SSH_USERNAME}}
         
         script: |
-          cd /var/www/bargikrit-bigyapan/live/frontend
+          cd /var/www/adzoner/live/frontend
           git checkout main
           git reset --hard origin/main
           git pull

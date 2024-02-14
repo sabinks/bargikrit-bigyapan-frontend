@@ -142,7 +142,7 @@ function Header() {
                         </div>
                         <div className={`flex md:space-x-2 text-sm text-white`}>
                             <div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMobile /><span className='pl-2'> {country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}</span></div>
-                            < div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><span className='pl-2'>admin@adzoner.com</span></div>
+                            < div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><span className='pl-2'>info@adzoner.com</span></div>
                             {/* <div className="flex items-center pl-2 hover:cursor-pointer hover:text-gray-dark transition duration-500"><FaLocationPin /><span className='pl-2'> 1234 Elm Street</span></div> */}
                             <div className="flex items-center pl-2 hover:cursor-pointer transition duration-500">
                                 {isAuthenticated &&
