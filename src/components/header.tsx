@@ -116,8 +116,18 @@ function Header() {
                                         {item.name}
                                     </Link>
                                 ))}
-                                <Link href="/login" className="-mx-3 block px-3 py-2 tracking-wide text-base text-gray-dark hover:bg-primary hover:text-white transition duration-300">Login</Link>
-                                <Link href="/register" className="-mx-3 block px-3 py-2 tracking-wide text-base text-gray-dark hover:bg-primary hover:text-white transition duration-300">Register</Link>
+                                {
+                                    !isAuthenticated ?
+                                        <>
+                                            <Link href="/login" className="-mx-3 block px-3 py-2 tracking-wide text-base text-gray-dark hover:bg-primary hover:text-white transition duration-300">Login</Link>
+                                            <Link href="/register" className="-mx-3 block px-3 py-2 tracking-wide text-base text-gray-dark hover:bg-primary hover:text-white transition duration-300">Register</Link>
+                                        </>
+                                        :
+                                        <>
+                                            <Link href="/auth/dashboard" className="-mx-3 block px-3 py-2 tracking-wide text-base text-gray-dark hover:bg-primary hover:text-white transition duration-300">Dashboard</Link>
+                                            <span className="-mx-3 block px-3 py-2 tracking-wide text-base text-gray-dark hover:bg-primary hover:text-white transition duration-300" onClick={() => handleLogout()}>Logout</span>
+                                        </>
+                                }
                             </div>
                             {/* <div className="py-6">
                                 <a
@@ -194,7 +204,7 @@ function Header() {
                                 width="100"
                                 height="100"
                             />
-                            <h1 className={`text-secondary tracking-wider font-semibold text-3xl ${montserrat.className}`}>Ad Zoner</h1>
+                            <h1 className={`text-secondary tracking-wider font-semibold text-3xl ${montserrat.className}`}>{APP_NAME}</h1>
                         </div>
                         <div className={`flex items-center text-gray-dark ${montserratRegular.className}`}>
                             <Link href="/" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary py-5 px-5 transition duration-300 cursor-pointer">HOME</Link>

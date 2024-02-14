@@ -7,6 +7,7 @@ import rehypeParse from "rehype-parse";
 import rehypeRemark from "rehype-remark";
 import remarkStringify from "remark-stringify";
 import dynamic from "next/dynamic";
+import { read } from "fs";
 
 export interface EditorContentChanged {
     html: string;
@@ -17,6 +18,7 @@ export interface EditorProps {
     label?: string;
     value?: string;
     defaultValue?: string;
+    charLimit: number;
     onChange?: (changes: EditorContentChanged) => void;
 }
 
@@ -46,40 +48,45 @@ export function markdownToHtml(markdownText: string) {
 }
 
 export default function Editor(props: EditorProps) {
-    const [value, setValue] = useState<string | undefined>();
-    const reactQuillRef = useRef<ReactQuill>(null);
+    const [value, setValue] = useState<string>("");
+    const reactQuillRef = useRef<any>();
+    const { charLimit } = props
     useEffect(() => {
-        setValue(props.value)
-    }, [props.value])
+        setValue(props?.value ? props.value : "")
+    }, [])
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
-    const onChange = (content: string) => {
-        setValue(content);
 
-        if (props.onChange) {
-            props.onChange({
-                html: content,
-                markdown: htmlToMarkdown(content)
-            });
+    const onChange = (content: string) => {
+        if (content.length <= charLimit) {
+            setValue(content);
+            if (props.onChange) {
+                props.onChange({
+                    html: content,
+                    markdown: htmlToMarkdown(content)
+                });
+            }
         }
     };
 
     return (
-        <div className="h-96">
-            <label className="block text-sm font-semibold text-gray-700">{props?.label}</label>
-            <ReactQuill
-                className="h-72 overflow-y-visible mt-1"
-                // ref={reactQuillRef}
-                theme="snow"
-                placeholder="Fill advertisement information here..."
-                modules={{
-                    toolbar: {
-                        container: TOOLBAR_OPTIONS
-                    },
-                }}
-                value={value}
-                onChange={onChange}
-                defaultValue={props.defaultValue}
-            />
+        <div className="">
+            <div className="h-96">
+                <label className="block text-sm font-semibold text-gray-700">{props?.label}</label>
+                <ReactQuill
+                    className="h-72 overflow-y-visible mt-1"
+                    theme="snow"
+                    placeholder="Fill advertisement information here..."
+                    modules={{
+                        toolbar: {
+                            container: TOOLBAR_OPTIONS
+                        },
+                    }}
+                    value={value}
+                    onChange={onChange}
+                // defaultValue={props.defaultValue}
+                />
+            </div>
+            {<p className="text-red-500 text-xs">Characters limit: {charLimit - value?.length}  </p>}
         </div>
     );
 }

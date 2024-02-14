@@ -104,6 +104,11 @@ export default function ListingView() {
             header: "Ads Name",
         }),
         columnHelper.accessor((row: any) => row, {
+            id: "companyName",
+            cell: ({ row }) => row.original.companyName,
+            header: "Company Name",
+        }),
+        columnHelper.accessor((row: any) => row, {
             id: "advertisementType",
             cell: ({ row }) =>
                 <div className="">{row.original.advertisementType?.name}</div>
@@ -112,11 +117,19 @@ export default function ListingView() {
             enableSorting: false,
         }),
         columnHelper.accessor((row: any) => row, {
-            id: "district",
+            id: "country",
             cell: ({ row }) =>
-                <div className="">{row.original.district?.name}</div>
+                <div className="">{row.original.country?.name}</div>
             ,
-            header: "District",
+            header: "Country",
+            enableSorting: false,
+        }),
+        columnHelper.accessor((row: any) => row, {
+            id: "province",
+            cell: ({ row }) =>
+                <div className="">{row.original.province?.name}</div>
+            ,
+            header: "Province/State",
             enableSorting: false,
         }),
         columnHelper.accessor((row: any) => row, {

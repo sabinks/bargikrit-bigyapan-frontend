@@ -144,7 +144,9 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
 
                 <div className="">
                     <Editor
+                        charLimit={500}
                         label='Content'
+
                         value={state?.data ? state?.data : ""}
                         onChange={onEditorContentChanged}
                         defaultValue={state?.data}
