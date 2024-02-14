@@ -142,7 +142,7 @@ function Header() {
                         </div>
                         <div className={`flex md:space-x-2 text-sm text-white`}>
                             <div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMobile /><span className='pl-2'> {country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}</span></div>
-                            < div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><span className='pl-2'>admin@bargikritbigyapan.com</span></div>
+                            < div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><span className='pl-2'>admin@adzoner.com</span></div>
                             {/* <div className="flex items-center pl-2 hover:cursor-pointer hover:text-gray-dark transition duration-500"><FaLocationPin /><span className='pl-2'> 1234 Elm Street</span></div> */}
                             <div className="flex items-center pl-2 hover:cursor-pointer transition duration-500">
                                 {isAuthenticated &&
@@ -194,7 +194,7 @@ function Header() {
                                 width="100"
                                 height="100"
                             />
-                            <h1 className={`text-secondary tracking-wider font-semibold text-3xl ${montserrat.className}`}>Bargikrit Bigyapan</h1>
+                            <h1 className={`text-secondary tracking-wider font-semibold text-3xl ${montserrat.className}`}>Ad Zoner</h1>
                         </div>
                         <div className={`flex items-center text-gray-dark ${montserratRegular.className}`}>
                             <Link href="/" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary py-5 px-5 transition duration-300 cursor-pointer">HOME</Link>
