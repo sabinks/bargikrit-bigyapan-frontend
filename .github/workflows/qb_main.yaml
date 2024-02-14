@@ -26,5 +26,5 @@ jobs:
           npm i 
           npm run build
           echo 'Building App'
-          pm2 restart bbigyapan_nextjs
+          pm2 restart adzoner_nextjs
           echo 'Build successful'
