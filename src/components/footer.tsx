@@ -20,7 +20,7 @@ function Footer() {
                         <Link href="/contact-us" className="text-sm border-b-[1px] border-dotted">Contact Us</Link>
                     </div>
                     <div className="text-white text-center text-sm tracking-wider">
-                        Copyright © 2024 Bargikrit Bigyapan . All rights reserved.
+                        Copyright © 2024 Ad Zoner . All rights reserved.
                     </div>
                 </div>
             </div>
