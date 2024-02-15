@@ -72,6 +72,7 @@ export default function AdvertisementsForm({ state, setState, error }: any) {
             <p className='text-red-400 text-sm'>{error?.district}</p>
 
             <Editor
+                charLimit={1000}
                 label='Content'
                 value={state?.data ? state?.data : ""}
                 onChange={onEditorContentChanged}

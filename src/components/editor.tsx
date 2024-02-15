@@ -39,7 +39,6 @@ export function htmlToMarkdown(htmlText: string) {
         .use(rehypeRemark)
         .use(remarkStringify)
         .processSync(htmlText);
-
     return String(file);
 }
 export function markdownToHtml(markdownText: string) {
@@ -86,7 +85,7 @@ export default function Editor(props: EditorProps) {
                 // defaultValue={props.defaultValue}
                 />
             </div>
-            {<p className="text-red-500 text-xs">Characters limit: {charLimit - value?.length}  </p>}
+            {<p className="text-red-500 text-xs">Characters limit: {charLimit - value?.length}, extra characters will be omitted.  </p>}
         </div>
     );
 }
