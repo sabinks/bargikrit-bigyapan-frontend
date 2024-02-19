@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import React, { useEffect, useState } from 'react'
 import PartnerSignUp from './PartnerSignUp'
 import UserSignUp from './UserSignUp'
-import { classNames } from '../../../utils';
+import { classNames } from '@/utils';
 import Link from 'next/link';
 import { BASE_URL } from '@/constants';
 import Image from 'next/image';

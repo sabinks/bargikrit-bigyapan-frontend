@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
-import { classNames } from "../../utils";
+import { classNames } from "@/utils";
 
 
 type ButtonProps = {

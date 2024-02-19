@@ -6,9 +6,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { deleteById, getQueryData, userStatusChange } from "../../../api";
 import AdvertisementForm from "./advertisementsForm";
 import Search from "../../../components/search";
-import { checkSubset } from "../../../../utils";
+import { checkSubset } from "@/utils";
 import { useAuth } from "../../../../hooks/auth";
-import { addAdvertisement, advertisementStatusChange, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "../../../../api/advertisement";
 
 const initialState = {
     name: "",

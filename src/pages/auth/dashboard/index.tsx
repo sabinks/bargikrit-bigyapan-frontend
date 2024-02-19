@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAuth } from '../../../../hooks/auth'
 import PartnerDashboard from './PartnerDashboard';
-import { checkSubset } from '../../../../utils';
+import { checkSubset } from '@/utils';
 import Dashboard from './Dashboard';
 import UserDashboard from './UserDashboard';
 

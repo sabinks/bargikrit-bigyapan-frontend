@@ -1,6 +1,6 @@
+import { getCountries } from "@/api";
+import { getNextAdvertisementTypes } from "@/api/frontend";
 import React, { useEffect, useState } from "react";
-import { getCountries } from "../src/api";
-import { getNextAdvertisementTypes } from "../src/api/frontend";
 
 interface StateType {
     advertisementView: string;

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { apiClient } from "../src/api";
-import { booleanCheck, checkSubset } from "../utils";
+import { booleanCheck, checkSubset } from "@/utils";
 import { getCookie, deleteCookie, setCookie } from "cookies-next";
-import { getUser } from "../api/auth";
-import { cookies } from "next/dist/client/components/headers";
+import { apiClient } from "@/api";
 
 interface UserType {
     name: string;
@@ -27,6 +25,7 @@ interface AuthContextType {
     can: Function;
     show: Function;
     getUserDetails: Function;
+    setAccessToken: Function;
 }
 
 export const AuthContext = React.createContext<AuthContextType>(null!);
@@ -118,6 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         roles,
         permissions,
         access_token,
+        setAccessToken,
         isAuthenticated,
         signin,
         signout,

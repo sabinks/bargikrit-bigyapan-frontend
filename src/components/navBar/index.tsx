@@ -16,7 +16,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import NewButton from "../new-button";
 import { logout } from "../../../api/auth";
-import { classNames } from "../../../utils";
+import { classNames } from "@/utils";
 import { useAuth } from "../../../hooks/auth";
 
 

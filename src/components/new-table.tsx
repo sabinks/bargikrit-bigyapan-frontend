@@ -8,7 +8,7 @@ import {
     useReactTable,
 } from "@tanstack/react-table";
 import * as React from "react";
-import { classNames } from "../../utils";
+import { classNames } from "@/utils";
 import ReactPaginate from "react-paginate";
 import Spinner from "@/components/spinner";
 import { ArrowDownIcon, ArrowUpIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";

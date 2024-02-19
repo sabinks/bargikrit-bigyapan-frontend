@@ -9,9 +9,12 @@ import { getNextQueryData } from "@/api/frontend";
 import { useDebounce } from "use-debounce";
 import AdvertisementCard from "@/components/AdvertisementCard";
 import Dropdown from "@/components/dropDown";
-import { Input } from "../components";
+import { Input } from "@/components";
+import { setCookie } from "cookies-next";
+import { useAuth } from "../../hooks/auth";
 
 export default function Home({ }: any) {
+    const { setAccessToken } = useAuth()
     const { appState, setAppState } = useApplication()
     const [query, setQuery] = useState<string>("");
     const [sorting, setSorting] = useState<SortingState>([{
@@ -22,6 +25,14 @@ export default function Home({ }: any) {
     const [pagination, setPagination] = useState<any>({
         totalPages: 0
     })
+    useEffect(() => {
+        if (sessionStorage.getItem("token")) {
+            setCookie('token', sessionStorage.getItem('token'))
+            setAccessToken(sessionStorage.getItem('token'))
+        }
+    }, [])
+
+
     const [text] = useDebounce(appState?.search, 300);
     const [advertisements, setAdvertisements] = useState<any>([])
     const { isLoading, refetch, isFetching } = useQuery(

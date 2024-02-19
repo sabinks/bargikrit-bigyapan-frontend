@@ -33,12 +33,11 @@ export default function Login() {
 
     const { isLoading, mutate } = useMutation<any, Error>(userLogin, {
         onSuccess: (data: any) => {
-
             const { role, token } = data;
+            sessionStorage.setItem('token', token)
             setCookie("token", token);
-            setCookie("role", role)
+            // setCookie("role", role)
             // setCookie("permissions", JSON.stringify(permissions))
-
             signin(role, token, () => {
 
                 let prev: any = sessionStorage.getItem("path");

@@ -1,30 +1,21 @@
-import { CheckBox, NewTable, PageTitle } from "../../../components";
-import { useState } from "react";
-import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import React from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { addAdvertisement, advertisementStatusChange, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "../../../../api/advertisement";
-import { useAuth } from "../../../../hooks/auth";
-import { getQueryData } from "../../../api";
-import { checkSubset } from "../../../../utils";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import Search from "../../../components/search";
-import AdvertisementsForm from "./advertisementsForm";
-import SidePanel from "../../../components/sidePanel";
 import Button from "../../../components/Button";
-import { useApplication } from "../../../../hooks/application";
 import GridView from "./GridView";
 import ListingView from "./listingView";
 import { MdGridView } from "react-icons/md";
 import { CiBoxList } from "react-icons/ci";
+import { useApplication } from "../../../../hooks/application";
+import { useAuth } from "../../../../hooks/auth";
 
 const initialState = {
     name: "",
     content: "",
 };
 export default function Advertisements() {
-    const { roles, user: { email, canPublish, name, contactNumber } } = useAuth()
+    const { roles, user: { email, canPublish, } } = useAuth()
     const { appState, setAppState } = useApplication()
+    // console.log('name');
+
     return (
         <div className="space-y-2">
             <div className="flex justify-end">

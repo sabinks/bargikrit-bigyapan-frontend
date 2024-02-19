@@ -1,4 +1,4 @@
-import { camalize, classNames } from "../../utils";
+import { camalize, classNames } from "@/utils";
 
 type CheckboxProps = {
     label: string;

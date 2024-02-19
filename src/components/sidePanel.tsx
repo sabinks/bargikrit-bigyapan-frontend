@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { classNames } from "../../utils";
+import { classNames } from "@/utils";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Button from "./Button";
 export default function SidePanel({

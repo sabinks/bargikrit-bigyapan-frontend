@@ -1,17 +1,12 @@
-import Image from "next/image";
 import { Suspense, useEffect, useState } from "react";
-import { apiClient, getList, getQueryData, showQueryData } from "../../../api";
-import Link from "next/link";
-import dynamic from 'next/dynamic'
+import { apiClient, getList, getQueryData, showQueryData } from "@/api";
 import { useAuth } from "../../../../hooks/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
 import { SortingState } from "@tanstack/react-table";
-import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
 import { PageTitle, SidePanel } from "../../../components";
 import Button from '@/components/Button'
-import { checkSubset } from "../../../../utils";
-import { addAdvertisement, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "../../../../api/advertisement";
+import { checkSubset } from "@/utils";
+import { addAdvertisement, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "@/api/advertisement";
 import AdvertisementsForm from "./advertisementsForm";
 import AdvertisementCard from "@/components/AdvertisementCard";
 import Loading from "@/components/loading";

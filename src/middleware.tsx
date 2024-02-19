@@ -6,10 +6,12 @@ export function middleware(request: NextRequest) {
     const redirectUrl = process.env.NEXT_PUBLIC_BASE_URL as string;
     let islogin = request.cookies.get("token");
     const role = request.cookies.get("role");
+    console.log(role);
+
     const routes = [
         { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], startPath: /\/auth\/dashboard/ },
         { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], startPath: /\/auth\/advertisements/ },
-        // { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], startPath: /\/auth\/favourite-advertisements/ },
+        { roles: ['SUPERADMIN', 'ADMIN', 'PARTNER'], startPath: /\/auth\/subscriptions/ },
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/advertisement-type/ },
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/partners/ },
         { roles: ['SUPERADMIN', 'ADMIN'], startPath: /\/auth\/users/ },

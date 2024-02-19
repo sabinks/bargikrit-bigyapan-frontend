@@ -1,20 +1,17 @@
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Fragment, useEffect, useState } from "react";
-import { useAuth } from "../hooks/auth";
-import { checkSubset, classNames } from "../utils";
+import { checkSubset, classNames } from "@/utils";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { AcademicCapIcon, BanknotesIcon, Bars3Icon, BookmarkIcon, BookmarkSlashIcon, BookmarkSquareIcon, BuildingLibraryIcon, ChatBubbleBottomCenterIcon, ChatBubbleLeftIcon, ChatBubbleLeftRightIcon, CircleStackIcon, Cog6ToothIcon, HomeIcon, MagnifyingGlassCircleIcon, MagnifyingGlassIcon, StarIcon, UserCircleIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { usePathname } from 'next/navigation';
-import { logout } from "../api/auth";
-import { searchUser } from "../src/api";
 import io from 'socket.io-client';
 import { APP_NAME } from "@/constants";
 import { poppins } from "@/fonts";
 import Image from "next/image";
 import { setCookie } from "cookies-next";
 import Head from "next/head";
+import { useAuth } from "../../hooks/auth";
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 
 const navigation = [
@@ -30,6 +27,13 @@ const navigation = [
         href: '/auth/advertisements',
         icon: HomeIcon,
         roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'],
+        permission: ''
+    },
+    {
+        name: "Subscriptions",
+        href: '/auth/subscriptions',
+        icon: HomeIcon,
+        roles: ['SUPERADMIN', 'ADMIN', 'PARTNER'],
         permission: ''
     },
     // {
@@ -182,9 +186,9 @@ export default function AuthLayout({ props }: any) {
 
     return (
         <>
-            <Head>
+            {/* <Head>
                 <title>{APP_NAME} | Dashboard</title>
-            </Head>
+            </Head> */}
             <div onClick={() => setQuery("")} className={`${poppins.className}`}>
                 <Transition.Root show={sidebarOpen} as={Fragment}>
                     <Dialog
