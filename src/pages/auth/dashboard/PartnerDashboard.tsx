@@ -128,7 +128,7 @@ function PartnerDashboard() {
                     <h1 className='font-bold text-2xl'>Partner Documents</h1>
                     {
                         canPublish &&
-                        <p className='text-accent1'>(Document locked, cannot edit/delete)</p>
+                        <p className='text-accent1 text-sm'>(Document locked, cannot edit/delete)</p>
                     }
                 </div>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

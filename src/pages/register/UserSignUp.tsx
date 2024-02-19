@@ -136,7 +136,7 @@ export default function UserSignUp() {
                     Terms, Privacy Policy and Cookies Policy
                 </Link>.
             </div> */}
-
+            <p className="text-red-500 text-sm text-center">Note: Member can add one advertisement.</p>
             <Button buttonType="" label="Sign Up" loading={isLoading} onClick={handleSubmit} className='w-full' />
         </div>
     );

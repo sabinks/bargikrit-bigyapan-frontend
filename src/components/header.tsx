@@ -50,8 +50,8 @@ function Header() {
                     <a href="#" className="-m-1.5 p-1.5">
                         <span className="sr-only">{APP_NAME}</span>
                         <Image
-                            className="h-8 w-auto"
-                            src="/assets/bb-250.png"
+                            className="h-12 w-auto"
+                            src="/assets/az_logo_250.png"
                             alt=""
                             width="100"
                             height="100"
@@ -198,8 +198,8 @@ function Header() {
                     <div className="flex justify-between items-center ">
                         <div className="flex items-center gap-x-2">
                             <Image
-                                className="h-8 w-auto"
-                                src="/assets/bb-250.png"
+                                className="h-12 w-auto"
+                                src="/assets/az_logo_250.png"
                                 alt=""
                                 width="100"
                                 height="100"

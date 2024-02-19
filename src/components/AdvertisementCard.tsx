@@ -11,12 +11,13 @@ import { MdEmail } from 'react-icons/md'
 import { FaSms } from 'react-icons/fa'
 import { userFavouriteAdsChange } from '@/api'
 import { BsFillStarFill, BsStarFill } from 'react-icons/bs'
+import { BiGlobe } from 'react-icons/bi'
 
 function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = false, handleFavCheck }: any) {
     const { roles, user: { email }, isAuthenticated } = useAuth()
-    const handleAdsPublishStatus = (e: any, id: number) => {
+    const handleAdsPublishStatus = (e: any, publish: boolean, id: number) => {
         const { checked } = e.target
-        changeAdsPublishStatus({ id, status: checked })
+        changeAdsPublishStatus({ id, status: publish })
     }
     const { mutate: changeAdsPublishStatus }: any = useMutation<any>(advertisementStatusChange,
         {
@@ -52,8 +53,8 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                             />
                         }
                         {
-                            !isFrontPage && (checkSubset(['SUPERADMIN', 'ADMIN'], roles) ?
-                                <CheckBox label="" checked={advertisement.publish} onChange={(e: any) => handleAdsPublishStatus(e, advertisement?.id)} />
+                            !isFrontPage && (checkSubset(['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], roles) ?
+                                <CheckBox label="" checked={advertisement.publish} onChange={(e: any) => handleAdsPublishStatus(e, !advertisement?.publish, advertisement?.id)} />
                                 :
                                 <CheckBox label="" checked={advertisement.publish} disabled />
                             )
@@ -93,6 +94,9 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                     </div>
                     <div className="flex flex-col justify-between space-y-1 text-xs">
                         <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-4' /> {advertisement?.email}</a>
+                        {
+                            advertisement?.website && <a href={`${advertisement?.website}`} target='_blank' className='flex items-center gap-x-2'><BiGlobe className='w-4' /> {advertisement.website}</a>
+                        }
                         <div className="flex flex-row justify-between gap-x-2">
                             <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-4' /> {advertisement?.contactNumber}</a>
                             <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-4' /> {advertisement?.contactNumber}</a>

@@ -14,6 +14,7 @@ import { APP_NAME } from "@/constants";
 import { poppins } from "@/fonts";
 import Image from "next/image";
 import { setCookie } from "cookies-next";
+import Head from "next/head";
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 
 const navigation = [
@@ -181,6 +182,9 @@ export default function AuthLayout({ props }: any) {
 
     return (
         <>
+            <Head>
+                <title>{APP_NAME} | Dashboard</title>
+            </Head>
             <div onClick={() => setQuery("")} className={`${poppins.className}`}>
                 <Transition.Root show={sidebarOpen} as={Fragment}>
                     <Dialog

@@ -169,6 +169,17 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                 </div>
                 <div className="">
                     <Input
+                        name="website"
+                        label='Website'
+                        placeholder=''
+                        type="text"
+                        value={state?.website}
+                        onChange={(e: any) => setState({ ...state, website: e.target.value })}
+                    />
+                    <p className='text-red-400 text-sm'>{error?.website}</p>
+                </div>
+                <div className="">
+                    <Input
                         name="contactNumber"
                         label='Contact Number'
                         placeholder=''

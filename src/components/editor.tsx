@@ -52,19 +52,19 @@ export default function Editor(props: EditorProps) {
     const { charLimit } = props
     useEffect(() => {
         setValue(props?.value ? props.value : "")
-    }, [])
+    }, [props.value])
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), []);
 
     const onChange = (content: string) => {
-        if (content.length <= charLimit) {
-            setValue(content);
-            if (props.onChange) {
-                props.onChange({
-                    html: content,
-                    markdown: htmlToMarkdown(content)
-                });
-            }
+        // if (content.length <= charLimit) {
+        setValue(content);
+        if (props.onChange) {
+            props.onChange({
+                html: content,
+                markdown: htmlToMarkdown(content)
+            });
         }
+        // }
     };
 
     return (
@@ -82,10 +82,10 @@ export default function Editor(props: EditorProps) {
                     }}
                     value={value}
                     onChange={onChange}
-                // defaultValue={props.defaultValue}
+                    defaultValue={props.defaultValue}
                 />
             </div>
-            {<p className="text-red-500 text-xs">Characters limit: {charLimit - value?.length}, extra characters will be omitted.  </p>}
+            {/* {<p className="text-red-500 text-xs">Characters limit: {charLimit - value?.length}, extra characters will be omitted.  </p>} */}
         </div>
     );
 }

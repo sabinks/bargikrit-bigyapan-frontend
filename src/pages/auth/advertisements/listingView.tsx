@@ -148,7 +148,7 @@ export default function ListingView() {
             id: "pubish",
             cell: (info: any) => <span>
                 {
-                    checkSubset(['SUPERADMIN', 'ADMIN'], roles) ?
+                    checkSubset(['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], roles) ?
                         <CheckBox label="" checked={info.getValue()} onChange={(e: any) => handleAdsPublishStatus(e, info?.row?.original?.id)} />
                         :
                         <CheckBox label="" checked={info.getValue()} disabled />
@@ -215,7 +215,7 @@ export default function ListingView() {
                 <div className='flex flex-row justify-between items-center'>
                     <PageTitle title='Advertisement' />
                     {
-                        (checkSubset(['SUPERADMIN', 'ADMIN'], roles) || canPublish) &&
+                        (checkSubset(['SUPERADMIN', 'ADMIN', 'USER'], roles) || canPublish) &&
                         <Button
                             label='Add Advertisement'
                             buttonType=""

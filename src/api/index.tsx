@@ -188,7 +188,7 @@ apiClient.interceptors.response.use(
         const { status, data } = error.response;
 
         if (status == 400 || status == 403 || status == 404 || status == 409) {
-            toast.error(data.message, { autoClose: 1500 });
+            toast.error(data.message, { autoClose: 2500 });
         }
         if (status == 401) {
             deleteCookie("token");
@@ -196,13 +196,13 @@ apiClient.interceptors.response.use(
             window.location.reload();
         }
         if (status == 500) {
-            toast.error("Server Error!", { autoClose: 1500 });
+            toast.error("Server Error!", { autoClose: 2500 });
         }
         if (status == 413) {
-            toast.error("File size large!", { autoClose: 1500 });
+            toast.error("File size large!", { autoClose: 2500 });
         }
         if (status == 422) {
-            toast.error("Please fill form !", { autoClose: 1500 });
+            toast.error("Please fill form !", { autoClose: 2500 });
         }
         return Promise.reject(error);
     }

@@ -87,6 +87,7 @@ const Input = ({
                         onChange={onChange}
                         name={name}
                         value={value}
+                        id={name + "-unique"}
                         // defaultValue={""}
                         placeholder={placeholder}
                         autoComplete="off"
