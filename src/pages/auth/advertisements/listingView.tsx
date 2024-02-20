@@ -16,6 +16,7 @@ import Button from "../../../components/Button";
 const initialState = {
     name: "",
     content: "",
+    adImages: []
 };
 export default function ListingView() {
     const { roles, user: { email, canPublish } } = useAuth()

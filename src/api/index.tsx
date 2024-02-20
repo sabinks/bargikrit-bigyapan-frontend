@@ -78,8 +78,6 @@ export const getDocumentTypeList = async (value: any) => {
     return data;
 }
 export const uploadPartnerDocuments = async (value: any) => {
-    console.log(value);
-
     const formData: any = new FormData()
     const { documentTypeId, images } = value
 

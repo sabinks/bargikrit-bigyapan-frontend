@@ -6,6 +6,7 @@ import Dropdown from "@/components/dropDown";
 import { Input } from '../../../components';
 import { useAuth } from '../../../../hooks/auth';
 import Editor from '@/components/editor';
+import Compressor from 'compressorjs';
 
 export default function AdvertisementsForm({ state, setState, error, edit }: any) {
     const { roles, user: { email, name, contactNumber }, getUserDetails } = useAuth()
@@ -13,6 +14,8 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
     const [countries, setCountries] = useState<any>([])
     const [provinces, setProvinces] = useState<any>([])
     const [districts, setDistricts] = useState<any>([])
+    const [imageRequirement, setImageRequirement] = useState<any>({ fileSize: 2048000, fileType: ['image/png', 'image/jpg', 'image/jpeg'] })
+    const [imageErrors, setImageErrors] = useState<any>({})
     const onEditorContentChanged = (content: any) => {
         setState((prev: any) => ({ ...prev, data: content?.html }))
     };
@@ -66,11 +69,9 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
     function handleProviceSelected(province: any) {
         setDistricts([])
         const tempProvince = provinces.filter((data: any) => data.id == province.id)
-        console.log(provinces);
         setState((prev: any) => ({
             ...prev, province, provinceId: province?.id
         }))
-        console.log(tempProvince);
 
         if (tempProvince && tempProvince[0]?.districtList) {
             setState((prev: any) => ({
@@ -79,6 +80,68 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
             }))
             setDistricts(tempProvince[0].districtList)
         }
+    }
+    const handleAdvertisementImages = (e: any) => {
+        setState((prev: any) => ({
+            ...prev, adImages: []
+        }))
+        setImageErrors({})
+        const files = e.target.files;
+        if (files.length > 3) {
+            setImageErrors((prev: any) => ({
+                ...prev, maxFileUpload: 'Max 3 images can be uploaded.'
+            }))
+        }
+        for (let index = 0; index < files.length; index++) {
+            const file = files[index];
+            if (file.size > imageRequirement.fileSize) {
+                setImageErrors((prev: any) => ({
+                    ...prev, fileSize: 'File upload size limit is 2MB.'
+                }))
+            }
+            if (!imageRequirement.fileType.includes(file.type)) {
+                setImageErrors((prev: any) => ({
+                    ...prev, fileType: 'Please upload file type of: jpg, png.'
+                }))
+            }
+        }
+        if (true) {
+            setState((prev: any) => ({
+                ...prev, adImages: []
+            }))
+            for (let index = 0; index < files.length; index++) {
+                const file = files[index];
+                let quality = 1;
+                switch (true) {
+                    case file.size >= 1536000 && file.size <= 2048000:
+                        quality = 0.4; break;
+                    case file.size >= 1024000 && file.size < 1536000:
+                        quality = 0.6; break;
+                    case file.size >= 512000 && file.size < 1024000:
+                        quality = 0.8; break;
+                    default:
+                        quality = 1; break;
+                }
+                if (true) {
+                    setState((prev: any) => ({
+                        ...prev, adImages: [...prev.adImages, file]
+                    }))
+                } else {
+                    new Compressor(file, {
+                        quality: quality,
+                        success(result) {
+                            setState((prev: any) => ({
+                                ...prev, adImages: [...prev.adImages, result]
+                            }))
+                        },
+                        error(err) {
+                            console.log(err.message);
+                        },
+                    });
+                }
+            }
+        }
+
     }
 
     return (
@@ -153,7 +216,20 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                     <p className='text-red-400 text-sm'>{error?.data}</p>
                 </div>
             </div>
-
+            <div className="border rounded-md p-2 space-y-2 bg-gray-light">
+                <div className="">
+                    <Input
+                        name="advertisementImages"
+                        label='Advertisement Images'
+                        placeholder=''
+                        type="file"
+                        onChange={(e: any) => {
+                            handleAdvertisementImages(e)
+                        }}
+                    />
+                    <p className='text-red-400 text-sm'>{error?.companyName}</p>
+                </div>
+            </div>
             <div className="border rounded-md p-2 bg-gray-light">
                 <h1 className=''>Footer</h1>
                 <div className="">
