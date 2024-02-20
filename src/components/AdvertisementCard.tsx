@@ -127,7 +127,7 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                 </div>
             </div >
             <Modal isVisible={modalOpen} onClose={() => setModalOpen(false)} isPrimaryButtonVisible={false} secondaryButtonLabel="Close">
-                <div className="grid grid-cols-1 lg:grid-cols-2 pt-0 pb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 pt-0 pb-12" id="modal-advertisement-card">
                     <div className="flex flex-row gap-2 items-center pb-2 justify-center">
                         {
                             advertisementImages?.map((image: any) => {
