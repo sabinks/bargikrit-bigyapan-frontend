@@ -197,13 +197,15 @@ function Header() {
                 <div className="container mx-auto">
                     <div className="flex justify-between items-center ">
                         <div className="flex items-center gap-x-2">
-                            <Image
-                                className="h-12 w-auto"
-                                src="/assets/az_logo_250.png"
-                                alt=""
-                                width="100"
-                                height="100"
-                            />
+                            <Link href="/">
+                                <Image
+                                    className="h-12 w-auto"
+                                    src="/assets/az_logo_250.png"
+                                    alt=""
+                                    width="100"
+                                    height="100"
+                                />
+                            </Link>
                             <h1 className={`text-secondary tracking-wider font-semibold text-3xl ${montserrat.className}`}>{APP_NAME}</h1>
                         </div>
                         <div className={`flex items-center text-gray-dark ${montserratRegular.className}`}>
@@ -214,7 +216,7 @@ function Header() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

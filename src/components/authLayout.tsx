@@ -485,7 +485,7 @@ export default function AuthLayout({ props }: any) {
                                                                 <Link
                                                                     href={item.href}
                                                                     onClick={
-                                                                        () => { console.log("helo") }
+                                                                        () => { }
                                                                     }
                                                                     className={classNames(
                                                                         active ? "bg-secondary text-white" : "",

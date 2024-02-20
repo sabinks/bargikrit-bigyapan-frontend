@@ -23,7 +23,6 @@ function Subscription() {
         },
         enabled: checkSubset(['PARTNER'], roles) ? true : false
     })
-    // console.log('12312312312321');
 
     return (
         <div>

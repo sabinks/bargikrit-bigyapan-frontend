@@ -18,6 +18,7 @@ function Footer() {
                         {/* <Link href="/about-us" className='text-sm border-b-[1px] border-dotted'>About Us</Link>
                         <p className='text-xs opacity-50'>/</p> */}
                         <Link href="/contact-us" className="text-sm border-b-[1px] border-dotted">Contact Us</Link>
+                        <Link href="/privacy-policy" className="text-sm border-b-[1px] border-dotted">Privacy Policy</Link>
                     </div>
                     <div className="text-white text-center text-sm tracking-wider">
                         Copyright © 2024 Ad Zoner . All rights reserved.

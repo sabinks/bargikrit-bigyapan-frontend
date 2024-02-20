@@ -14,7 +14,6 @@ const initialState = {
 export default function Advertisements() {
     const { roles, user: { email, canPublish, } } = useAuth()
     const { appState, setAppState } = useApplication()
-    // console.log('name');
 
     return (
         <div className="space-y-2">
