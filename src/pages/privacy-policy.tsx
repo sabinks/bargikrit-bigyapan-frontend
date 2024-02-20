@@ -92,7 +92,7 @@ function PrivacyPolicy() {
                 </p>
                 <h2 className="text-2xl font-bold mb-2">Contact Us</h2>
 
-                <p className="mb-4">If you have any questions, concerns, or complaints about our Privacy Policy or practices, please contact us at info@adzoner.com.</p>
+                <p className="mb-4">If you have any questions, concerns, or complaints about our Privacy Policy or practices, please contact us at <span className='border-b-[1px] border-dotted'>info@adzoner.com</span>.</p>
 
                 <p className="mb-4">
                     By using Advertisement House's portal, you agree to the collection and use of your information in accordance with this Privacy Policy and the terms and conditions are regularly subject to update.

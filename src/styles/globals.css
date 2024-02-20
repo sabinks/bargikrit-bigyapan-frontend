@@ -5,7 +5,7 @@
 #advertisement-card h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: x-large;
-    font-weight: 800;
+    font-weight: 700;
     text-align: center;
 }
 
@@ -18,5 +18,5 @@
 
 #advertisement-card p {
     font-size: small;
-    font-weight: 400;
+    font-weight: 300;
 }

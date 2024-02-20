@@ -39,7 +39,7 @@ export const deleteAdvertisement = async (data: any) => {
 };
 export const advertisementStatusChange = async (data: any) => {
     const { id, status } = data
-    await apiClient.post(`/advertisementsadImages/${id}/publish`,
+    await apiClient.post(`/advertisements/${id}/publish`,
         {
             status,
         });

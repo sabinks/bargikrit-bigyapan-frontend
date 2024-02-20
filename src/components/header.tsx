@@ -145,7 +145,7 @@ function Header() {
                 <div className="container mx-auto">
                     <div className="flex justify-between items-center">
                         <div className="flex md:space-x-4 divide-x divide-white text-white">
-                            <div className=""><FaFacebookF className=" hover:text-[#316FF6] transition duration-300 cursor-pointer" /></div>
+                            <Link href="https://www.facebook.com/people/Ad-Zoner/61556479892859"><FaFacebookF className=" hover:text-[#316FF6] transition duration-300 cursor-pointer" /></Link>
                             {/* <div className="pl-4"><FaTwitter className=" hover:text-[#1DA1F2] transition duration-300 cursor-pointer" /></div> */}
                             {/* <div className="pl-4"><FaInstagram className=" hover:text-pink-600 transition duration-300 cursor-pointer" /></div>
                             <div className="pl-4"><FaYoutube className=" hover:text-[#CD201F] transition duration-300 cursor-pointer" /> </div> */}
