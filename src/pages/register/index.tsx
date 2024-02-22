@@ -4,32 +4,19 @@ import PartnerSignUp from './PartnerSignUp'
 import UserSignUp from './UserSignUp'
 import { classNames } from '@/utils';
 import Link from 'next/link';
-import { BASE_URL } from '@/constants';
+import { APP_NAME, BASE_URL } from '@/constants';
 import Image from 'next/image';
+import { montserrat } from '@/fonts';
 
 export default function Register() {
     // const [searchParams] = useSearchParams();
     // const user = searchParams.get('user');
     const [tab, setTab] = useState([
-        { label: "User SignUp", slug: 'user-signup' },
-        { label: "Partner SignUp", slug: 'partner-signup' },
+        { label: "Personal SignUp", slug: 'user-signup' },
+        { label: "Business SignUp", slug: 'partner-signup' },
     ])
     const [navState, setNavState] = useState('user-signup')
     const [partnerType, setPartnerType] = useState<any>()
-
-    // useEffect(() => {
-    //     if (user) {
-    //         setNavState(`${user}-signup`)
-    //         setTab((prev: any) => prev.filter((item: any) => item.slug == `${user}-signup`))
-    //     }
-    // }, [user])
-
-    // useQuery(['partner-type-list'], getList, {
-    //     onSuccess: (res) => {
-    //         const roles = res?.data?.map(({ name, id }: any) => ({ name, value: id }))
-    //         setPartnerType(roles)
-    //     }
-    // })
 
     return (
         <div className="min-h-screen flex">
@@ -37,13 +24,20 @@ export default function Register() {
                 <div className="mx-auto w-full max-w-sm lg:w-96">
                     <Link href={'/'}>
                         <div >
-                            <Image
-                                className="h-24 w-auto"
-                                src="/assets/bb-250.png"
-                                alt="Logo"
-                                width="100"
-                                height="100"
-                            />
+                            <Link href={'/'}>
+                                <div className="flex flex-row gap-x-4 items-center">
+                                    <Image
+                                        className="h-36 w-auto"
+                                        src="/assets/az_logo_250.png"
+                                        alt="Logo"
+                                        width="100"
+                                        height="100"
+                                    />
+                                    <h2 className={`text-4xl tracking-wider font-extrabold text-secondary ${montserrat.className}`}>
+                                        {APP_NAME}
+                                    </h2>
+                                </div>
+                            </Link>
                             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
                                 Sign in to your account
                             </h2>

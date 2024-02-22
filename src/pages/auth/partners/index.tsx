@@ -9,7 +9,7 @@ import { getPartnerDocumentsByUserId } from "@/api/dashboard";
 import { DocumentIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { apiClient, getQueryData, userCanPublishChange, userStatusChange } from "@/api";
 import Modal from "@/components/modal";
-import { ImageZoom } from "../dashboard/PartnerDashboard";
+import { ImageZoom } from "../dashboard/dashboard";
 
 const initialState = {
     name: "",

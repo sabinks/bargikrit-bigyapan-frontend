@@ -114,15 +114,21 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                         </div>
                     </div>
 
-                    <div className="flex flex-col justify-between space-y-1 text-xs">
-                        <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-4' /> {advertisement?.email}</a>
+                    <div className="flex flex-row justify-between space-y-1 text-xs">
+                        <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-5 h-5' />
+                            {/* {advertisement?.email} */}
+                        </a>
                         {
-                            advertisement?.website && <a href={`${advertisement?.website}`} target='_blank' className='flex items-center gap-x-2'><BiGlobe className='w-4' /> {advertisement.website}</a>
+                            advertisement?.website && <a href={`${advertisement?.website}`} target='_blank' className='flex items-center gap-x-2'><BiGlobe className='w-5 h-5' />
+                                {/* {advertisement.website} */}
+                            </a>
                         }
-                        <div className="flex flex-row justify-between gap-x-2">
-                            <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-4' /> {advertisement?.contactNumber}</a>
-                            <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-4' /> {advertisement?.contactNumber}</a>
-                        </div>
+                        <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-5 h-5' />
+                            {/* {advertisement?.contactNumber} */}
+                        </a>
+                        <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-5 h-5' />
+                            {/* {advertisement?.contactNumber} */}
+                        </a>
                     </div>
                 </div>
             </div >
@@ -170,13 +176,13 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                             {/* <p className=''>District: {advertisement?.district?.name}</p> */}
                         </div>
                         <div className="flex flex-col justify-between space-y-1 text-xs">
-                            <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-4' /> {advertisement?.email}</a>
+                            <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-5 h-5' /> {advertisement?.email}</a>
                             {
-                                advertisement?.website && <a href={`${advertisement?.website}`} target='_blank' className='flex items-center gap-x-2'><BiGlobe className='w-4' /> {advertisement.website}</a>
+                                advertisement?.website && <a href={`${advertisement?.website}`} target='_blank' className='flex items-center gap-x-2'><BiGlobe className='w-5 h-5' /> {advertisement.website}</a>
                             }
                             <div className="flex flex-row justify-between gap-x-2">
-                                <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-4' /> {advertisement?.contactNumber}</a>
-                                <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-4' /> {advertisement?.contactNumber}</a>
+                                <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-5 h-5' /> {advertisement?.contactNumber}</a>
+                                <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-5 h-5' /> {advertisement?.contactNumber}</a>
                             </div>
                         </div>
                     </div>

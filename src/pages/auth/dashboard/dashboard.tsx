@@ -9,7 +9,7 @@ import Zoom from 'react-medium-image-zoom'
 import { Button, Input } from '@/components';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
-function PartnerDashboard() {
+function Dashboard() {
     const { user: { canPublish } } = useAuth()
     const [documentTypeList, setDocumentTypeList] = useState<any>([])
     const [documentList, setDocumentList] = useState<any>([])
@@ -101,12 +101,11 @@ function PartnerDashboard() {
                     <h1>Please uploaded required documents!</h1>
                     <div className="">
                         <form onSubmit={handleSubmit} className=" flex flex-col space-y-4">
-                            <Dropdown label='Advertisement Type' data={documentTypeList} selectedValue={state?.documentType} onChange={(documentType: any) => {
+                            <Dropdown label='Document Type' data={documentTypeList} selectedValue={state?.documentType} onChange={(documentType: any) => {
                                 setState((prev: any) => ({
                                     ...prev, documentTypeId: documentType?.id, documentType
                                 }))
                             }} />
-
 
                             <div>
                                 <Input type='file' name='images' label='Select images' onChange={handleImage} />
@@ -151,7 +150,7 @@ function PartnerDashboard() {
     )
 }
 
-export default PartnerDashboard
+export default Dashboard
 
 export const ImageZoom = ({ src, alt, width, height, className }: any) => (
     <Zoom>

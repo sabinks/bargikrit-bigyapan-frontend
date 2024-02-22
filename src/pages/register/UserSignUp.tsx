@@ -6,6 +6,7 @@ import Input from "../../components/Input";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import Button from "../../components/Button";
 import { classNames } from "@/utils";
+import Link from "next/link";
 
 export default function UserSignUp() {
     const router = useRouter()
@@ -136,7 +137,11 @@ export default function UserSignUp() {
                     Terms, Privacy Policy and Cookies Policy
                 </Link>.
             </div> */}
-            <p className="text-red-500 text-sm text-center">Note: Member can add one advertisement.</p>
+            <p className="text-red-500 text-sm text-center">Note: Personal signup user can add one advertisement.</p>
+            <div className="text-sm">
+                By clicking Sign Up, you agree to our <Link href={`terms-and-conditions`} target="_blank" className='text-blue-500 underline font-semibold'>Terms & Conditions</Link> <Link href={`privacy-policy`} target="_blank" className='text-blue-500 underline font-semibold'>Privacy Policy and Cookies Policy</Link>
+                .
+            </div>
             <Button buttonType="" label="Sign Up" loading={isLoading} onClick={handleSubmit} className='w-full' />
         </div>
     );

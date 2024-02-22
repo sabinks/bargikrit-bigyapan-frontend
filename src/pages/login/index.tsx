@@ -34,7 +34,7 @@ export default function Login() {
     const { isLoading, mutate } = useMutation<any, Error>(userLogin, {
         onSuccess: (data: any) => {
             const { role, token } = data;
-            sessionStorage.setItem('token', token)
+            // sessionStorage.setItem('token', token)
             setCookie("token", token);
             // setCookie("role", role)
             // setCookie("permissions", JSON.stringify(permissions))
@@ -62,12 +62,12 @@ export default function Login() {
             <div className="min-h-screen flex">
                 <div className="flex items-center w-full xl:w-1/3 justify-center px-12 py-12">
                     <div className="mx-auto w-full max-w-sm lg:w-96">
-                        <div>
+                        <div className="">
                             <Link href={'/'}>
                                 <div className="flex flex-row gap-x-4 items-center">
                                     <Image
-                                        className="h-24 w-auto"
-                                        src="/assets/bb-250.png"
+                                        className="h-36 w-auto"
+                                        src="/assets/az_logo_250.png"
                                         alt="Logo"
                                         width="100"
                                         height="100"

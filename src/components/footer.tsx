@@ -20,6 +20,7 @@ function Footer() {
                         <Link href="/contact-us" className="text-sm border-b-[1px] border-dotted">Contact Us</Link>
                         <Link href="/privacy-policy" className="text-sm border-b-[1px] border-dotted">Privacy Policy</Link>
                         <Link href="/terms-and-conditions" className="text-sm border-b-[1px] border-dotted">Terms & Conditions</Link>
+                        <Link href="/faq" className="text-sm border-b-[1px] border-dotted">Frequently Asked Questions</Link>
                     </div>
                     <div className="text-white text-center text-sm tracking-wider">
                         Copyright © 2024 Ad Zoner . All rights reserved.

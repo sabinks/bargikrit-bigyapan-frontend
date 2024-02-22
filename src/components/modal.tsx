@@ -9,11 +9,13 @@ export default function Modal({
     isVisible = false,
     isButtonVisible = true,
     isPrimaryButtonVisible = true,
+    isSecondaryButtonVisible = true,
     primaryButtonLabel = "Confirm",
     primaryButtonAction,
     secondaryButtonLabel = "Cancel",
     title,
     secondaryButtonAction,
+    bodyAlign = "text-left",
     // HandleFormSubmit,
     onClose,
     children
@@ -21,10 +23,12 @@ export default function Modal({
     isVisible: boolean,
     isButtonVisible?: boolean,
     isPrimaryButtonVisible?: boolean,
+    isSecondaryButtonVisible?: boolean,
     primaryButtonLabel?: string,
     primaryButtonAction?: () => void,
     secondaryButtonLabel?: string,
     secondaryButtonAction?: () => void,
+    bodyAlign?: string,
     // HandleFormSubmit?: () => void,
     onClose: () => void,
     title?: string,
@@ -42,7 +46,6 @@ export default function Modal({
 
     return (
         <>
-
             <Transition appear show={isVisible} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={onClose}>
                     <Transition.Child
@@ -68,7 +71,7 @@ export default function Modal({
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full md:max-w-5xl transform rounded-lg bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className={`w-full md:max-w-5xl transform rounded-lg bg-white p-6 ${bodyAlign} align-middle shadow-xl transition-all`}>
                                     <Dialog.Title
                                         as="h3"
                                         className={classNames("text-lg font-semibold leading-6 text-gray-900", !title ? 'text-red-500' : '')}
@@ -97,7 +100,7 @@ export default function Modal({
                                             />
                                         }
                                         {
-                                            isButtonVisible &&
+                                            isSecondaryButtonVisible &&
 
                                             <Button
                                                 label={secondaryButtonLabel}
