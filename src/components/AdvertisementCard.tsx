@@ -67,7 +67,7 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                     </div>
                 </div>
             </div>
-            <div className='  border-4 border-black shadow-xl hover:shadow-2xl transition duration-500 p-4 pl-8 shadow-indigo-100 hover:shadow-indigo-300' id="advertisement-card">
+            <div className='  border-4 border-black shadow-xl hover:shadow-2xl transition duration-500 p-2 md:p-4 md:pl-8 shadow-indigo-100 hover:shadow-indigo-300' id="advertisement-card">
                 <div className="space-y-4" key={advertisement?.id}>
                     <div className=" cursor-pointer" onClick={(e: any) => setModalOpen(true)}>
                         <div className="">

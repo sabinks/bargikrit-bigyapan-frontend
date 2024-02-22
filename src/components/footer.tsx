@@ -6,7 +6,7 @@ import { FaInstagram } from 'react-icons/fa6'
 function Footer() {
     return (
         <div className='bg-primary'>
-            <div className="container mx-auto pt-8 pb-4">
+            <div className="container mx-auto pt-4 md:pt-8 pb-4">
                 <div className="flex flex-col items-center">
                     <div className="flex space-x-6 text-white">
                         <Link href="https://www.facebook.com/people/Ad-Zoner/61556479892859" className="rounded-full p-2"><FaFacebookF /></Link>
@@ -14,7 +14,7 @@ function Footer() {
                         <Link href="" className="rounded-full p-2"><FaInstagram /></Link>
                         <Link href="" className="rounded-full p-2"><FaYoutube /></Link> */}
                     </div>
-                    <div className="flex items-center space-x-4 text-white py-4">
+                    <div className="flex flex-col md:flex-row items-center space-x-4 text-white py-2 md:py-4">
                         {/* <Link href="/about-us" className='text-sm border-b-[1px] border-dotted'>About Us</Link>
                         <p className='text-xs opacity-50'>/</p> */}
                         <Link href="/contact-us" className="text-sm border-b-[1px] border-dotted">Contact Us</Link>

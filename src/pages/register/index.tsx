@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { APP_NAME, BASE_URL } from '@/constants';
 import Image from 'next/image';
 import { montserrat } from '@/fonts';
+import Head from 'next/head';
 
 export default function Register() {
     // const [searchParams] = useSearchParams();
@@ -20,6 +21,9 @@ export default function Register() {
 
     return (
         <div className="min-h-screen flex">
+            <Head>
+                <title>{APP_NAME} | Register</title>
+            </Head>
             <div className="flex items-center w-full xl:w-1/3 justify-center px-12 py-12">
                 <div className="mx-auto w-full max-w-sm lg:w-96">
                     <Link href={'/'}>

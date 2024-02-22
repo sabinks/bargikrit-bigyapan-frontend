@@ -45,7 +45,7 @@ function Header() {
     }
     return (
         <div>
-            <nav className="flex md:hidden items-center justify-between p-6 lg:px-8" aria-label="Global">
+            <nav className="flex md:hidden items-center justify-between px-2 py-0 lg:px-8" aria-label="Global">
                 <div className="flex lg:flex-1">
                     <a href="#" className="-m-1.5 p-1.5">
                         <span className="sr-only">{APP_NAME}</span>
@@ -141,11 +141,11 @@ function Header() {
                     </div>
                 </Dialog.Panel>
             </Dialog>
-            <div className="hidden md:flex bg-primary py-3">
+            <div className="flex bg-primary py-3">
                 <div className="container mx-auto">
                     <div className="flex justify-between items-center">
-                        <div className="flex md:space-x-4 divide-white text-white text-sm items-center">
-                            <Link href="https://www.facebook.com/people/Ad-Zoner/61556479892859"><FaFacebookF className=" hover:text-[#316FF6] transition duration-300 cursor-pointer" /></Link>
+                        <div className="flex flex-col justify-start md:flex-row md:space-x-4 divide-white text-white text-xs md:text-sm">
+                            <Link className='flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500' href="https://www.facebook.com/people/Ad-Zoner/61556479892859"><FaFacebookF className=" hover:text-[#316FF6] transition duration-300 cursor-pointer" /></Link>
                             {/* <div className="pl-4"><FaTwitter className=" hover:text-[#1DA1F2] transition duration-300 cursor-pointer" /></div> */}
                             {/* <div className="pl-4"><FaInstagram className=" hover:text-pink-600 transition duration-300 cursor-pointer" /></div>
                             <div className="pl-4"><FaYoutube className=" hover:text-[#CD201F] transition duration-300 cursor-pointer" /> </div> */}
@@ -153,7 +153,7 @@ function Header() {
                             < div className="flex items-center pl-2 hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><span className='pl-2'>info@adzoner.com</span></div>
                         </div>
 
-                        <Link href={isAuthenticated ? "/auth/advertisement" : "/register"} className="relative px-5 py-2 font-medium text-white group">
+                        <Link href={isAuthenticated ? "/auth/advertisement" : "/register"} className="flex text-sm md:text-base relative px-3 md:px-5 py-1 md:py-2 font-medium text-white group">
                             <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-purple-500 group-hover:bg-purple-700 group-hover:skew-x-12"></span>
                             <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-purple-700 group-hover:bg-purple-500 group-hover:-skew-x-12"></span>
                             <span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-purple-600 -rotate-12"></span>
@@ -163,7 +163,7 @@ function Header() {
                         <div className={`flex md:space-x-2 text-sm text-white`}>
 
                             {/* <div className="flex items-center pl-2 hover:cursor-pointer hover:text-gray-dark transition duration-500"><FaLocationPin /><span className='pl-2'> 1234 Elm Street</span></div> */}
-                            <div className="flex items-center pl-2 hover:cursor-pointer transition duration-500">
+                            <div className="hidden md:flex items-center pl-2 hover:cursor-pointer transition duration-500">
                                 {isAuthenticated &&
                                     <div className="px-4 py-1 rounded-xl w-max  place-self-end hover:text-white hover:drop-shadow-xl hover:cursor-pointer transition delay-50 duration-500">
                                         <Link href="/auth/dashboard">

@@ -12,6 +12,7 @@ import dynamic from "next/dynamic";
 import { APP_NAME } from "@/constants";
 import { montserrat, nunitoSans, playFair, poppins } from "@/fonts";
 import Image from "next/image";
+import Head from "next/head";
 
 // const SocialLogin = dynamic(
 //     () => import("../../../components/socialLogin"),
@@ -59,6 +60,9 @@ export default function Login() {
     };
     return (
         <>
+            <Head>
+                <title>{APP_NAME} | Login</title>
+            </Head>
             <div className="min-h-screen flex">
                 <div className="flex items-center w-full xl:w-1/3 justify-center px-12 py-12">
                     <div className="mx-auto w-full max-w-sm lg:w-96">
