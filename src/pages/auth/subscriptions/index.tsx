@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { checkSubset } from '@/utils'
 import { useSubscription } from '../../../../hooks/subscription'
 import { getSubscriptionTypeList, getCurrentSubscription } from '@/api/dashboard/membership'
+import Head from 'next/head'
 
 function Subscription() {
     const { setSubscriptionState } = useSubscription()
@@ -26,12 +27,15 @@ function Subscription() {
 
     return (
         <div>
+            <Head>
+                <title>Subscription</title>
+            </Head>
             <div className="px-4 sm:px-0">
                 <h3 className="text-base font-semibold leading-7 text-gray-900">Subscription Information</h3>
                 {/* <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and application.</p> */}
             </div>
             <div className="mt-6 border-t border-gray-100">
-                {/* <dl className="divide-y divide-gray-100">
+                <dl className="divide-y divide-gray-100">
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">Subscription Name</dt>
                         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{subscription?.subscriptionType?.name}</dd>
@@ -48,7 +52,7 @@ function Subscription() {
                         <dt className="text-sm font-medium leading-6 text-gray-900">Expires At</dt>
                         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{subscription?.expiresAt}</dd>
                     </div>
-                </dl> */}
+                </dl>
             </div>
             <div className="container mx-auto w-3/4">
                 <h2 className='font-bold text-center text-4xl py-4'>Subscription Plans</h2>

@@ -6,6 +6,7 @@ import { MdGridView } from "react-icons/md";
 import { CiBoxList } from "react-icons/ci";
 import { useApplication } from "../../../../hooks/application";
 import { useAuth } from "../../../../hooks/auth";
+import Head from "next/head";
 
 const initialState = {
     name: "",
@@ -17,6 +18,9 @@ export default function Advertisements() {
 
     return (
         <div className="space-y-2">
+            <Head>
+                <title>Advertisements</title>
+            </Head>
             <div className="flex justify-end">
                 <div className=" flex space-x-2">
                     <Button icon={<MdGridView className="w-5 h-5" />} className="bg-secondary" label='' disable={appState?.advertisementView == 'grid'} buttonType="" onClick={(e: any) => setAppState((prev: any) => ({ ...prev, advertisementView: 'grid' }))} />

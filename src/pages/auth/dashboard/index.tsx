@@ -4,18 +4,23 @@ import { useAuth } from '../../../../hooks/auth'
 import Dashboard from './dashboard';
 import AdminDashboard from './adminDashboard';
 import Modal from '@/components/modal';
+import Head from 'next/head';
 
 function Index() {
     const { roles, user: { canPublish, email } } = useAuth()
     let [isOpen, setIsOpen] = useState(false)
     useEffect(() => {
+
         if (!canPublish && email) {
             setIsOpen(true)
         }
-    }, [canPublish])
+    }, [canPublish, email])
 
     return (
         <div>
+            <Head>
+                <title>Dashboard</title>
+            </Head>
             {
                 checkSubset(['SUPERADMIN', 'ADMIN'], roles) && <AdminDashboard />
             }
