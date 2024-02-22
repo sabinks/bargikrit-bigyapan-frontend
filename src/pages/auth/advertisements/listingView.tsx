@@ -212,7 +212,7 @@ export default function ListingView() {
 
     return (
         <>
-            <div className='flex flex-col sm:px-6 lg:px-8'>
+            <div className='flex flex-col'>
                 <div className='flex flex-row justify-between items-center'>
                     <PageTitle title='Advertisement' />
                     {
@@ -229,7 +229,7 @@ export default function ListingView() {
                         />
                     }
                 </div>
-                <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+                <div className='-my-2 overflow-x-auto'>
                     <div className='py-2 align-middle inline-block min-w-full '>
                         <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
                             <Search query={query} placeholder="Search advertisement" handleSearch={handleSearch} />
