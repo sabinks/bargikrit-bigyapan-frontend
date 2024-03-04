@@ -7,6 +7,9 @@ import { Input } from '../../../components';
 import { useAuth } from '../../../../hooks/auth';
 import Editor from '@/components/editor';
 import Compressor from 'compressorjs';
+import Image from 'next/image';
+import { BACKEND_URL } from '@/constants';
+import { ImageZoom } from '../dashboard/dashboard';
 
 export default function AdvertisementsForm({ state, setState, error, edit }: any) {
     const { roles, user: { email, name, contactNumber }, getUserDetails } = useAuth()
@@ -229,6 +232,23 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                     />
                     <p className='text-red-400 text-sm'>{error?.companyName}</p>
                 </div>
+            </div>
+            <div className="flex flex-row gap-2 items-center pb-2 justify-center">
+                {
+                    state?.advertisementImages?.map((image: any) => {
+                        return <div className="rounded-md">
+                            <ImageZoom className='object-contain'
+                                src={`${BACKEND_URL}/public/advertisements/${image?.documentName}`}
+                                height={800} width={800}
+                                alt='Ads Image' />
+                            {/* <Image
+                                className='object-contain'
+                                src={`${BACKEND_URL}/public/advertisements/${image?.documentName}`}
+                                height={200} width={200}
+                                alt='Ads Image' /> */}
+                        </div>
+                    })
+                }
             </div>
             <div className="border rounded-md p-2 bg-gray-light">
                 <h1 className=''>Footer</h1>

@@ -186,7 +186,6 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                             </div>
                         </div>
                     </div>
-
                 </div>
             </Modal >
         </div >

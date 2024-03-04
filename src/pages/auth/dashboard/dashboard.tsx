@@ -3,7 +3,7 @@ import { useAuth } from '../../../../hooks/auth'
 import Dropdown from '../../../components/dropDown';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { apiClient, getDocumentTypeList, uploadPartnerDocuments } from '../../../api';
-import { deletePartnerDocument, getPartnerDocuments } from '@/api/dashboard';
+import { deletePartnerDocument, getMembersDocuments } from '@/api/dashboard';
 import Image from 'next/image';
 import Zoom from 'react-medium-image-zoom'
 import { Button, Input } from '@/components';
@@ -30,8 +30,8 @@ function Dashboard() {
         }
     })
     const { refetch: partnerDocumentsRefetch } = useQuery(
-        ["partner-documents"],
-        getPartnerDocuments, {
+        ["member-documents"],
+        getMembersDocuments, {
         onSuccess: (data: any) => {
             setDocumentList(data)
         }
@@ -49,7 +49,7 @@ function Dashboard() {
 
     const loadImages = async (filename: string) => {
         try {
-            const { data } = await apiClient.get(`partner-document/${filename}`)
+            const { data } = await apiClient.get(`member-document/${filename}`)
             setImages((prev: any) => (
                 [...prev, { filename, data }]
             ))

@@ -1,15 +1,15 @@
 import { apiClient } from "..";
 
-export const getPartnerDocuments = async () => {
-    const { data } = await apiClient.get('/partner-documents');
+export const getMembersDocuments = async () => {
+    const { data } = await apiClient.get('/member-documents');
     return data;
 }
 export const deletePartnerDocument = async (documentName: string) => {
-    await apiClient.delete(`/partner-documents/${documentName}`);
+    await apiClient.delete(`/member-documents/${documentName}`);
 }
-export const getPartnerDocumentsByUserId = async (query: any) => {
+export const getMembersDocumentsByUserId = async (query: any) => {
     const [name, id] = query?.queryKey
-    const { data } = await apiClient.get(`/partner-documents/${id}`)
+    const { data } = await apiClient.get(`/member-documents/${id}`)
     return data;
 }
 export const userFavouriteAds = async () => {

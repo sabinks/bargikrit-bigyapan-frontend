@@ -5,7 +5,7 @@ import React from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Search from "../../../components/search";
 import { useAuth } from "../../../../hooks/auth";
-import { getPartnerDocumentsByUserId } from "@/api/dashboard";
+import { getMembersDocumentsByUserId } from "@/api/dashboard";
 import { DocumentIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { apiClient, getQueryData, userCanPublishChange, userStatusChange } from "@/api";
 import Modal from "@/components/modal";
@@ -39,7 +39,7 @@ export default function Clients() {
         }
     })
 
-    useQuery(['partner-document', partnerId], getPartnerDocumentsByUserId, {
+    useQuery(['member-document', partnerId], getMembersDocumentsByUserId, {
         onSuccess: (data) => {
             setDocumentList(data)
             setPartnerId(0)
@@ -57,7 +57,7 @@ export default function Clients() {
     }, [documentList])
     const loadImages = async (filename: string) => {
         try {
-            const { data } = await apiClient.get(`partner-document/${filename}`)
+            const { data } = await apiClient.get(`member-document/${filename}`)
             setImages((prev: any) => (
                 [...prev, { filename, data }]
             ))

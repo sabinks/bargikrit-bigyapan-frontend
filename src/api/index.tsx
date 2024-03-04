@@ -186,7 +186,7 @@ apiClient.interceptors.response.use(
         const { status, data } = error.response;
 
         if (status == 400 || status == 403 || status == 404 || status == 409) {
-            toast.error(data.message, { autoClose: 2500 });
+            toast.error(data.message, { autoClose: 3500 });
         }
         if (status == 401) {
             deleteCookie("token");

@@ -44,9 +44,9 @@ export default function ListingView() {
 
     useQuery(['advertisements', adsId], showAdvertisement, {
         onSuccess: (res) => {
-            const { name, data, id, advertisementType, country, province, district, companyName, email, contactNumber } = res.data
+            const { name, data, id, advertisementType, country, province, district, companyName, email, contactNumber, website, advertisementImages } = res.data
             setState({
-                name: name, id: id, data: data, companyName, email, contactNumber,
+                name: name, id: id, data: data, companyName, email, contactNumber, website, advertisementImages,
                 advertisementType, advertisementTypeId: advertisementType?.id,
                 country, countryId: country?.id,
                 province, provinceId: province?.id,
