@@ -14,7 +14,8 @@ import Loading from "@/components/loading";
 const initialState = {
     name: "",
     content: "",
-    adImages: []
+    adImages: [],
+    images_remove_ids: [],
 };
 export default function GridView({ }: any) {
     const [query, setQuery] = useState<string>("");

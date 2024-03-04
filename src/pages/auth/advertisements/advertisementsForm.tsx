@@ -3,13 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 import { getCountries, getProvinces, getProvincesByCountryId } from '@/api'
 import { getAdvertisementTypes } from '@/api/advertisement';
 import Dropdown from "@/components/dropDown";
-import { Input } from '../../../components';
+import { Button, Input } from '../../../components';
 import { useAuth } from '../../../../hooks/auth';
 import Editor from '@/components/editor';
 import Compressor from 'compressorjs';
 import Image from 'next/image';
 import { BACKEND_URL } from '@/constants';
 import { ImageZoom } from '../dashboard/dashboard';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 export default function AdvertisementsForm({ state, setState, error, edit }: any) {
     const { roles, user: { email, name, contactNumber }, getUserDetails } = useAuth()
@@ -144,7 +145,12 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                 }
             }
         }
-
+    }
+    const handleDelete = (id: number) => {
+        let newDocuments = state.advertisementImages.filter((document: any) => document.id != id)
+        setState((prev: any) => ({
+            ...prev, documents: newDocuments, image_remove_ids: [...prev.document_remove_id, id]
+        }))
     }
 
     return (
@@ -241,6 +247,9 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                                 src={`${BACKEND_URL}/public/advertisements/${image?.documentName}`}
                                 height={800} width={800}
                                 alt='Ads Image' />
+                            <Button className='text-red-500' buttonType='none' icon={<TrashIcon className='w-4 h-4' />}
+                                onClick={(e: any) => handleDelete(image?.id)} />
+
                             {/* <Image
                                 className='object-contain'
                                 src={`${BACKEND_URL}/public/advertisements/${image?.documentName}`}

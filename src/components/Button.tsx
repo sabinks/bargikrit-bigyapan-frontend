@@ -39,19 +39,19 @@ export default function Button({
     let buttonTypeClass = "";
     switch (buttonType) {
         case "primary":
-            buttonTypeClass = "p-1.5 rounded-md text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500";
+            buttonTypeClass = "p-1.5 border border-transparent rounded-md text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500";
             break;
         case "secondary":
-            buttonTypeClass = "p-1.5 rounded-md text-white bg-gray-600  hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600";
+            buttonTypeClass = "p-1.5 border border-transparent rounded-md text-white bg-gray-600  hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600";
             break;
         case "danger":
-            buttonTypeClass = "p-1.5 rounded-md text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600";
+            buttonTypeClass = "p-1.5 border border-transparent rounded-md text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600";
             break;
         case "warning":
-            buttonTypeClass = "p-1.5 rounded-md text-white bg-warning hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-600";
+            buttonTypeClass = "p-1.5 border border-transparent rounded-md text-white bg-warning hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-600";
             break;
         case "info":
-            buttonTypeClass = "p-1.5 rounded-md text-white bg-da hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500";
+            buttonTypeClass = "p-1.5 border border-transparent rounded-md text-white bg-da hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500";
             break;
         case "next_prev":
             buttonTypeClass = "rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600";
@@ -63,7 +63,7 @@ export default function Button({
             buttonTypeClass = "rounded-full hover:text-secondary";
             break;
         default:
-            buttonTypeClass = "p-1.5 rounded-md bg-primary text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600";
+            buttonTypeClass = "p-1.5 border border-transparent rounded-md bg-primary text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600";
             break;
     }
 
@@ -74,7 +74,7 @@ export default function Button({
                 disabled={disable}
                 className={classNames(
                     fullWidth ? "w-full" : "",
-                    "flex  border border-transparent shadow-sm text-sm font-medium disabled:opacity-75 disabled:cursor-not-allowed scale-100 hover:scale-105 hover:drop-shadow-md transition transform duration-500",
+                    "flex   shadow-sm text-sm font-medium disabled:opacity-75 disabled:cursor-not-allowed scale-100 hover:scale-105 hover:drop-shadow-md transition transform duration-500",
                     buttonTypeClass,
                     labelOnLeft ? " justify-start" : " justify-center",
                     // label ? "px-2" : "",
