@@ -24,6 +24,7 @@ jobs:
           source ~/.nvm/nvm.sh
           nvm use 18.17.0
           npm i 
+          pm2 stop adzoner_nextjs
           npm run build
           echo 'Building App'
           pm2 restart adzoner_nextjs

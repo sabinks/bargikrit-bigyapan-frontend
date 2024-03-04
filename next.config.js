@@ -4,8 +4,12 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                hostname: ["localhost", "api.adzoner.com"]
+                hostname: "localhost"
             },
+            {
+                protocol: 'https',
+                hostname: 'api.adzoner.com'
+            }
         ],
     },
 };
