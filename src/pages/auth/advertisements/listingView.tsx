@@ -17,7 +17,7 @@ const initialState = {
     name: "",
     content: "",
     adImages: [],
-    images_remove_ids: [],
+    imageRemoveIds: [],
 };
 export default function ListingView() {
     const { roles, user: { email, canPublish } } = useAuth()
@@ -47,7 +47,7 @@ export default function ListingView() {
         onSuccess: (res) => {
             const { name, data, id, advertisementType, country, province, district, companyName, email, contactNumber, website, advertisementImages } = res.data
             setState({
-                name: name, id: id, data: data, companyName, email, contactNumber, website, advertisementImages,
+                name: name, id: id, data: data, companyName, email, contactNumber, website, advertisementImages, imageRemoveIds: [],
                 advertisementType, advertisementTypeId: advertisementType?.id,
                 country, countryId: country?.id,
                 province, provinceId: province?.id,

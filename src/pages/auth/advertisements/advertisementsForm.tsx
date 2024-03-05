@@ -149,7 +149,7 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
     const handleDelete = (id: number) => {
         let newDocuments = state.advertisementImages.filter((document: any) => document.id != id)
         setState((prev: any) => ({
-            ...prev, documents: newDocuments, image_remove_ids: [...prev.document_remove_id, id]
+            ...prev, advertisementImages: newDocuments, imageRemoveIds: [...prev.imageRemoveIds, id]
         }))
     }
 
