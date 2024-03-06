@@ -235,8 +235,8 @@ apiClient.interceptors.request.use(async (config: any) => {
             showCancelButton: true,
             confirmButtonColor: '#1ea432e6',
             cancelButtonColor: '#9F1853',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel!',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No',
             reverseButtons: true
         })
         const { isConfirmed, dismiss } = await modal;

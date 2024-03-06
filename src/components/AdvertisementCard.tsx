@@ -16,18 +16,28 @@ import Image from 'next/image'
 import { BACKEND_URL } from '@/constants'
 import Modal from './modal'
 
-function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = false, handleFavCheck }: any) {
+function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refetch, isFrontPage = false, handleFavCheck }: any) {
     const { advertisementImages } = advertisement
     const { roles, user: { email }, isAuthenticated } = useAuth()
     const handleAdsPublishStatus = (e: any, publish: boolean, id: number) => {
-        const { checked } = e.target
         changeAdsPublishStatus({ id, status: publish })
     }
     const [modalOpen, setModalOpen] = useState<boolean>(false)
     const { mutate: changeAdsPublishStatus }: any = useMutation<any>(advertisementStatusChange,
         {
-            onSuccess: () => {
-                refetch();
+            onSuccess: (res: any, variable: any) => {
+                const { id, status } = variable
+                setAdvertisements((prev: any) => (
+                    prev.map((ad: any) => {
+                        if (ad.id == id) {
+                            return {
+                                ...ad, publish: status
+                            }
+                        } else {
+                            return ad
+                        }
+                    })
+                ))
             }
         }
     );
@@ -58,10 +68,9 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                             />
                         }
                         {
-                            !isFrontPage && (checkSubset(['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], roles) ?
+                            !isFrontPage && ((checkSubset(['SUPERADMIN', 'ADMIN'], roles) || advertisement?.user?.email == email) &&
                                 <CheckBox label="" checked={advertisement.publish} onChange={(e: any) => handleAdsPublishStatus(e, !advertisement?.publish, advertisement?.id)} />
-                                :
-                                <CheckBox label="" checked={advertisement.publish} disabled />
+
                             )
                         }
                     </div>
@@ -69,7 +78,7 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
             </div>
             <div className='  border-4 border-black shadow-xl hover:shadow-2xl transition duration-500 p-4 pl-8 shadow-indigo-100 hover:shadow-indigo-300' id="advertisement-card">
                 <div className="space-y-4" key={advertisement?.id}>
-                    <div className=" cursor-pointer" onClick={(e: any) => setModalOpen(true)}>
+                    <div >
                         <div className="">
                             <div className="flex items-center justify-between">
                                 <div className=""></div>
@@ -82,30 +91,34 @@ function AdvertisementCard({ advertisement, handleClick, refetch, isFrontPage = 
                                             buttonType="none"
                                             icon={advertisement?.favourite ? <BsFillStarFill className="w-5 text-secondary" /> : <StarIcon className="w-5" />}
                                             className=''
-                                            onClick={(e: any) => handleFavouriteClick(!advertisement?.favourite, advertisement?.id)}
-                                            tooltipMsg="Edit Advertisement"
+                                            onClick={(e: any) => {
+                                                handleFavouriteClick(!advertisement?.favourite, advertisement?.id)
+                                            }}
+                                            tooltipMsg="Favourite Advertisement"
                                         />
                                     }
                                 </div>
                             </div>
-                            <h3 className='text-center bg-gray-dark text-white py-1 rounded-tr-2xl rounded-bl-2xl'>{advertisement?.name}</h3>
+                            <div className=" cursor-pointer" onClick={(e: any) => setModalOpen(true)}>
+                                <h3 className='text-center bg-gray-dark text-white py-1 rounded-tr-2xl rounded-bl-2xl'>{advertisement?.name}</h3>
 
-                            <div dangerouslySetInnerHTML={{ __html: advertisement?.data }} className='py-2'></div>
+                                <div dangerouslySetInnerHTML={{ __html: advertisement?.data }} className='py-2'></div>
 
-                            <div className="flex flex-row gap-2 items-center pb-2">
-                                {
-                                    advertisementImages?.map((image: any) => {
-                                        return <div className="rounded-md">
-                                            <Image
-                                                className='object-contain'
-                                                src={`${BACKEND_URL}/public/advertisements/${image?.documentName}`}
-                                                height={50} width={50}
-                                                alt='Ads Image' />
-                                        </div>
-                                    })
-                                }
+                                <div className="flex flex-row gap-2 items-center pb-2">
+                                    {
+                                        advertisementImages?.map((image: any) => {
+                                            return <div className="rounded-md">
+                                                <Image
+                                                    className='object-contain'
+                                                    src={`${BACKEND_URL}/public/advertisements/${image?.documentName}`}
+                                                    height={50} width={50}
+                                                    alt='Ads Image' />
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                                <span className='bg-secondary px-4 py-1 text-white rounded-xl text-sm'>Category: {advertisement?.advertisementType?.name}</span>
                             </div>
-                            <span className='bg-secondary px-4 py-1 text-white rounded-xl text-sm'>Category: {advertisement?.advertisementType?.name}</span>
                         </div>
 
                         <div className="flex md:justify-between pt-2">

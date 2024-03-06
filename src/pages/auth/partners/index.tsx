@@ -122,19 +122,19 @@ export default function Clients() {
             cell: ({ row }) => row.original.mobile,
             header: "Mobile",
         }),
+        columnHelper.accessor((row: any) => row.canPublish, {
+            id: "publish",
+            cell: (info: any) => <span>
+                <CheckBox label="" checked={info.getValue()} onChange={(e: any) => handleCanPublishChange(e, info?.row?.original?.id)} />
+            </span>,
+            header: "Verify/Unverify",
+        }),
         columnHelper.accessor((row: any) => row.active, {
             id: "active",
             cell: (info: any) => <span>
                 <CheckBox label="" checked={info.getValue()} onChange={(e: any) => handleActiveStatusChange(e, info?.row?.original?.id)} />
             </span>,
             header: "Active",
-        }),
-        columnHelper.accessor((row: any) => row.canPublish, {
-            id: "publish",
-            cell: (info: any) => <span>
-                <CheckBox label="" checked={info.getValue()} onChange={(e: any) => handleCanPublishChange(e, info?.row?.original?.id)} />
-            </span>,
-            header: "Publish",
         }),
         columnHelper.accessor((row: any) => row, {
             id: "createdAt",

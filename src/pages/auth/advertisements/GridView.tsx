@@ -41,7 +41,7 @@ export default function GridView({ }: any) {
     }, [])
 
     const loadData = async () => {
-        const { data } = await apiClient.get(`/advertisements?pageSize=10&offset=0`);
+        const { data } = await apiClient.get(`/advertisements-all?pageSize=10&offset=0`);
         setAdvertisements(data?.content)
         setPage(data?.pageable.pageNumber)
         setPagination((prev: any) => ({
@@ -50,7 +50,7 @@ export default function GridView({ }: any) {
     }
 
     const { isLoading, refetch, isFetching } = useQuery(
-        ["advertisements", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 10],
+        ["advertisements-all", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 10],
         getQueryData, {
         onSuccess: (data) => {
             setAdvertisements((prev: any) => ([
@@ -157,7 +157,7 @@ export default function GridView({ }: any) {
                 {
                     advertisements?.map((advertisement: any, index: number) => {
                         return <div className="" key={index}>
-                            <AdvertisementCard advertisement={advertisement} handleClick={handleClick} isFrontPage={false} handleFavCheck={handleFavCheck} />
+                            <AdvertisementCard advertisement={advertisement} setAdvertisements={setAdvertisements} refetch={refetch} handleClick={handleClick} isFrontPage={false} handleFavCheck={handleFavCheck} />
                         </div>
                     })
                 }

@@ -22,7 +22,7 @@ export default function Profile() {
 
         <div className='px-3'>
             <PageTitle title='Profile' />
-            <div className="flex flex-col mb-2  md:flex-row rounded">
+            <div className="flex mb-2  flex-row rounded">
                 {
                     multipleTabData.map(({ label, slug, role }) => (
                         <div key={label}

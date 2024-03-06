@@ -30,11 +30,18 @@ function Index() {
             {
                 <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} isPrimaryButtonVisible={false} isSecondaryButtonVisible={false}
                     bodyAlign='text-center'
-                    title='User/Partner Document Required!'>
-                    <p className='text-sm py-2 text-gray-dark'>
-                        Dear user/partner, please upload documents as such as Citizenship, Passport, Driving License or Company Registration.
-                        Our admin will check the documents, once satisfied, we will allow for advertiserment publish from your dashboard. Thank you.
-                    </p>
+                    title='Dear valued User / Partner'>
+                    <div className=" tracking-wide py-2 text-gray-dark text-sm">
+                        <p className='text-sm py-1 text-gray-dark'>
+                            We kindly request that you upload the following documents for verification purposes: Citizenship ID, Passport, Driving License, or Company Registration.
+                            Our administrative team will review the submitted documents, and upon verification, we will grant permission for advertisement publication through your dashboard.
+                        </p>
+                        <p className='text-sm py-1 text-gray-dark'>Please feel free to reach us if you require further information at <a className='underline text-blue-500' href="mailto:info@adzoner.com">info@adzoner.com</a>.</p>
+                        <div className="pt-4">
+                            <p>Thank you for your cooperation and understanding.</p>
+                            <p>Sincerely, Adzoner Team</p>
+                        </div>
+                    </div>
                 </Modal>
             }
         </div>

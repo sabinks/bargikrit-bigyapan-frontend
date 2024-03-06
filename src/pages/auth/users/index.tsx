@@ -143,7 +143,7 @@ export default function Clients() {
             cell: (info: any) => <span>
                 <CheckBox label="" checked={info.getValue()} onChange={(e: any) => handleCanPublishChange(e, info?.row?.original?.id)} />
             </span>,
-            header: "Publish",
+            header: "Verify/Unverify",
         }),
         columnHelper.accessor((row: any) => row.active, {
             id: "active",

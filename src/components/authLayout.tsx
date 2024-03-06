@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import { checkSubset, classNames } from "@/utils";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { AcademicCapIcon, BanknotesIcon, Bars3Icon, BookmarkIcon, BookmarkSlashIcon, BookmarkSquareIcon, BuildingLibraryIcon, ChatBubbleBottomCenterIcon, ChatBubbleLeftIcon, ChatBubbleLeftRightIcon, CircleStackIcon, Cog6ToothIcon, HomeIcon, MagnifyingGlassCircleIcon, MagnifyingGlassIcon, StarIcon, UserCircleIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { AcademicCapIcon, BanknotesIcon, Bars3Icon, BookmarkIcon, BookmarkSlashIcon, BookmarkSquareIcon, BuildingLibraryIcon, ChatBubbleBottomCenterIcon, ChatBubbleLeftIcon, ChatBubbleLeftRightIcon, CircleStackIcon, Cog6ToothIcon, GlobeAltIcon, HomeIcon, MagnifyingGlassCircleIcon, MagnifyingGlassIcon, QueueListIcon, StarIcon, UserCircleIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import io from 'socket.io-client';
 import { APP_NAME } from "@/constants";
 import { poppins } from "@/fonts";
@@ -12,6 +12,8 @@ import Image from "next/image";
 import { setCookie } from "cookies-next";
 import Head from "next/head";
 import { useAuth } from "../../hooks/auth";
+import { MdGroup, MdPerson2 } from "react-icons/md";
+import { BiHomeCircle } from "react-icons/bi";
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 
 const navigation = [
@@ -25,17 +27,11 @@ const navigation = [
     {
         name: "Advertisements",
         href: '/auth/advertisements',
-        icon: HomeIcon,
+        icon: QueueListIcon,
         roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'],
         permission: ''
     },
-    {
-        name: "Subscriptions",
-        href: '/auth/subscriptions',
-        icon: HomeIcon,
-        roles: ['SUPERADMIN', 'ADMIN', 'PARTNER'],
-        permission: ''
-    },
+
     // {
     //     name: "Favourite",
     //     href: '/auth/favourite-advertisements',
@@ -43,13 +39,7 @@ const navigation = [
     //     roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'],
     //     permission: ''
     // },
-    {
-        name: "Advertisement Type",
-        href: '/auth/advertisement-type',
-        icon: HomeIcon,
-        roles: ['SUPERADMIN', 'ADMIN'],
-        permission: ''
-    },
+
     // {
     //     name: "Advertisements",
     //     href: '/auth/member/advertisements',
@@ -65,23 +55,30 @@ const navigation = [
         permission: ''
     },
     {
-        name: "Partner",
+        name: "Business Partner",
         href: '/auth/partners',
-        icon: HomeIcon,
+        icon: MdGroup,
+        roles: ['SUPERADMIN', 'ADMIN'],
+        permission: ''
+    },
+    {
+        name: "Individual Members",
+        href: '/auth/users ',
+        icon: MdPerson2,
         roles: ['SUPERADMIN', 'ADMIN'],
         permission: ''
     },
     {
         name: "Country",
         href: '/auth/countries',
-        icon: HomeIcon,
+        icon: GlobeAltIcon,
         roles: ['SUPERADMIN', 'ADMIN'],
         permission: ''
     },
     {
-        name: "Users",
-        href: '/auth/users ',
-        icon: UserCircleIcon,
+        name: "Advertisement Type",
+        href: '/auth/advertisement-type',
+        icon: BiHomeCircle,
         roles: ['SUPERADMIN', 'ADMIN'],
         permission: ''
     },
@@ -90,6 +87,13 @@ const navigation = [
         href: '/auth/role',
         icon: BuildingLibraryIcon,
         roles: ['SUPERADMIN'],
+        permission: ''
+    },
+    {
+        name: "Subscriptions",
+        href: '/auth/subscriptions',
+        icon: HomeIcon,
+        roles: ['SUPERADMIN', 'ADMIN', 'PARTNER'],
         permission: ''
     },
 
@@ -193,7 +197,7 @@ export default function AuthLayout({ props }: any) {
                 <Transition.Root show={sidebarOpen} as={Fragment}>
                     <Dialog
                         as='div'
-                        className='hidden fixed inset-0 z-40 md:hidden'
+                        className='fixed inset-0 z-40 md:hidden'
                         onClose={setSidebarOpen}
                     >
                         <Transition.Child
@@ -270,6 +274,7 @@ export default function AuthLayout({ props }: any) {
                                                                     "group text-white flex items-center px-1 py-1.5 text-base rounded-md"
                                                                 )
                                                             }
+                                                            onClick={() => setSidebarOpen(false)}
 
                                                         >
                                                             <item.icon
@@ -281,11 +286,8 @@ export default function AuthLayout({ props }: any) {
                                                         </Link>
                                                     )
                                                     )}
-
                                             </nav>
-
-                                            <Link
-
+                                            {/* <Link
                                                 href={'/auth/setting'}
                                                 className={
                                                     classNames(
@@ -299,7 +301,7 @@ export default function AuthLayout({ props }: any) {
                                             >
                                                 <Cog6ToothIcon className="w-5" />
                                                 <span>Setting</span>
-                                            </Link>
+                                            </Link> */}
                                         </>
                                     }
                                 </div>

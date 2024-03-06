@@ -74,7 +74,7 @@ export default function Modal({
                                 <Dialog.Panel className={`w-full md:max-w-5xl transform rounded-lg bg-white p-6 ${bodyAlign} align-middle shadow-xl transition-all`}>
                                     <Dialog.Title
                                         as="h3"
-                                        className={classNames("text-lg font-semibold leading-6 text-gray-900", !title ? 'text-red-500' : '')}
+                                        className={classNames("text-2xl leading-6 text-gray-900", !title ? 'text-red-500' : '')}
                                     >
                                         {children ? title :
                                             <span>

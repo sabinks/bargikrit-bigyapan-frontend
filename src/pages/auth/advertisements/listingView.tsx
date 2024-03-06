@@ -137,7 +137,7 @@ export default function ListingView() {
         columnHelper.accessor((row: any) => row, {
             id: "createdBy",
             cell: ({ row }) =>
-                <div className="">{row.original.user?.name}({row.original.user?.email})</div>,
+                <div className=""><p>{row.original.user?.name}</p><p className="text-xs">({row.original.user?.email})</p></div>,
             header: "Created By",
             enableSorting: false,
         }),
@@ -146,14 +146,12 @@ export default function ListingView() {
             cell: ({ row }) => row.original.createdAt,
             header: "Created At",
         }),
-        columnHelper.accessor((row: any) => row.publish, {
-            id: "pubish",
+        columnHelper.accessor((row: any) => row, {
+            id: "publish",
             cell: (info: any) => <span>
                 {
-                    checkSubset(['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'], roles) ?
-                        <CheckBox label="" checked={info.getValue()} onChange={(e: any) => handleAdsPublishStatus(e, info?.row?.original?.id)} />
-                        :
-                        <CheckBox label="" checked={info.getValue()} disabled />
+                    (checkSubset(['SUPERADMIN', 'ADMIN'], roles) || info?.row?.original?.user?.email == email) &&
+                    <CheckBox label="" checked={info.getValue().publish} onChange={(e: any) => handleAdsPublishStatus(e, info?.row?.original?.id)} />
                 }
             </span>,
             header: "Publish",
@@ -167,7 +165,7 @@ export default function ListingView() {
                 return (
                     <div className='flex items-center space-x-2'>
                         {
-                            (checkSubset(["SUPERADMIN", "ADMIN"], roles) || (user?.email == email && !publish)) &&
+                            (checkSubset(["SUPERADMIN", "ADMIN"], roles) || (user?.email == email)) &&
                             <Button
                                 label=''
                                 buttonType="primary"

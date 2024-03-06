@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { BACKEND_URL } from '@/constants';
 import { ImageZoom } from '../dashboard/dashboard';
 import { TrashIcon } from '@heroicons/react/24/outline';
+import { useApplication } from '../../../../hooks/application';
 
 export default function AdvertisementsForm({ state, setState, error, edit }: any) {
     const { roles, user: { email, name, contactNumber }, getUserDetails } = useAuth()
@@ -203,14 +204,14 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                     <p className='text-red-400 text-sm'>{error?.provinceId}</p>
                 </div>
 
-                <div className="">
+                {/* <div className="">
                     <Dropdown label='District' data={districts} selectedValue={state?.district} onChange={(district: any) => {
                         setState((prev: any) => ({
                             ...prev, district, districtId: district?.id
                         }))
                     }} />
                     <p className='text-red-400 text-sm'>{error?.districtId}</p>
-                </div>
+                </div> */}
             </div>
             <div className="border rounded-md p-2">
 
@@ -237,6 +238,7 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                         }}
                     />
                     <p className='text-red-400 text-sm'>{error?.companyName}</p>
+                    <p className='pt-1 text-xs font-medium text-red-500'>Note: Only 3 images allowed with 2MB max file size for each image.</p>
                 </div>
             </div>
             <div className="flex flex-row gap-2 items-center pb-2 justify-center">
