@@ -17,6 +17,7 @@ jobs:
         
         script: |
           service azapi stop
+          pm2 stop adzoner_nextjs
           cd /var/www/adzoner/live/frontend
           git checkout main
           git reset --hard origin/main
@@ -28,6 +29,6 @@ jobs:
           pm2 stop adzoner_nextjs
           npm run build
           echo 'Building App'
-          pm2 restart adzoner_nextjs
+          pm2 start adzoner_nextjs
           service azapi start
           echo 'Build successful'

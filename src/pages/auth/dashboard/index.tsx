@@ -28,6 +28,7 @@ function Index() {
                 checkSubset(['PARTNER', 'USER'], roles) && <Dashboard />
             }
             {
+                checkSubset(['PARTNER', 'USER'], roles) &&
                 <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} isPrimaryButtonVisible={false} isSecondaryButtonVisible={false}
                     bodyAlign='text-center'
                     title='Dear valued User / Partner'>
