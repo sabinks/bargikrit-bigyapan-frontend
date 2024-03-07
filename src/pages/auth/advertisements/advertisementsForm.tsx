@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getCountries, getProvinces, getProvincesByCountryId } from '@/api'
 import { getAdvertisementTypes } from '@/api/advertisement';
 import Dropdown from "@/components/dropDown";
-import { Button, Input } from '../../../components';
+import { Button, CheckBox, Input } from '../../../components';
 import { useAuth } from '../../../../hooks/auth';
 import Editor from '@/components/editor';
 import Compressor from 'compressorjs';
@@ -153,6 +153,13 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
             ...prev, advertisementImages: newDocuments, imageRemoveIds: [...prev.imageRemoveIds, id]
         }))
     }
+    const handleInputChange = (e: any) => {
+        const { name, value, checked } = e.target
+
+        setState((prev: any) => ({
+            ...prev, [name]: checked
+        }))
+    }
 
     return (
         <div className='space-y-4 mb-4'>
@@ -273,6 +280,7 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                         onChange={(e: any) => setState({ ...state, email: e.target.value })}
                     />
                     <p className='text-red-400 text-sm'>{error?.email}</p>
+                    <CheckBox name="showEmail" checked={state?.showEmail} label="showEmail" labelName='Show Email Address' onChange={(e: any) => handleInputChange(e)} />
                 </div>
                 <div className="">
                     <Input
@@ -284,6 +292,7 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                         onChange={(e: any) => setState({ ...state, website: e.target.value })}
                     />
                     <p className='text-red-400 text-sm'>{error?.website}</p>
+                    <CheckBox name="showWebsite" checked={state?.showWebsite} label="showWebsite" labelName='Show Website' onChange={(e: any) => handleInputChange(e)} />
                 </div>
                 <div className="">
                     <Input
@@ -295,6 +304,7 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                         onChange={(e: any) => setState({ ...state, contactNumber: e.target.value })}
                     />
                     <p className='text-red-400 text-sm'>{error?.contactNumber}</p>
+                    <CheckBox name="showContactNumber" checked={state?.showContactNumber} label="showContactNumber" labelName='Show Contact Number' onChange={(e: any) => handleInputChange(e)} />
                 </div>
             </div>
         </div>

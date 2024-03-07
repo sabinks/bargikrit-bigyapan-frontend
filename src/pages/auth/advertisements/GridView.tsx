@@ -16,6 +16,9 @@ const initialState = {
     content: "",
     adImages: [],
     imageRemoveIds: [],
+    showEmail: false,
+    showContactNumber: false,
+    showWebsite: false,
 };
 export default function GridView({ }: any) {
     const [query, setQuery] = useState<string>("");
@@ -28,7 +31,7 @@ export default function GridView({ }: any) {
         totalPages: 0
     })
     const [tableData, setTableData] = useState<any>([]);
-    const [state, setState] = useState<any>([])
+    const [state, setState] = useState<any>(initialState)
     const [advertisements, setAdvertisements] = useState<any>([])
     const { roles, user: { email, canPublish } } = useAuth()
 

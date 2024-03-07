@@ -8,10 +8,6 @@ import { useApplication } from "../../../../hooks/application";
 import { useAuth } from "../../../../hooks/auth";
 import Head from "next/head";
 
-const initialState = {
-    name: "",
-    content: "",
-};
 export default function Advertisements() {
     const { roles, user: { email, canPublish, } } = useAuth()
     const { appState, setAppState } = useApplication()

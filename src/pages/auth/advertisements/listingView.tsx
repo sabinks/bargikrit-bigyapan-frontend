@@ -18,6 +18,9 @@ const initialState = {
     content: "",
     adImages: [],
     imageRemoveIds: [],
+    showEmail: false,
+    showContactNumber: false,
+    showWebsite: false,
 };
 export default function ListingView() {
     const { roles, user: { email, canPublish } } = useAuth()
@@ -151,7 +154,7 @@ export default function ListingView() {
             cell: (info: any) => <span>
                 {
                     (checkSubset(['SUPERADMIN', 'ADMIN'], roles) || info?.row?.original?.user?.email == email) &&
-                    <CheckBox label="" checked={info.getValue().publish} onChange={(e: any) => handleAdsPublishStatus(e, info?.row?.original?.id)} />
+                    <CheckBox name="pubish" label="" checked={info.getValue().publish} onChange={(e: any) => handleAdsPublishStatus(e, info?.row?.original?.id)} />
                 }
             </span>,
             header: "Publish",

@@ -45,6 +45,7 @@ export default function Clients() {
         onSuccess: (data) => {
             setDocumentList(data)
             setMemberId(0)
+            setVisibleModal(true)
         },
         enabled: memberId ? true : false
     })
@@ -120,7 +121,6 @@ export default function Clients() {
     // }
     const handleClick = (id: number) => {
         setMemberId(id)
-        setVisibleModal(true)
     }
     const columns = [
         columnHelper.accessor((row: any) => row, {
@@ -141,14 +141,14 @@ export default function Clients() {
         columnHelper.accessor((row: any) => row.canPublish, {
             id: "publish",
             cell: (info: any) => <span>
-                <CheckBox label="" checked={info.getValue()} onChange={(e: any) => handleCanPublishChange(e, info?.row?.original?.id)} />
+                <CheckBox name="publish" label="" checked={info.getValue()} onChange={(e: any) => handleCanPublishChange(e, info?.row?.original?.id)} />
             </span>,
             header: "Verify/Unverify",
         }),
         columnHelper.accessor((row: any) => row.active, {
             id: "active",
             cell: (info: any) => <span>
-                <CheckBox label="" checked={info.getValue()} onChange={(e: any) => handleActiveStatusChange(e, info?.row?.original?.id)} />
+                <CheckBox name="active" label="" checked={info.getValue()} onChange={(e: any) => handleActiveStatusChange(e, info?.row?.original?.id)} />
             </span>,
             header: "Active",
         }),
@@ -244,7 +244,7 @@ export default function Clients() {
     return (
         <>
             <div className='flex flex-row justify-between items-center'>
-                <PageTitle title='Users' />
+                <PageTitle title='Individual Members' />
                 {/* <Button
                     label='Add Advertisement'
                     buttonType="success"

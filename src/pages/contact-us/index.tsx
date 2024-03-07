@@ -1,8 +1,6 @@
 "use client";
 import { useState, FormEvent, useRef, Fragment } from "react";
 import { Inter } from 'next/font/google'
-import { toast } from "react-toastify";
-import Head from "next/head";
 import { Dialog, Transition } from '@headlessui/react'
 import Image from "next/image";
 import { sendContact } from "../../api";

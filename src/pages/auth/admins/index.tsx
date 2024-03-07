@@ -98,7 +98,7 @@ export default function Admins() {
         }),
         columnHelper.accessor((row: any) => row.is_active, {
             id: "is_active",
-            cell: (info: any) => <span ><CheckBox label="" checked={info.getValue()} onChange={(e: any) => handleChange(e, info?.row?.original?.id)} /> </span>,
+            cell: (info: any) => <span ><CheckBox name="is_active" label="" checked={info.getValue()} onChange={(e: any) => handleChange(e, info?.row?.original?.id)} /> </span>,
             header: "Status",
         }),
         columnHelper.accessor((row: any) => row.created_at, {

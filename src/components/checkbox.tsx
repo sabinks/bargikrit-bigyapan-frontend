@@ -2,17 +2,23 @@ import { camalize, classNames } from "@/utils";
 
 type CheckboxProps = {
     label: string;
+    labelName?: string;
+    name: string;
     className?: string;
     checked?: boolean;
     labelClassName?: string;
     [key: string]: any;
+    placeholder?: string;
 };
 
 export default function CheckBox({
     label,
+    name,
+    labelName = "",
     className = "",
     labelClassName = "",
     checked = false,
+    placeholder = "",
     ...props
 }: CheckboxProps) {
     const labelId = label && camalize(label);
@@ -20,13 +26,14 @@ export default function CheckBox({
         <div className='flex items-center w-full'>
             <input
                 id={labelId}
-                name={labelId}
+                name={name}
                 type='checkbox'
                 checked={checked}
                 className={classNames(
                     "h-4 w-4 text-primary1 focus:ring-transparent border-primary rounded cursor-pointer",
                     className,
                 )}
+                placeholder={placeholder}
                 {...props}
             />
             <label
@@ -36,7 +43,7 @@ export default function CheckBox({
                     labelClassName,
                 )}
             >
-                {label}
+                {labelName ? labelName : label}
             </label>
         </div>
     );

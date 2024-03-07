@@ -175,10 +175,10 @@ apiClient.interceptors.response.use(
     function (response) {
         const { status, data } = response;
         if (status == 201 || status == 200) {
-            toast.success(data, { autoClose: 1500 });
+            toast.success(data, { autoClose: 2500 });
         }
         if (status == 205) {
-            toast.success(data, { autoClose: 1500 });
+            toast.success(data, { autoClose: 2500 });
         }
         return response;
     },

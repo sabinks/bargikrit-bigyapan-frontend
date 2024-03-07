@@ -69,7 +69,7 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                         }
                         {
                             !isFrontPage && ((checkSubset(['SUPERADMIN', 'ADMIN'], roles) || advertisement?.user?.email == email) &&
-                                <CheckBox label="" checked={advertisement.publish} onChange={(e: any) => handleAdsPublishStatus(e, !advertisement?.publish, advertisement?.id)} />
+                                <CheckBox name="publish" label="" checked={advertisement.publish} onChange={(e: any) => handleAdsPublishStatus(e, !advertisement?.publish, advertisement?.id)} />
 
                             )
                         }
@@ -128,20 +128,28 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                     </div>
 
                     <div className="flex flex-row justify-between space-y-1 text-xs">
-                        <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-5 h-5' />
-                            {/* {advertisement?.email} */}
-                        </a>
                         {
-                            advertisement?.website && <a href={`${advertisement?.website}`} target='_blank' className='flex items-center gap-x-2'><BiGlobe className='w-5 h-5' />
-                                {/* {advertisement.website} */}
-                            </a>
+                            advertisement?.showEmail ?
+                                <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-5 h-5' /></a>
+                                : <a className='flex items-center gap-x-2'><MdEmail className='w-5 h-5 text-gray-200' /></a>
                         }
-                        <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-5 h-5' />
-                            {/* {advertisement?.contactNumber} */}
-                        </a>
-                        <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-5 h-5' />
-                            {/* {advertisement?.contactNumber} */}
-                        </a>
+                        {/* {advertisement?.email} */}
+
+                        {
+                            advertisement?.showWebsite ?
+                                <a href={`${advertisement?.website}`} target='_blank' className='flex items-center gap-x-2'><BiGlobe className='w-5 h-5' /></a>
+                                : <a className='flex items-center gap-x-2'><BiGlobe className='w-5 h-5 text-gray-200' /></a>
+                        }
+                        {
+                            advertisement?.showContactNumber ?
+                                <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-5 h-5' /></a>
+                                : <a className='flex items-center gap-x-2'><FaSms className='w-5 h-5 text-gray-200' /></a>
+                        }
+                        {
+                            advertisement?.showContactNumber ?
+                                <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-5 h-5' /></a>
+                                : <a className='flex items-center gap-x-2'><PhoneIcon className='w-5 h-5 text-gray-200' /></a>
+                        }
                     </div>
                 </div>
             </div >
