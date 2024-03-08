@@ -224,7 +224,9 @@ export const sendContact = async (data: {
     return response;
 };
 
-
+export const siteVisited = async (data: any) => {
+    await apiClient.post(`/next/site-visit-count`, data);
+};
 
 apiClient.interceptors.request.use(async (config: any) => {
     if (config.method == 'delete') {

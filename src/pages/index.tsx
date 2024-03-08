@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { apiClient, listProvincesByCountryId } from "../api";
+import { apiClient, listProvincesByCountryId, siteVisited } from "../api";
 import { useQuery } from "@tanstack/react-query";
 import { SortingState } from "@tanstack/react-table";
 import Loading from "@/components/loading";
@@ -12,6 +12,7 @@ import Dropdown from "@/components/dropDown";
 import { Input } from "@/components";
 import { setCookie } from "cookies-next";
 import { useAuth } from "../../hooks/auth";
+import SiteVisit from "@/components/siteVisit";
 
 export default function Home({ }: any) {
     const { setAccessToken } = useAuth()
@@ -171,6 +172,7 @@ export default function Home({ }: any) {
                     isFetching && <Loading />
                 }
             </main>
+            <SiteVisit />
         </div>
     );
 }

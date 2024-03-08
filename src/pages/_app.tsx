@@ -13,6 +13,7 @@ import { ApplicationProvider } from "../../context/application";
 import AuthLayout from "@/components/authLayout";
 import Layout from "@/components/layout";
 import { SubscriptionProvider } from "../../context/subscription";
+import SiteVisit from "@/components/siteVisit";
 
 const roboto = Roboto({
     subsets: ["latin"],
@@ -56,6 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 {/* </GoogleOAuthProvider>; */}
 
                 <ToastContainer />
+                {/* <SiteVisit /> */}
             </QueryClientProvider>
         </div>
     );
