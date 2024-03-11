@@ -190,7 +190,7 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                             <h3 className='text-center bg-gray-dark text-white py-1 rounded-tr-2xl rounded-bl-2xl'>{advertisement?.name}</h3>
                             <div dangerouslySetInnerHTML={{ __html: advertisement?.data }} className='py-2'></div>
                             <h3 className='text-sm'>Categories</h3>
-                            <span className='grid grid-cols-1 gap-y-0.5 text-black text-xs font-semibold'>{categories?.map(({ name }: any) => <span className="bg-secondary px-2 py-0.5 rounded-md">{name}</span>)}</span>
+                            <div className='flex flex-wrap gap-2 text-black text-xs font-semibold'>{categories?.map(({ name }: any) => <span className="bg-secondary px-2 py-0.5 rounded-md">{name}</span>)}</div>
                         </div>
 
                         <div className="flex md:justify-between pt-2">
@@ -200,12 +200,10 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                         <div className="flex flex-col justify-between space-y-1 text-xs">
                             <a href={`mailto:${advertisement?.email}`} className='flex items-center gap-x-2'><MdEmail className='w-5 h-5' /> {advertisement?.email}</a>
                             {
-                                advertisement?.website && <a href={`${advertisement?.website}`} target='_blank' className='flex items-center gap-x-2'><BiGlobe className='w-5 h-5' /> {advertisement.website}</a>
+                                advertisement?.website != "null" && <a href={`${advertisement?.website}`} target='_blank' className='flex items-center gap-x-2'><BiGlobe className='w-5 h-5' /> {advertisement.website}</a>
                             }
-                            <div className="flex flex-row justify-between gap-x-2">
-                                <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-5 h-5' /> {advertisement?.contactNumber}</a>
-                                <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-5 h-5' /> {advertisement?.contactNumber}</a>
-                            </div>
+                            <a href={`sms:/${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><FaSms className='w-5 h-5' /> {advertisement?.contactNumber}</a>
+                            <a href={`tel:${advertisement?.contactNumber}`} className='flex items-center gap-x-2'><PhoneIcon className='w-5 h-5' /> {advertisement?.contactNumber}</a>
                         </div>
                     </div>
                 </div>

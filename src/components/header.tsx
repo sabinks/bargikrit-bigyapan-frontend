@@ -17,7 +17,7 @@ import { useAuth } from '../../hooks/auth';
 import { logout } from '../../api/auth';
 import { useApplication } from '../../hooks/application';
 function Header() {
-    const { isAuthenticated, signout } = useAuth()
+    const { isAuthenticated, signout, setIsAuthenticated, setAccessToken } = useAuth()
     const { appState: { country } } = useApplication()
     const router = useRouter()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -39,9 +39,11 @@ function Header() {
         }
     );
     const handleLogout = () => {
+        setAccessToken('')
+        setIsAuthenticated(false)
         setCookie('role', '')
         setCookie('token', '')
-        router.reload()
+        // router.reload()
     }
     return (
         <div>

@@ -48,7 +48,8 @@ export default function ListingView() {
                 country, countryId: country?.id,
                 province, provinceId: province?.id,
                 district, districtId: district?.id,
-                selectedCategories: categories?.map(({ id, name }: any) => ({ id, value: id, label: name }))
+                selectedCategories: categories?.map(({ id, name }: any) => ({ id, value: id, label: name })),
+                selectedCategoryIds: categories.map(({ id }: any) => id)
             })
             setAdsId(0)
         },

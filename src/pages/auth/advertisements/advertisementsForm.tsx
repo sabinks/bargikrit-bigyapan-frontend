@@ -30,10 +30,11 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
         getCategories, {
         onSuccess: (data) => {
             setCategories(data?.map(({ id, name }: any) => ({ id, value: id, label: name })))
-        }
+        },
+        // enabled: categories.length < 1 ? true : false
     })
     useEffect(() => {
-        getUserDetails()
+        // getUserDetails()
         if (!edit) {
             setState((prev: any) => ({
                 ...prev, companyName: name, email, contactNumber

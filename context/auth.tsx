@@ -28,6 +28,7 @@ interface AuthContextType {
     show: Function;
     getUserDetails: Function;
     setAccessToken: Function;
+    setIsAuthenticated: Function;
 }
 
 export const AuthContext = React.createContext<AuthContextType>(null!);
@@ -128,7 +129,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         user,
         can,
         show,
-        getUserDetails
+        getUserDetails,
+        setIsAuthenticated
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
