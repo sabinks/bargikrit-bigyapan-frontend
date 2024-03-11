@@ -1,5 +1,4 @@
 import { getCountries } from "@/api";
-import { getNextAdvertisementTypes } from "@/api/frontend";
 import React, { useEffect, useState } from "react";
 
 interface StateType {
@@ -13,6 +12,7 @@ interface StateType {
     advertisementTypes: any;
     selectedAdvertisementType: any;
     search: string;
+    catIds: any;
 }
 
 interface ApplicationType {
@@ -34,7 +34,8 @@ export function ApplicationProvider({ children }: { children: React.ReactNode })
         selectedProvince: {},
         advertisementTypes: [],
         selectedAdvertisementType: null,
-        search: ""
+        search: "",
+        catIds: [0]
     });
     useEffect(() => {
         const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -58,15 +59,15 @@ export function ApplicationProvider({ children }: { children: React.ReactNode })
             ...prev, countries: data
         }))
     }
-    useEffect(() => {
-        loadAdsType()
-    }, [])
-    const loadAdsType = async () => {
-        let data = await getNextAdvertisementTypes()
-        setAppState((prev: any) => ({
-            ...prev, advertisementTypes: data
-        }))
-    }
+    // useEffect(() => {
+    //     loadAdsType()
+    // }, [])
+    // const loadAdsType = async () => {
+    //     let data = await getNextAdvertisementTypes()
+    //     setAppState((prev: any) => ({
+    //         ...prev, advertisementTypes: data
+    //     }))
+    // }
     const value = {
         appState, setAppState
     };

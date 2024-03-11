@@ -113,9 +113,7 @@ export default function NavBar() {
                                         <UserPlusIcon className="w-5" />
                                         <span>Sign Up123</span>
                                     </div>
-
                                 </Link>
-
                             </div>
                         )}
                     </>

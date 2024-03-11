@@ -12,16 +12,9 @@ import Search from "../../../components/search";
 import AdvertisementsForm from "./advertisementsForm";
 import SidePanel from "../../../components/sidePanel";
 import Button from "../../../components/Button";
+import { initialState } from "./GridView";
 
-const initialState = {
-    name: "",
-    content: "",
-    adImages: [],
-    imageRemoveIds: [],
-    showEmail: false,
-    showContactNumber: false,
-    showWebsite: false,
-};
+
 export default function ListingView() {
     const { roles, user: { email, canPublish } } = useAuth()
     const [query, setQuery] = useState<string>("");
@@ -48,13 +41,14 @@ export default function ListingView() {
 
     useQuery(['advertisements', adsId], showAdvertisement, {
         onSuccess: (res) => {
-            const { name, data, id, advertisementType, country, province, district, companyName, email, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber } = res.data
+            const { name, data, id, advertisementType, categories, country, province, district, companyName, email, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber } = res.data
             setState({
                 name: name, id: id, data: data, companyName, email, contactNumber, website, advertisementImages, imageRemoveIds: [], showWebsite, showEmail, showContactNumber,
                 advertisementType, advertisementTypeId: advertisementType?.id,
                 country, countryId: country?.id,
                 province, provinceId: province?.id,
                 district, districtId: district?.id,
+                selectedCategories: categories?.map(({ id, name }: any) => ({ id, value: id, label: name }))
             })
             setAdsId(0)
         },

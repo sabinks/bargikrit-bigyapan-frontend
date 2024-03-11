@@ -17,7 +17,7 @@ import { BACKEND_URL } from '@/constants'
 import Modal from './modal'
 
 function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refetch, isFrontPage = false, handleFavCheck }: any) {
-    const { advertisementImages } = advertisement
+    const { advertisementImages, categories } = advertisement
     const { roles, user: { email }, isAuthenticated } = useAuth()
     const handleAdsPublishStatus = (e: any, publish: boolean, id: number) => {
         changeAdsPublishStatus({ id, status: publish })
@@ -70,7 +70,6 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                         {
                             !isFrontPage && ((checkSubset(['SUPERADMIN', 'ADMIN'], roles) || advertisement?.user?.email == email) &&
                                 <CheckBox name="publish" label="" checked={advertisement.publish} onChange={(e: any) => handleAdsPublishStatus(e, !advertisement?.publish, advertisement?.id)} />
-
                             )
                         }
                     </div>
@@ -117,7 +116,8 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                                         })
                                     }
                                 </div>
-                                <span className='bg-secondary px-4 py-1 text-white rounded-xl text-sm'>Category: {advertisement?.advertisementType?.name}</span>
+                                <h3 className='text-sm'>Categories</h3>
+                                <div className='flex flex-wrap gap-2 text-black text-xs font-semibold'>{categories?.map(({ name }: any) => <span className="bg-secondary px-2 py-0.5 rounded-md">{name}</span>)}</div>
                             </div>
                         </div>
 
@@ -189,7 +189,8 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                             </div>
                             <h3 className='text-center bg-gray-dark text-white py-1 rounded-tr-2xl rounded-bl-2xl'>{advertisement?.name}</h3>
                             <div dangerouslySetInnerHTML={{ __html: advertisement?.data }} className='py-2'></div>
-                            <span className='bg-secondary px-4 py-1 text-white rounded-xl text-sm'>Category: {advertisement?.advertisementType?.name}</span>
+                            <h3 className='text-sm'>Categories</h3>
+                            <span className='grid grid-cols-1 gap-y-0.5 text-black text-xs font-semibold'>{categories?.map(({ name }: any) => <span className="bg-secondary px-2 py-0.5 rounded-md">{name}</span>)}</span>
                         </div>
 
                         <div className="flex md:justify-between pt-2">

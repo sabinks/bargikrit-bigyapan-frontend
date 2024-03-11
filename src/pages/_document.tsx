@@ -8,7 +8,7 @@ export default function Document() {
         <Html lang="en">
             <Head >
                 {/* <title>{APP_NAME}</title> */}
-                <meta property="og:description" content={`${APP_NAME}, advertisement house, bargikrit bigyapan, advertisement, promote business, create job`} key="description" />
+                <meta property="og:description" content={`${APP_NAME}, advertisement, advertise, ads, ad, ad zoner, ad zone, ads zone, ads zoner, job hunt, post advertisement, post ads, advertisement house, bargikrit bigyapan, advertisement, promote business, create job`} key="description" />
                 <link rel="icon" href="/assets/az_logo_500.png" type="image/png" sizes="32x32" />
             </Head>
             <body>

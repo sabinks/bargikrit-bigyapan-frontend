@@ -5,7 +5,7 @@ import { SortingState } from "@tanstack/react-table";
 import Loading from "@/components/loading";
 import { useApplication } from "../../hooks/application";
 import Button from "@/components/Button";
-import { getNextQueryData } from "@/api/frontend";
+import { getNextCategoryList, getNextQueryData } from "@/api/frontend";
 import { useDebounce } from "use-debounce";
 import AdvertisementCard from "@/components/AdvertisementCard";
 import Dropdown from "@/components/dropDown";
@@ -13,10 +13,13 @@ import { Input } from "@/components";
 import { setCookie } from "cookies-next";
 import { useAuth } from "../../hooks/auth";
 import SiteVisit from "@/components/siteVisit";
+import { getCategories } from "@/api/advertisement/category";
+import ReactSelect from "react-select";
 
 export default function Home({ }: any) {
     const { setAccessToken } = useAuth()
     const { appState, setAppState } = useApplication()
+    const [categories, setCategories] = useState<any>([])
     const [query, setQuery] = useState<string>("");
     const [sorting, setSorting] = useState<SortingState>([{
         id: 'createdAt',
@@ -33,12 +36,18 @@ export default function Home({ }: any) {
         }
     }, [])
 
-
     const [text] = useDebounce(appState?.search, 300);
     const [advertisements, setAdvertisements] = useState<any>([])
+    useQuery(
+        ["categories"],
+        getNextCategoryList, {
+        onSuccess: (data) => {
+            setCategories(data?.map(({ id, name }: any) => ({ id, value: id, label: name })))
+        }
+    })
     const { isLoading, refetch, isFetching } = useQuery(
         ["next/advertisements", query, 'createdAt', sorting[0].desc ? 'DESC' : 'ASC', page, 5,
-            appState?.selectedAdvertisementType?.name,
+            appState?.catIds,
             appState?.selectedCountry?.name,
             appState?.selectedProvince?.name,
             appState?.search],
@@ -53,17 +62,19 @@ export default function Home({ }: any) {
     })
 
     useEffect(() => {
-        if (appState?.selectedProvince?.hasOwnProperty('name') || appState?.selectedCountry?.hasOwnProperty('name') || appState?.selectedAdvertisementType || text) {
+        if (appState?.selectedProvince?.hasOwnProperty('name') ||
+            appState?.selectedCountry?.hasOwnProperty('name') ||
+            appState?.selectedAdvertisementType ||
+            text) {
             loadAdvertisements()
         }
-    }, [appState?.selectedProvince, appState?.selectedCountry, appState?.selectedAdvertisementType, text])
+    }, [appState?.selectedProvince, appState?.selectedCountry, appState?.catIds, text])
 
     const loadAdvertisements = async () => {
-        const { selectedCountry, selectedProvince, selectedAdvertisementType } = appState
-        const { data } = await apiClient.get(`/next/advertisements?advertisementType=${selectedAdvertisementType?.name}&country=${selectedCountry?.name}&province=${selectedProvince?.name}&search=${text}&pageSize=10&offset=0`);
+        const { selectedCountry, selectedProvince, catIds } = appState
+        const { data } = await apiClient.get(`/next/advertisements?categoryIds=${catIds.toString()}&country=${selectedCountry?.name}&province=${selectedProvince?.name}&search=${text}&pageSize=10&offset=0`);
         setAdvertisements((prev: any) => ([...data?.content]))
-
-        setPage(data?.pageable.pageNumber)
+        setPage(data?.pageable?.pageNumber)
         setPagination((prev: any) => ({
             ...prev, totalPages: data.totalPages
         }))
@@ -109,7 +120,11 @@ export default function Home({ }: any) {
         })
         setAdvertisements(advertisementsTemp)
     }
-
+    const handleCategoryChange = (selected: any) => {
+        setAppState((prev: any) => ({
+            ...prev, catIds: selected.map(({ id }: any) => id), selectedCategories: selected
+        }))
+    }
     return (
         <div className="container mx-auto mb-8">
             <div className="mb-4">
@@ -134,11 +149,36 @@ export default function Home({ }: any) {
 
                     <div className="w-full flex flex-col md:flex-row md:space-x-2">
                         <div className="md:w-full">
-                            <Dropdown label="Select Ads Type" selectedValue={appState?.selectedAdvertisementType} data={appState?.advertisementTypes} onChange={(advertisement: any) => {
-                                setAppState((prev: any) => ({
-                                    ...prev, selectedAdvertisementType: advertisement
-                                }))
-                            }} />
+                            <label htmlFor="" className="text-gray-700 text-sm font-semibold">Select category</label>
+                            <ReactSelect
+                                name={'category'}
+                                options={categories}
+                                isMulti
+                                isClearable={false}
+                                onChange={(value: any, clicked) => handleCategoryChange(value)
+                                }
+                                isSearchable={true}
+                                placeholder="Select Client"
+                                className={` text-sm capitalize`}
+
+                                styles={{
+                                    control: (baseStyles, state) => ({
+                                        ...baseStyles, borderColor: "#5F8670", borderRadius: "8px", color: "#FF9800",
+
+
+                                    }),
+                                    option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+                                        ...styles, backgroundColor: "white", ":hover": { ...styles[':hover'], backgroundColor: "#FF9800", color: "white" }
+                                    }),
+                                    // multiValueLabel: (styles, { data }) => {
+                                    //     return {
+                                    //         ...styles,
+                                    //         backgroundColor: "red"
+                                    //     };
+                                    // },
+                                }}
+
+                            />
                         </div>
                         <div className="w-full flex items-end space-x-2">
                             <Dropdown label="Country" selectedValue={appState?.selectedCountry} data={appState?.countries} onChange={(country: any) => {

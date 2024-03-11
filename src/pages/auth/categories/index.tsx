@@ -3,16 +3,14 @@ import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import React from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { deleteById, getQueryData, showQueryData, toggleIsActive } from "../../../api";
-import { addAdmin } from "../../../../api/admin";
-import { Button, CheckBox, NewTable, PageTitle, SidePanel } from "../../../components";
-import Link from "next/link";
-import { PencilSquareIcon, TrashIcon, UserIcon } from "@heroicons/react/24/outline";
+import { Button, NewTable, PageTitle, SidePanel } from "../../../components";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Search from "../../../components/search";
 import { useAuth } from "../../../../hooks/auth";
-import AdvertisementTypeForm from "./advertisementTypeForm";
-import { addAdvertisementType } from "../../../../api/advertisement/advertisement-type";
+import CategoryForm from "./categoryForm";
+import { addCategory } from "@/api/advertisement/category";
 
-export default function AdvertisementType() {
+export default function Category() {
     const { isAuthenticated } = useAuth()
 
     const [query, setQuery] = useState<string>("");
@@ -21,7 +19,7 @@ export default function AdvertisementType() {
         desc: true
     }])
     const [page, setPage] = useState<number>(1);
-    const [advertisementTypeId, setAdvertisementTypeId] = useState<number>(0)
+    const [categoryId, setCategoryId] = useState<number>(0)
     const columnHelper = createColumnHelper();
     const [isVisible, toggleIsVisible] = React.useState(false);
     const [tableData, setTableData] = React.useState<any>([]);
@@ -30,25 +28,23 @@ export default function AdvertisementType() {
     const [edit, setEdit] = useState(false)
 
     const { isFetching, isLoading, data, refetch } = useQuery(
-        ["advertisement-type", query, sorting[0].id, sorting[0].desc ? 'desc' : 'asc', page, 10],
+        ["categories", query, sorting[0].id, sorting[0].desc ? 'desc' : 'asc', page, 10],
         getQueryData, {
         onSuccess: (data) => {
-            console.log(data);
-
             setTableData(data);
         },
         enabled: isAuthenticated
     })
 
-    useQuery(['advertisement-type', advertisementTypeId], showQueryData, {
+    useQuery(['categories', categoryId], showQueryData, {
         onSuccess: (res: any) => {
             const { name } = res.data
             setState({ name })
-            setAdvertisementTypeId(0)
+            setCategoryId(0)
         },
-        enabled: advertisementTypeId ? true : false
+        enabled: categoryId ? true : false
     })
-    const { isLoading: creatingAdvertisementType, mutate } = useMutation<any, Error>(addAdvertisementType,
+    const { isLoading: creatingCategory, mutate } = useMutation<any, Error>(addCategory,
         {
             onSuccess: () => {
                 refetch();
@@ -67,7 +63,7 @@ export default function AdvertisementType() {
     );
 
 
-    const { mutate: deletePackage } = useMutation(deleteById, {
+    const { mutate: deleteCategory } = useMutation(deleteById, {
         onSuccess: () => refetch()
     })
     const { mutate: toggleActive }: any = useMutation<any>(toggleIsActive,
@@ -80,7 +76,7 @@ export default function AdvertisementType() {
 
     const handleClick = (id: number) => {
         setEdit(true)
-        setAdvertisementTypeId(id)
+        setCategoryId(id)
         toggleIsVisible(!isVisible)
     }
 
@@ -111,7 +107,7 @@ export default function AdvertisementType() {
                             label=''
                             buttonType="danger"
                             icon={<TrashIcon className="w-5" />}
-                            onClick={() => deletePackage({ name: "advertisement-type", id })}
+                            onClick={() => deleteCategory({ name: "categories", id })}
                         />
                     </div>
                 );
@@ -134,9 +130,9 @@ export default function AdvertisementType() {
     return (
         <div className="">
             <div className='flex flex-row justify-between items-center'>
-                <PageTitle title='Advertisement Type' />
+                <PageTitle title='Category' />
                 <Button
-                    label='Add Advertisement Type'
+                    label='Add Category'
                     buttonType="primary"
                     onClick={() => {
                         toggleIsVisible(true);
@@ -147,7 +143,7 @@ export default function AdvertisementType() {
             </div>
 
             <div className='shadow overflow-x-auto border-b border-gray-200 sm:rounded-lg'>
-                <Search query={query} placeholder="Search advertisement type" handleSearch={handleSearch} />
+                <Search query={query} placeholder="Search category" handleSearch={handleSearch} />
 
                 <NewTable
                     data={tableData}
@@ -167,15 +163,15 @@ export default function AdvertisementType() {
                     toggleIsVisible(!isVisible);
                     setFormErrors({});
                 }}
-                title={edit ? 'Edit Advertisement Type' : 'Add Advertisement Type'}
+                title={edit ? 'Edit Category' : 'Add Category'}
                 primaryButtonAction={() => {
                     setFormErrors({});
-                    mutate({ ...state, route: "advertisement-type" })
+                    mutate({ ...state, route: "categories" })
                 }}
-                primaryButtonLoading={creatingAdvertisementType}
+                primaryButtonLoading={creatingCategory}
             >
                 <React.Suspense fallback='loading'>
-                    <AdvertisementTypeForm state={state} setState={setState} error={formerrors} edit={edit} />
+                    <CategoryForm state={state} setState={setState} error={formerrors} edit={edit} />
                 </React.Suspense>
             </SidePanel>
         </div>

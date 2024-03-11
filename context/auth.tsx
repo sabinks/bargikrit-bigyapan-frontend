@@ -8,6 +8,8 @@ interface UserType {
     email: string;
     canPublish: false;
     contactNumber: string;
+    remainingAds: number;
+    currentPublishedAds: number;
 }
 
 interface AuthContextType {
@@ -40,7 +42,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         email: "",
         name: "",
         canPublish: false,
-        contactNumber: ''
+        contactNumber: '',
+        remainingAds: 0,
+        currentPublishedAds: 0,
     });
     useEffect(() => {
         // getUserDetails()
@@ -63,9 +67,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         apiClient.defaults.headers.common["Authorization"] = `${access_token}`;
         let { status, data } = await apiClient.post("get-user");
         if (status == 200) {
-            let { email, name, role, canPublish, contactNumber } = data
+            let { email, name, role, canPublish, contactNumber, currentPublishedAds, remainingAds } = data
             setUser(prev => ({
-                ...prev, name, email, canPublish: booleanCheck(canPublish), contactNumber
+                ...prev, name, email, canPublish: booleanCheck(canPublish), contactNumber, currentPublishedAds, remainingAds
             }))
             setRoles([role]);
             setIsAuthenticated(true)

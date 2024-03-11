@@ -12,7 +12,12 @@ export const addAdvertisement = async (state: any) => {
         }
     }
     keys.forEach((key: string) => {
-        formData.append(key, state[key])
+        if (key == 'selectedCategoryIds') {
+
+            state[key].length > 0 && formData.append(key, JSON.stringify(state[key]))
+        } else {
+            formData.append(key, state[key])
+        }
     })
     return await apiClient.post(`/advertisements`,
         formData, {
@@ -32,7 +37,6 @@ export const updateAdvertisement = async (state: any) => {
     //     name, data, advertisementTypeId, districtId, provinceId, countryId, companyName, email, contactNumber, website, imageRemoveIds: imageRemoveIds.length ? JSON.stringify(imageRemoveIds) : JSON.stringify([0])
     // });
     const { id, adImages } = state
-    console.log(adImages);
 
     const formData = new FormData()
     const keys = Object.keys(state)
@@ -45,7 +49,9 @@ export const updateAdvertisement = async (state: any) => {
         }
     }
     keys.forEach((key: string) => {
-        if (key == "imageRemoveIds") {
+        if (key == 'selectedCategoryIds') {
+            state[key].length > 0 && formData.append(key, JSON.stringify(state[key]))
+        } else if (key == "imageRemoveIds") {
             formData.append(key, state[key].length ? JSON.stringify(state[key]) : JSON.stringify([0]))
         } else if (key == 'districtId') {
             formData.append('districtId', state['districtId'] ? state['districtId'] : 0)
@@ -72,10 +78,6 @@ export const advertisementStatusChange = async (data: any) => {
             status,
         });
 };
-export const getAdvertisementTypes = async () => {
-    const response = await apiClient.get(`/advertisement-type`);
-    return response.data;
-}
 export const advertisementFavourite = async (data: any) => {
     const { id, status } = data
     await apiClient.post(`/advertisement/${id}/favourite`,

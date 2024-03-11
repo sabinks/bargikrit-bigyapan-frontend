@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAuth } from '../../../../hooks/auth'
 import { useQuery } from '@tanstack/react-query'
 import { checkSubset } from '@/utils'
@@ -8,7 +8,7 @@ import Head from 'next/head'
 
 function Subscription() {
     const { setSubscriptionState } = useSubscription()
-    const { roles, user: { email, canPublish, name, contactNumber } } = useAuth()
+    const { roles, user: { email, canPublish, name, contactNumber, currentPublishedAds, remainingAds }, getUserDetails, isAuthenticated, } = useAuth()
     const { data: subscriptionList } = useQuery(['subscription-list'], getSubscriptionTypeList, {
         onSuccess: (res: any) => {
             setSubscriptionState((prev: any) => ({
@@ -24,7 +24,9 @@ function Subscription() {
         },
         enabled: checkSubset(['PARTNER'], roles) ? true : false
     })
-
+    useEffect(() => {
+        getUserDetails()
+    }, [isAuthenticated])
     return (
         <div>
             <Head>
@@ -53,8 +55,12 @@ function Subscription() {
                         <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{subscription?.expiresAt}</dd>
                     </div>
                     <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt className="text-sm font-medium leading-6 text-gray-900">Total published Ads</dt>
+                        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{currentPublishedAds}</dd>
+                    </div>
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt className="text-sm font-medium leading-6 text-gray-900">Advertisement Remaining Count</dt>
-                        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{subscription?.expiresAt}</dd>
+                        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{remainingAds}</dd>
                     </div>
                 </dl>
             </div>

@@ -46,17 +46,18 @@ function Header() {
     return (
         <div>
             <nav className="flex md:hidden items-center justify-between px-2 py-0 lg:px-8" aria-label="Global">
-                <div className="flex lg:flex-1">
+                <div className="flex items-center gap-x-2 lg:flex-1 pb-2">
                     <a href="#" className="-m-1.5 p-1.5">
                         <span className="sr-only">{APP_NAME}</span>
                         <Image
                             className="h-12 w-auto"
-                            src="/assets/az_logo_250.png"
+                            src="/assets/az_logo_500.png"
                             alt=""
                             width="100"
                             height="100"
                         />
                     </a>
+                    <p className='text-sm'>Platform To Post Anything</p>
                 </div>
                 <div className="flex lg:hidden">
                     <button
@@ -153,7 +154,7 @@ function Header() {
                             <div className="flex items-center pl-2 text-lg hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><a href="mailto:info@adzoner.com" className='pl-2'>info@adzoner.com</a></div>
                         </div>
 
-                        <Link href={isAuthenticated ? "/auth/advertisements" : "/register"} className="flex text-sm md:text-base relative px-3 md:px-5 py-1 md:py-2 font-medium text-white group">
+                        <Link href={isAuthenticated ? "/auth/advertisements?new=true" : "/register"} className="flex text-sm md:text-base relative px-3 md:px-5 py-1 md:py-2 font-medium text-white group">
                             <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-purple-500 group-hover:bg-purple-700 group-hover:skew-x-12"></span>
                             <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-purple-700 group-hover:bg-purple-500 group-hover:-skew-x-12"></span>
                             <span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-purple-600 -rotate-12"></span>
@@ -205,17 +206,20 @@ function Header() {
             <div className=" hidden md:flex py-0.5">
                 <div className="container mx-auto">
                     <div className="flex justify-between items-center ">
-                        <div className="flex items-center gap-x-2">
-                            <Link href="/">
-                                <Image
-                                    className="h-12 w-auto"
-                                    src="/assets/az_logo_250.png"
-                                    alt=""
-                                    width="100"
-                                    height="100"
-                                />
-                            </Link>
-                            <h1 className={`text-secondary tracking-wider font-semibold text-3xl ${montserrat.className}`}>{APP_NAME}</h1>
+                        <div className="flex flex-col gap-x-2 pb-2">
+                            <div className="flex items-center">
+                                <Link href="/">
+                                    <Image
+                                        className="h-12 w-auto"
+                                        src="/assets/az_logo_500.png"
+                                        alt=""
+                                        width="100"
+                                        height="100"
+                                    />
+                                </Link>
+                                <h1 className={`text-secondary tracking-wider font-semibold text-3xl ${montserrat.className}`}>{APP_NAME}</h1>
+                            </div>
+                            <p className='text-xs'>Platform To Post Anything</p>
                         </div>
                         <div className={`flex items-center text-gray-dark ${montserratRegular.className}`}>
                             <Link href="/" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary py-5 px-5 transition duration-300 cursor-pointer">HOME</Link>

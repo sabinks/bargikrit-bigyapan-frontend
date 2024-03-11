@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import { getCountries, getProvinces, getProvincesByCountryId } from '@/api'
-import { getAdvertisementTypes } from '@/api/advertisement';
 import Dropdown from "@/components/dropDown";
 import { Button, CheckBox, Input } from '../../../components';
 import { useAuth } from '../../../../hooks/auth';
@@ -12,10 +11,12 @@ import { BACKEND_URL } from '@/constants';
 import { ImageZoom } from '../dashboard/dashboard';
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { useApplication } from '../../../../hooks/application';
-
+import { getCategories } from '@/api/advertisement/category';
+import Select from 'react-select'
+import { id } from 'date-fns/locale';
 export default function AdvertisementsForm({ state, setState, error, edit }: any) {
     const { roles, user: { email, name, contactNumber }, getUserDetails } = useAuth()
-    const [adsType, setAdsType] = useState<any>([])
+    const [categories, setCategories] = useState<any>([])
     const [countries, setCountries] = useState<any>([])
     const [provinces, setProvinces] = useState<any>([])
     const [districts, setDistricts] = useState<any>([])
@@ -25,10 +26,10 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
         setState((prev: any) => ({ ...prev, data: content?.html }))
     };
     useQuery(
-        ["advertisement-type"],
-        getAdvertisementTypes, {
+        ["categories"],
+        getCategories, {
         onSuccess: (data) => {
-            setAdsType(data)
+            setCategories(data?.map(({ id, name }: any) => ({ id, value: id, label: name })))
         }
     })
     useEffect(() => {
@@ -160,6 +161,11 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
             ...prev, [name]: checked
         }))
     }
+    const handleCategoryChange = (selected: any) => {
+        setState((prev: any) => ({
+            ...prev, selectedCategoryIds: selected.map(({ id }: any) => id), selectedCategories: selected
+        }))
+    }
 
     return (
         <div className='space-y-4 mb-4'>
@@ -190,12 +196,20 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
 
             <div className="border rounded-md p-2 space-y-4 bg-gray-light">
                 <div className="">
-                    <Dropdown label='Advertisement Type' data={adsType} selectedValue={state?.advertisementType} onChange={(advertisementType: any) => {
-                        setState((prev: any) => ({
-                            ...prev, advertisementType: advertisementType, advertisementTypeId: advertisementType?.id
-                        }))
-                    }} />
-                    <p className='text-red-400 text-sm'>{error?.advertisementTypeId}</p>
+                    <label htmlFor="" className='text-gray-700 text-sm font-semibold'>Category</label>
+                    <Select
+                        name={'category'}
+                        value={state?.selectedCategories}
+                        options={categories}
+                        isMulti
+                        isClearable={false}
+                        onChange={(value: any, clicked) => handleCategoryChange(value)
+                        }
+                        isSearchable={true}
+                        placeholder="Select Client"
+                        className={` text-sm capitalize p-0 m-0`}
+                    />
+                    <p className='text-red-400 text-sm'>{error?.selectedCategory}</p>
                 </div>
 
                 <div className="">
@@ -224,11 +238,12 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
 
                 <div className="">
                     <Editor
-                        charLimit={3000}
+                        charLimit={250}
                         label='Content'
                         value={state?.data ? state?.data : ""}
                         onChange={onEditorContentChanged}
                         defaultValue={state?.data}
+
                     />
                     <p className='text-red-400 text-sm'>{error?.data}</p>
                 </div>

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Input } from '../../../components';
 import Editor from '../../../components/editor'
 import { useQuery } from '@tanstack/react-query';
-import { getAdvertisementTypes } from '../../../../api/advertisement';
 import Dropdown from '../../../components/dropDown';
 import { getProvinces } from '../../../api';
 
@@ -13,13 +12,6 @@ export default function AdvertisementsForm({ state, setState, error }: any) {
     const onEditorContentChanged = (content: any) => {
         setState((prev: any) => ({ ...prev, data: content?.html }))
     };
-    useQuery(
-        ["advertisement-type"],
-        getAdvertisementTypes, {
-        onSuccess: (data) => {
-            setAdsType(data)
-        }
-    })
     useQuery(
         ["get-provinces"],
         getProvinces, {

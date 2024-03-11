@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import { checkSubset, classNames } from "@/utils";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { AcademicCapIcon, BanknotesIcon, Bars3Icon, BookmarkIcon, BookmarkSlashIcon, BookmarkSquareIcon, BuildingLibraryIcon, ChatBubbleBottomCenterIcon, ChatBubbleLeftIcon, ChatBubbleLeftRightIcon, CircleStackIcon, Cog6ToothIcon, GlobeAltIcon, HomeIcon, MagnifyingGlassCircleIcon, MagnifyingGlassIcon, QueueListIcon, StarIcon, UserCircleIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { AcademicCapIcon, BanknotesIcon, Bars3Icon, BookmarkIcon, BookmarkSlashIcon, BookmarkSquareIcon, BuildingLibraryIcon, ChatBubbleBottomCenterIcon, ChatBubbleLeftIcon, ChatBubbleLeftRightIcon, CircleStackIcon, Cog6ToothIcon, DocumentPlusIcon, GlobeAltIcon, HomeIcon, MagnifyingGlassCircleIcon, MagnifyingGlassIcon, QueueListIcon, StarIcon, UserCircleIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import io from 'socket.io-client';
 import { APP_NAME } from "@/constants";
 import { poppins } from "@/fonts";
@@ -29,6 +29,13 @@ const navigation = [
         href: '/auth/advertisements',
         icon: QueueListIcon,
         roles: ['SUPERADMIN', 'ADMIN', 'PARTNER', 'USER'],
+        permission: ''
+    },
+    {
+        name: "Documents",
+        href: '/auth/documents',
+        icon: DocumentPlusIcon,
+        roles: ['PARTNER', 'USER'],
         permission: ''
     },
 
@@ -76,8 +83,8 @@ const navigation = [
         permission: ''
     },
     {
-        name: "Advertisement Type",
-        href: '/auth/advertisement-type',
+        name: "Category",
+        href: '/auth/categories',
         icon: BiHomeCircle,
         roles: ['SUPERADMIN', 'ADMIN'],
         permission: ''
@@ -248,8 +255,10 @@ export default function AuthLayout({ props }: any) {
                                     <div className='flex-shrink-0 flex items-center px-4'>
                                         <img
                                             className='h-8 w-auto'
-                                            src='/assets/bb-250.png'
+                                            src='/assets/az_logo_250.png'
                                             alt={APP_NAME}
+                                            width="100"
+                                            height="100"
                                         />
                                         <p className='font-extrabold text-white px-3 text-xl'>
                                             {APP_NAME}
@@ -262,6 +271,7 @@ export default function AuthLayout({ props }: any) {
                                             <nav className='px-2 space-y-1'>
                                                 {
                                                     navigation.map((item: any) => (
+                                                        checkSubset(item.roles, roles) &&
                                                         // show(item?.permission) &&
                                                         <Link
                                                             key={item.name}
@@ -318,7 +328,7 @@ export default function AuthLayout({ props }: any) {
                             <div className='flex items-center flex-shrink-0 px-2'>
                                 <Image
                                     className='h-8 w-auto'
-                                    src='/assets/bb-250.png'
+                                    src='/assets/az_logo_250.png'
                                     alt={APP_NAME ? APP_NAME : ''}
                                     width="100"
                                     height="100"
@@ -363,7 +373,7 @@ export default function AuthLayout({ props }: any) {
                                                 ))
                                         }
                                     </nav>
-                                    <Link
+                                    {/* <Link
                                         href={'/auth/setting'}
                                         className={
                                             classNames(
@@ -376,7 +386,7 @@ export default function AuthLayout({ props }: any) {
                                     >
                                         <Cog6ToothIcon className="w-5" />
                                         <span>Setting</span>
-                                    </Link>
+                                    </Link> */}
                                 </>
                             }
                         </div>

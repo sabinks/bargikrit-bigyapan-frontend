@@ -7,14 +7,17 @@ import Modal from '@/components/modal';
 import Head from 'next/head';
 
 function Index() {
-    const { roles, user: { canPublish, email } } = useAuth()
+    const { roles, isAuthenticated, user: { canPublish, email }, getUserDetails } = useAuth()
     let [isOpen, setIsOpen] = useState(false)
     useEffect(() => {
-
         if (!canPublish && email) {
             setIsOpen(true)
         }
     }, [canPublish, email])
+
+    useEffect(() => {
+        getUserDetails()
+    }, [isAuthenticated])
 
     return (
         <div>

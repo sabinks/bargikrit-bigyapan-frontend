@@ -11,7 +11,7 @@ import AdvertisementsForm from "./advertisementsForm";
 import AdvertisementCard from "@/components/AdvertisementCard";
 import Loading from "@/components/loading";
 
-const initialState = {
+export const initialState = {
     name: "",
     content: "",
     adImages: [],
@@ -19,6 +19,7 @@ const initialState = {
     showEmail: false,
     showContactNumber: false,
     showWebsite: false,
+    selectedCategoryIds: []
 };
 export default function GridView({ }: any) {
     const [query, setQuery] = useState<string>("");
@@ -108,13 +109,14 @@ export default function GridView({ }: any) {
     );
     useQuery(['advertisements', adsId], showAdvertisement, {
         onSuccess: (res) => {
-            const { name, data, id, advertisementType, country, province, district, companyName, email, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber } = res.data
+            const { name, data, id, advertisementType, categories, country, province, district, companyName, email, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber } = res.data
             setState({
                 name: name, id: id, data: data, companyName, email, contactNumber, website, advertisementImages, imageRemoveIds: [], showWebsite, showEmail, showContactNumber,
                 advertisementType, advertisementTypeId: advertisementType?.id,
                 country, countryId: country?.id,
                 province, provinceId: province?.id,
                 district, districtId: district?.id,
+                selectedCategories: categories?.map(({ id, name }: any) => ({ id, value: id, label: name }))
             })
             setEdit(true)
             toggleIsVisible(!isVisible)

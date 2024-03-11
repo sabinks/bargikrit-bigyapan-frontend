@@ -8,9 +8,10 @@ import Image from 'next/image';
 import Zoom from 'react-medium-image-zoom'
 import { Button, Input } from '@/components';
 import { TrashIcon } from '@heroicons/react/24/outline';
+import Head from 'next/head';
 
 function Dashboard() {
-    const { user: { canPublish } } = useAuth()
+    const { user: { canPublish, remainingAds, currentPublishedAds } } = useAuth()
     const [documentTypeList, setDocumentTypeList] = useState<any>([])
     const [documentList, setDocumentList] = useState<any>([])
     const [image, setImage] = useState<any>({})
@@ -82,19 +83,16 @@ function Dashboard() {
             setLoading(false);
         }
     };
-    const handleDocumentDelete = (documentName: string) => {
-        mutate(documentName)
-    }
-    const { mutate, isLoading } = useMutation(deletePartnerDocument, {
-        onSuccess: (data: any, variable: any) => {
-            setImages((prev: any) => (
-                prev.filter((image: any) => image.filename != variable)
-            ))
-        }
-    })
 
     return (
         <div>
+            <Head>
+                <title>Dashboard</title>
+            </Head>
+            <div className="px-4 sm:px-0">
+                <h3 className="text-base font-semibold leading-7 text-gray-900">Dashboard</h3>
+                {/* <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and application.</p> */}
+            </div>
             {
                 !canPublish &&
                 <div className="border rounded-md py-2 px-4 text-gray-dark">
@@ -122,30 +120,20 @@ function Dashboard() {
                     </div>
                 </div>
             }
-            <div className="py-8">
-                <div className="flex items-center gap-x-2 mb-4">
-                    <h1 className='font-bold text-2xl'>Partner Documents</h1>
-                    {
-                        canPublish &&
-                        <p className='text-accent1 text-sm'>(Document locked, cannot edit/delete)</p>
-                    }
-                </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {
-                        images && images.map((image: any) => {
-                            return <div className="flex flex-row justify-center border items-center">
-                                <ImageZoom className='object-center' src={`data:image/jpeg;base64,${image?.data}`} width={400} height={400} alt="Documents" />
-                                {
-                                    !canPublish &&
-                                    < Button buttonType='danger' className='w-8 h-8 relative left-2' icon={<TrashIcon className='w-5 h-5 self-center'
-                                        onClick={(e: any) => handleDocumentDelete(image?.filename)} />} />
-                                }
-                            </div>
-                        })
-                    }
-                </div>
-            </div>
 
+
+            <div className="mt-6 border-t border-gray-100">
+                <dl className="divide-y divide-gray-100">
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt className="text-sm font-medium leading-6 text-gray-900">Total published Ads</dt>
+                        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{currentPublishedAds}</dd>
+                    </div>
+                    <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt className="text-sm font-medium leading-6 text-gray-900">Remaining Ads Publish Count</dt>
+                        <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{remainingAds}</dd>
+                    </div>
+                </dl>
+            </div>
         </div>
     )
 }

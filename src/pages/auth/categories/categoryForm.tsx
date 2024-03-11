@@ -2,7 +2,7 @@
 import React from 'react'
 import { Input } from '../../../components'
 
-export default function AdvertisementTypeForm({ state, setState, error }: any) {
+export default function CategoryForm({ state, setState, error }: any) {
     const handleChange = (e: any) => {
         let { name, value } = e.target
         setState((prev: any) => ({
