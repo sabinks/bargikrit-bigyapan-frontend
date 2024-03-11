@@ -158,8 +158,8 @@ export default function Home({ }: any) {
                                 onChange={(value: any, clicked) => handleCategoryChange(value)
                                 }
                                 isSearchable={true}
-                                placeholder="Select Client"
-                                className={` text-sm capitalize`}
+                                placeholder="Select one or more category"
+                                className={`text-sm capitalize`}
 
                                 styles={{
                                     control: (baseStyles, state) => ({
