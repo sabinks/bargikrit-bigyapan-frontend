@@ -25,7 +25,7 @@ export const ApplicationContext = React.createContext<ApplicationType>(null!);
 export function ApplicationProvider({ children }: { children: React.ReactNode }) {
 
     const [appState, setAppState] = React.useState<any>({
-        advertisementView: 'listing',
+        advertisementView: 'grid',
         advertisementViewToogle: false,
         country: '',
         countries: [],
@@ -50,6 +50,12 @@ export function ApplicationProvider({ children }: { children: React.ReactNode })
             ...prev, country
         }))
     }, [])
+    useEffect(() => {
+        setAppState((prev: any) => ({
+            ...prev, selectedCountry: prev.countries.find((country: any) => country.name == prev.country)
+        }))
+    }, [appState.countries])
+
     useEffect(() => {
         loadCountries()
     }, [])

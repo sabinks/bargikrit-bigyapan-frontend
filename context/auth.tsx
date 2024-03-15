@@ -10,6 +10,7 @@ interface UserType {
     contactNumber: string;
     remainingAds: number;
     currentPublishedAds: number;
+    profileImage: string;
 }
 
 interface AuthContextType {
@@ -46,6 +47,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         contactNumber: '',
         remainingAds: 0,
         currentPublishedAds: 0,
+        profileImage: ''
     });
     useEffect(() => {
         // getUserDetails()
@@ -68,9 +70,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         apiClient.defaults.headers.common["Authorization"] = `${access_token}`;
         let { status, data } = await apiClient.post("get-user");
         if (status == 200) {
-            let { email, name, role, canPublish, contactNumber, currentPublishedAds, remainingAds } = data
+            let { email, name, role, canPublish, contactNumber, currentPublishedAds, remainingAds, profileImage } = data
             setUser(prev => ({
-                ...prev, name, email, canPublish: booleanCheck(canPublish), contactNumber, currentPublishedAds, remainingAds
+                ...prev, name, email, canPublish: booleanCheck(canPublish), contactNumber, currentPublishedAds, remainingAds, profileImage
             }))
             setRoles([role]);
             setIsAuthenticated(true)

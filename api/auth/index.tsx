@@ -1,3 +1,4 @@
+import App from "@/pages/_app";
 import { apiClient } from "../../src/api";
 
 export const userLogin = async (data: any) => {
@@ -32,7 +33,15 @@ export const changePassword = async (data: any) => {
     return response.data;
 };
 export const changeUserDetail = async (data: any) => {
-    await apiClient.post(`/set-user`, data);
+    const formData = new FormData()
+    formData.append('name', data.name)
+    formData.append('contactNumber', data.contactNumber)
+    formData.append('profileImage', data.profileImage)
+    await apiClient.post(`/set-user`, data, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
 };
 
 export const getUser = async () => {

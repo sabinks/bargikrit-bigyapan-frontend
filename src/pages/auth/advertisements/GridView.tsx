@@ -1,5 +1,5 @@
-import { Suspense, useEffect, useState } from "react";
-import { apiClient, getList, getQueryData, showQueryData } from "@/api";
+import { useEffect, useState } from "react";
+import { apiClient, getQueryData } from "@/api";
 import { useAuth } from "../../../../hooks/auth";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { SortingState } from "@tanstack/react-table";
@@ -10,6 +10,9 @@ import { addAdvertisement, deleteAdvertisement, showAdvertisement, updateAdverti
 import AdvertisementsForm from "./advertisementsForm";
 import AdvertisementCard from "@/components/AdvertisementCard";
 import Loading from "@/components/loading";
+import { useApplication } from "../../../../hooks/application";
+import Dropdown from "@/components/dropDown";
+import { toast } from "react-toastify";
 
 export const initialState = {
     name: "",
@@ -22,6 +25,7 @@ export const initialState = {
     selectedCategoryIds: []
 };
 export default function GridView({ }: any) {
+    const { appState, setAppState } = useApplication()
     const [query, setQuery] = useState<string>("");
     const [sorting, setSorting] = useState<SortingState>([{
         id: 'createdAt',
@@ -31,21 +35,24 @@ export default function GridView({ }: any) {
     const [pagination, setPagination] = useState<any>({
         totalPages: 0
     })
-    const [tableData, setTableData] = useState<any>([]);
     const [state, setState] = useState<any>(initialState)
     const [advertisements, setAdvertisements] = useState<any>([])
-    const { roles, user: { email, canPublish } } = useAuth()
-
+    const { roles, user: { email, canPublish }, isAuthenticated } = useAuth()
     const [adsId, setAdsId] = useState<number>(0)
-    const [isVisible, toggleIsVisible] = useState(false);
+    const [postedAdId, setPostedAdId] = useState<number>(0)
+    const [updatedAdId, setUpdatedAdId] = useState<number>(0)
+    const [isVisible, setIsVisible] = useState(false);
     const [formerrors, setFormErrors] = useState<any>({});
     const [edit, setEdit] = useState(false)
     useEffect(() => {
-        loadData()
-    }, [])
+        if (isAuthenticated) {
+            loadData()
+        }
+    }, [appState?.selectedCountry])
 
     const loadData = async () => {
-        const { data } = await apiClient.get(`/advertisements-all?pageSize=10&offset=0`);
+        const { selectedCountry } = appState
+        const { data } = await apiClient.get(`/advertisements-all?pageSize=10&offset=0&country=${selectedCountry?.name}`);
         setAdvertisements(data?.content)
         setPage(data?.pageable.pageNumber)
         setPagination((prev: any) => ({
@@ -54,7 +61,7 @@ export default function GridView({ }: any) {
     }
 
     const { isLoading, refetch, isFetching } = useQuery(
-        ["advertisements-all", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 10],
+        ["advertisements-all", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 10, 1, 0, appState?.selectedCountry?.name],
         getQueryData, {
         onSuccess: (data) => {
             setAdvertisements((prev: any) => ([
@@ -77,9 +84,10 @@ export default function GridView({ }: any) {
 
     const { isLoading: creatingAdvertisement, mutate } = useMutation<any, Error>(addAdvertisement,
         {
-            onSuccess: () => {
-                loadData();
-                toggleIsVisible(false);
+            onSuccess: (res: any) => {
+                const { message, id } = res.data
+                toast.success(message, { autoClose: 2500 })
+                setPostedAdId(id)
             },
             onError: (err: any) => {
                 const { status, data } = err.response;
@@ -93,9 +101,8 @@ export default function GridView({ }: any) {
     );
     const { mutate: update, isLoading: updatingAdvertisement } = useMutation<any, Error>(updateAdvertisement,
         {
-            onSuccess: () => {
-                refetch();
-                toggleIsVisible(false);
+            onSuccess: (data, variables: any) => {
+                setUpdatedAdId(variables?.id)
             },
             onError: (err: any) => {
                 const { status, data } = err.response;
@@ -107,7 +114,8 @@ export default function GridView({ }: any) {
             },
         }
     );
-    useQuery(['advertisements', adsId], showAdvertisement, {
+
+    const { refetch: refetchAdvetisement } = useQuery(['advertisements', adsId], showAdvertisement, {
         onSuccess: (res) => {
             const { name, data, id, advertisementType, categories, country, province, district, companyName, email, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber } = res.data
             setState({
@@ -120,14 +128,53 @@ export default function GridView({ }: any) {
                 selectedCategoryIds: categories.map(({ id }: any) => id)
             })
             setEdit(true)
-            toggleIsVisible(!isVisible)
+            setIsVisible(true)
             setAdsId(0)
         },
         enabled: adsId ? true : false
     })
+    useQuery(['advertisements', postedAdId], showAdvertisement, {
+        onSuccess: (res) => {
+            const { name, data, id, advertisementType, categories, country, province, district, companyName, email, user, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber } = res.data
+            setAdvertisements((prev: any) => ([
+                { name, data, id, advertisementType, categories, country, province, district, companyName, email, user, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber }, ...prev
+            ]))
+            setIsVisible(false)
+            setPostedAdId(0)
+        },
+        enabled: postedAdId > 0 ? true : false
+    })
+    useQuery(['advertisements', updatedAdId], showAdvertisement, {
+        onSuccess: (res) => {
+            const { name, data, id, advertisementType, categories, country, province, district, companyName, email, user, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber } = res.data
+            const newAds = advertisements.map((ad: any) => {
+                if (ad.id == id) {
+                    return {
+                        name, data, id, advertisementType, categories, country, province, district, companyName, email, user, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber
+                    }
+                } else {
+                    return ad
+                }
+            })
+            setAdvertisements(newAds)
+            setIsVisible(false)
+            setUpdatedAdId(0)
+        },
+        enabled: updatedAdId > 0 ? true : false
+    })
     const { mutate: mutateDeleteAdvertisement } = useMutation(deleteAdvertisement, {
         onSuccess: () => refetch()
     })
+    const loadAdData = async (id: number) => {
+        const { selectedCountry } = appState
+        const { data } = await apiClient.get(`/advertisements-all?pageSize=10&offset=0&country=${selectedCountry?.name}`);
+        setAdvertisements(data?.content)
+
+        setPage(data?.pageable.pageNumber)
+        setPagination((prev: any) => ({
+            ...prev, totalPages: data?.totalPages
+        }))
+    }
     const handleClick = (id: number) => {
         setAdsId(id)
     }
@@ -152,12 +199,21 @@ export default function GridView({ }: any) {
                         buttonType=""
                         className="bg-primary"
                         onClick={() => {
-                            toggleIsVisible(true);
+                            setIsVisible(true);
                             setState(initialState);
                             setEdit(false)
                         }}
                     />
                 }
+            </div>
+            <div className="flex justify-end">
+                <div className="flex w-72 justify-end">
+                    <Dropdown label="Country" selectedValue={appState?.selectedCountry} data={appState?.countries} onChange={(country: any) => {
+                        setAppState((prev: any) => ({
+                            ...prev, selectedCountry: country, selectedProvince: null
+                        }))
+                    }} />
+                </div>
             </div>
             <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
                 {
@@ -174,7 +230,7 @@ export default function GridView({ }: any) {
             <SidePanel
                 isVisible={isVisible}
                 onClose={() => {
-                    toggleIsVisible(!isVisible);
+                    setIsVisible(!isVisible);
                     setFormErrors({});
                 }}
                 wide="2xl"
@@ -186,9 +242,7 @@ export default function GridView({ }: any) {
                 }}
                 primaryButtonLoading={creatingAdvertisement || updatingAdvertisement}
             >
-                <Suspense fallback='loading'>
-                    <AdvertisementsForm state={state} setState={setState} error={formerrors} edit={edit} />
-                </Suspense>
+                <AdvertisementsForm state={state} setState={setState} error={formerrors} edit={edit} />
             </SidePanel>
         </div>
     );

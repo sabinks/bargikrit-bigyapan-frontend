@@ -137,7 +137,7 @@ export default function UserSignUp() {
                     Terms, Privacy Policy and Cookies Policy
                 </Link>.
             </div> */}
-            <p className="text-red-500 text-sm text-center">Note: Personal signup user can add one advertisement.</p>
+            <p className="text-red-500 text-sm text-center">Note: Personal signup user can add ten advertisements.</p>
             <div className="text-sm">
                 By clicking Sign Up, you agree to our <Link href={`terms-and-conditions`} target="_blank" className='text-blue-500 underline font-semibold'>Terms & Conditions</Link> <Link href={`privacy-policy`} target="_blank" className='text-blue-500 underline font-semibold'>Privacy Policy and Cookies Policy</Link>
                 .

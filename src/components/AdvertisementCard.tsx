@@ -64,7 +64,7 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                                 buttonType="none"
                                 icon={<PencilIcon className="w-4" />}
                                 onClick={() => handleClick(advertisement?.id)}
-                                tooltipMsg="Edit Advertisement"
+                            // tooltipMsg="Edit Advertisement"
                             />
                         }
                         {
@@ -93,7 +93,7 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                                             onClick={(e: any) => {
                                                 handleFavouriteClick(!advertisement?.favourite, advertisement?.id)
                                             }}
-                                            tooltipMsg="Favourite Advertisement"
+                                        // tooltipMsg="Favourite Advertisement"
                                         />
                                     }
                                 </div>
@@ -182,7 +182,7 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                                             icon={advertisement?.favourite ? <BsFillStarFill className="w-5 text-secondary" /> : <StarIcon className="w-5" />}
                                             className=''
                                             onClick={(e: any) => handleFavouriteClick(!advertisement?.favourite, advertisement?.id)}
-                                            tooltipMsg="Edit Advertisement"
+                                        // tooltipMsg="Edit Advertisement"
                                         />
                                     }
                                 </div>

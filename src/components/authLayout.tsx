@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { AcademicCapIcon, BanknotesIcon, Bars3Icon, BookmarkIcon, BookmarkSlashIcon, BookmarkSquareIcon, BuildingLibraryIcon, ChatBubbleBottomCenterIcon, ChatBubbleLeftIcon, ChatBubbleLeftRightIcon, CircleStackIcon, Cog6ToothIcon, DocumentPlusIcon, GlobeAltIcon, HomeIcon, MagnifyingGlassCircleIcon, MagnifyingGlassIcon, QueueListIcon, StarIcon, UserCircleIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import io from 'socket.io-client';
-import { APP_NAME } from "@/constants";
+import { APP_NAME, BACKEND_URL } from "@/constants";
 import { poppins } from "@/fonts";
 import Image from "next/image";
 import { setCookie } from "cookies-next";
@@ -127,7 +127,7 @@ const userNavigation = [
 ];
 
 export default function AuthLayout({ props }: any) {
-    const { roles, signout, permissions, show, user, user: { name }, access_token }: any = useAuth();
+    const { roles, signout, permissions, show, user, user: { name, profileImage }, access_token }: any = useAuth();
 
     const router = useRouter();
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -472,11 +472,20 @@ export default function AuthLayout({ props }: any) {
                                         <h1 className="font-bold text-gray-dark">{name}</h1>
                                         <Menu.Button className='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cerulean-500'>
                                             <span className='sr-only'>Open user menu</span>
-                                            <img
-                                                className='h-8 w-8 rounded-full'
-                                                src={user?.profile_image != null ? `${user?.path}${user?.profile_image}` : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}
-                                                alt=''
-                                            />
+                                            {
+                                                profileImage ?
+                                                    <Image
+                                                        className='h-8 w-8 rounded-full'
+                                                        src={`${BACKEND_URL}/public/profile-image/${profileImage}`}
+                                                        height={200} width={200}
+                                                        alt='Profile Image Image' />
+                                                    :
+                                                    <img
+                                                        className='h-8 w-8 rounded-full'
+                                                        src={'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'}
+                                                        alt='Profile Image'
+                                                    />
+                                            }
                                         </Menu.Button>
                                     </div>
                                     <Transition

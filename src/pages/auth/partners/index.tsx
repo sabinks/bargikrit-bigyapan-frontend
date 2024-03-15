@@ -153,7 +153,7 @@ export default function Clients() {
                             buttonType="success"
                             icon={<DocumentIcon className="w-5" />}
                             onClick={() => handleClick(id)}
-                            tooltipMsg="Edit Advertisement"
+                        // tooltipMsg="Edit Advertisement"
                         />
                         {/* {
                             <Button
@@ -161,7 +161,7 @@ export default function Clients() {
                                 buttonType="danger"
                                 icon={<TrashIcon className="w-5" />}
                                 onClick={() => mutateDeleteAdvertisement({ id })}
-                                tooltipMsg="Delete Advertisement"
+                                // tooltipMsg="Delete Advertisement"
                             />
                         } */}
                     </div>

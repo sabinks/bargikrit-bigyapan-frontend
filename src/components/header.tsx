@@ -57,9 +57,9 @@ function Header() {
                             alt=""
                             width="100"
                             height="100"
-                        />
+                        />``
                     </a>
-                    <p className='text-sm'>Platform To Post Anything</p>
+                    <p className='text-sm font-semibold text-[#57237E]'>Platform To Post Anything</p>
                 </div>
                 <div className="flex lg:hidden">
                     <button
@@ -221,7 +221,7 @@ function Header() {
                                 </Link>
                                 <h1 className={`text-secondary tracking-wider font-semibold text-3xl ${montserrat.className}`}>{APP_NAME}</h1>
                             </div>
-                            <p className='text-xs'>Platform To Post Anything</p>
+                            <p className='text-xs font-semibold text-[#57237E]'>Platform To Post Anything</p>
                         </div>
                         <div className={`flex items-center text-gray-dark ${montserratRegular.className}`}>
                             <Link href="/" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary py-5 px-5 transition duration-300 cursor-pointer">HOME</Link>

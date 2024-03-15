@@ -60,9 +60,9 @@ export default function Login() {
     };
     return (
         <>
-            <Head>
+            {/* <Head>
                 <title>{APP_NAME} | Login</title>
-            </Head>
+            </Head> */}
             <div className="min-h-screen flex">
                 <div className="flex items-center w-full xl:w-1/3 justify-center px-12 py-12">
                     <div className="mx-auto w-full max-w-sm lg:w-96">

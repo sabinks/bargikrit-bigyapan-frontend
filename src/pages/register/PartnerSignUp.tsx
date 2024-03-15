@@ -104,7 +104,7 @@ export default function PartnerSignUp({ partnerType }: any) {
                     Terms, Privacy Policy and Cookies Policy
                 </Link>.
             </div> */}
-            <p className="text-red-500 text-sm text-center">Note: Business signup user can add five advertisements under Free Plan.</p>
+            <p className="text-red-500 text-sm text-center">Note: Business signup user can add ten advertisements under Free Plan.</p>
             <Button buttonType="" label="Sign Up" loading={isLoading} onClick={handleSubmit} className="w-full" />
         </div>
     )

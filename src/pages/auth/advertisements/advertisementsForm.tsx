@@ -14,6 +14,7 @@ import { useApplication } from '../../../../hooks/application';
 import { getCategories } from '@/api/advertisement/category';
 import Select from 'react-select'
 import { id } from 'date-fns/locale';
+import { chartLimit } from '.';
 export default function AdvertisementsForm({ state, setState, error, edit }: any) {
     const { roles, user: { email, name, contactNumber }, getUserDetails } = useAuth()
     const [categories, setCategories] = useState<any>([])
@@ -210,7 +211,7 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
                         placeholder="Select Client"
                         className={` text-sm capitalize p-0 m-0`}
                     />
-                    <p className='text-red-400 text-sm'>{error?.selectedCategory}</p>
+                    <p className='text-red-400 text-sm'>{error?.selectedCategoryIds}</p>
                 </div>
 
                 <div className="">
@@ -239,7 +240,7 @@ export default function AdvertisementsForm({ state, setState, error, edit }: any
 
                 <div className="">
                     <Editor
-                        charLimit={250}
+                        charLimit={chartLimit}
                         label='Content'
                         value={state?.data ? state?.data : ""}
                         onChange={onEditorContentChanged}

@@ -1,27 +1,26 @@
-import { CheckBox, NewTable, PageTitle } from "../../../components";
-import { useState } from "react";
+import React, { useState } from "react";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
-import React from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { addAdvertisement, advertisementStatusChange, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "@/api/advertisement";
-import { useAuth } from "../../../../hooks/auth";
-import { getQueryData } from "../../../api";
-import { checkSubset } from "@/utils";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { addAdvertisement, advertisementStatusChange, deleteAdvertisement, showAdvertisement, updateAdvertisement } from "@/api/advertisement";
+import { checkSubset } from "@/utils";
+import { getQueryData } from "../../../api";
+import { CheckBox, NewTable, PageTitle, SidePanel, Button } from "../../../components";
 import Search from "../../../components/search";
+import { useApplication } from "../../../../hooks/application";
+import { useAuth } from "../../../../hooks/auth";
 import AdvertisementsForm from "./advertisementsForm";
-import SidePanel from "../../../components/sidePanel";
-import Button from "../../../components/Button";
+import Dropdown from "@/components/dropDown";
 import { initialState } from "./GridView";
 
-
 export default function ListingView() {
-    const { roles, user: { email, canPublish } } = useAuth()
+    const { roles, user: { email, canPublish }, isAuthenticated } = useAuth()
     const [query, setQuery] = useState<string>("");
     const [sorting, setSorting] = useState<SortingState>([{
         id: 'createdAt',
         desc: true
     }])
+    const { appState, setAppState } = useApplication()
     const [page, setPage] = useState<number>(0);
     const [adsId, setAdsId] = useState<number>(0)
     const columnHelper = createColumnHelper<any>();
@@ -32,11 +31,12 @@ export default function ListingView() {
     const [edit, setEdit] = useState(false)
 
     const { isLoading, data, refetch, isFetching } = useQuery(
-        ["advertisements", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 10],
+        ["advertisements", query, sorting[0].id, sorting[0].desc ? 'DESC' : 'ASC', page, 10, 1, [0], appState?.selectedCountry?.name],
         getQueryData, {
         onSuccess: (data) => {
             setTableData(data.content);
-        }
+        },
+        enabled: appState?.selectedCountry?.name && isAuthenticated ? true : false
     })
 
     useQuery(['advertisements', adsId], showAdvertisement, {
@@ -169,7 +169,7 @@ export default function ListingView() {
                                 buttonType="primary"
                                 icon={<PencilSquareIcon className="w-5" />}
                                 onClick={() => handleClick(id)}
-                                tooltipMsg="Edit Advertisement"
+                            // tooltipMsg="Edit Advertisement"
                             />
                         }
 
@@ -179,7 +179,7 @@ export default function ListingView() {
                                 buttonType="danger"
                                 icon={<TrashIcon className="w-5" />}
                                 onClick={() => mutateDeleteAdvertisement({ id })}
-                                tooltipMsg="Delete Advertisement"
+                            // tooltipMsg="Delete Advertisement"
                             />
                         }
                     </div>
@@ -225,11 +225,32 @@ export default function ListingView() {
                             }}
                         />
                     }
+
+                </div>
+                <div className="flex justify-end">
+                    <div className="flex w-72 justify-end">
+                        <Dropdown label="Country" selectedValue={appState?.selectedCountry} data={appState?.countries} onChange={(country: any) => {
+                            setAppState((prev: any) => ({
+                                ...prev, selectedCountry: country, selectedProvince: null
+                            }))
+                        }} />
+                    </div>
+                </div>
+                <div className="flex justify-between items-center gap-x-2">
+                    <div className="w-full">
+                        <Search query={query} placeholder="Search advertisement" handleSearch={handleSearch} />
+                    </div>
+                    {/* <div className="">
+                        <Button buttonType="primary" className="fle" label="Reset" type="button" onClick={(e: any) => {
+                            setQuery("")
+                            handleSearch("")
+                        }} />
+                    </div> */}
                 </div>
                 <div className='-my-2 overflow-x-auto'>
                     <div className='py-2 align-middle inline-block min-w-full '>
                         <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
-                            <Search query={query} placeholder="Search advertisement" handleSearch={handleSearch} />
+
                             <div className="">
                                 <NewTable
                                     data={tableData}
@@ -260,9 +281,7 @@ export default function ListingView() {
                     }}
                     primaryButtonLoading={creatingAdvertisement || updatingAdvertisement}
                 >
-                    <React.Suspense fallback='loading'>
-                        <AdvertisementsForm state={state} setState={setState} error={formerrors} edit={edit} />
-                    </React.Suspense>
+                    <AdvertisementsForm state={state} setState={setState} error={formerrors} edit={edit} />
                 </SidePanel>
             </div>
         </>
