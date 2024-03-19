@@ -2,13 +2,13 @@ import { montserrat, nunitoSans } from '@/fonts'
 import React, { useState } from 'react'
 import { checkSubset } from '@/utils'
 import { useAuth } from '../../hooks/auth'
-import { PencilIcon, PhoneIcon, StarIcon } from '@heroicons/react/24/outline'
+import { ArrowDownLeftIcon, ArrowLeftIcon, PencilIcon, PencilSquareIcon, PhoneIcon, StarIcon } from '@heroicons/react/24/outline'
 import Button from '@/components/Button'
 import CheckBox from './checkbox'
 import { useMutation } from '@tanstack/react-query'
 import { advertisementStatusChange } from '../../api/advertisement'
 import { MdEmail } from 'react-icons/md'
-import { FaSms } from 'react-icons/fa'
+import { FaIcons, FaSms } from 'react-icons/fa'
 import { userFavouriteAdsChange } from '@/api'
 import { BsFillStarFill, BsStarFill } from 'react-icons/bs'
 import { BiGlobe } from 'react-icons/bi'
@@ -56,20 +56,37 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
         <div className="p-2 bg-white">
             <div className="relative">
                 <div className="absolute right-2 -bottom-10">
-                    <div className="flex space-x-2">
+                    <div className="flex items-center space-x-2 pb-1">
                         {
                             (!isFrontPage && (checkSubset(["SUPERADMIN", "ADMIN"], roles) || advertisement?.user?.email == email)) &&
-                            <Button
-                                label=''
-                                buttonType="none"
-                                icon={<PencilIcon className="w-4" />}
-                                onClick={() => handleClick(advertisement?.id)}
-                            // tooltipMsg="Edit Advertisement"
-                            />
+                            <div className="flex items-start">
+                                <Button
+                                    label=''
+                                    buttonType="none"
+                                    icon={<PencilSquareIcon className="w-4" />}
+                                    onClick={() => handleClick(advertisement?.id)}
+                                // tooltipMsg="Edit Advertisement"
+                                />
+                                {/* <div className="flex items-center animate-bounce border bg-primary text-xs rounded-md px-1 space-x-0.5 text-white">
+                                    <ArrowLeftIcon className='w-3 h-3' /> Edit
+                                </div> */}
+                            </div>
                         }
                         {
                             !isFrontPage && ((checkSubset(['SUPERADMIN', 'ADMIN'], roles) || advertisement?.user?.email == email) &&
-                                <CheckBox name="publish" label="" checked={advertisement.publish} onChange={(e: any) => handleAdsPublishStatus(e, !advertisement?.publish, advertisement?.id)} />
+                                <div className="flex items-center">
+                                    {/* <CheckBox name="publish" label="" checked={advertisement.publish} onChange={(e: any) => handleAdsPublishStatus(e, !advertisement?.publish, advertisement?.id)} /> */}
+                                    {
+                                        !advertisement.publish ?
+                                            <div className="flex items-center animate-bounce border bg-secondary text-xs rounded-md px-1 py-0.5 space-x-0.5 text-accent1 cursor-pointer" onClick={(e: any) => handleAdsPublishStatus(e, !advertisement?.publish, advertisement?.id)}>
+                                                Click To Publish
+                                            </div>
+                                            :
+                                            <div className="flex items-center animate-bounce border bg-primary text-xs rounded-md px-1 py-0.5 space-x-0.5 text-white cursor-pointer" onClick={(e: any) => handleAdsPublishStatus(e, !advertisement?.publish, advertisement?.id)}>
+                                                Published
+                                            </div>
+                                    }
+                                </div>
                             )
                         }
                     </div>

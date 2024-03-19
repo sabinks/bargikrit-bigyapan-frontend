@@ -1,17 +1,16 @@
 import React, { FormEvent, useEffect, useState } from 'react'
 import { useAuth } from '../../../../hooks/auth'
 import Dropdown from '../../../components/dropDown';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { apiClient, getDocumentTypeList, uploadPartnerDocuments } from '../../../api';
-import { deletePartnerDocument, getMembersDocuments } from '@/api/dashboard';
+import { getMembersDocuments } from '@/api/dashboard';
 import Image from 'next/image';
 import Zoom from 'react-medium-image-zoom'
 import { Button, Input } from '@/components';
-import { TrashIcon } from '@heroicons/react/24/outline';
 import Head from 'next/head';
 
 function Dashboard() {
-    const { user: { canPublish, remainingAds, currentPublishedAds } } = useAuth()
+    const { user: { canPublish, remainingAds, currentPublishedAds }, isAuthenticated } = useAuth()
     const [documentTypeList, setDocumentTypeList] = useState<any>([])
     const [documentList, setDocumentList] = useState<any>([])
     const [image, setImage] = useState<any>({})
@@ -28,14 +27,16 @@ function Dashboard() {
         getDocumentTypeList, {
         onSuccess: (data: any) => {
             setDocumentTypeList(data)
-        }
+        },
+        enabled: isAuthenticated
     })
     const { refetch: partnerDocumentsRefetch } = useQuery(
         ["member-documents"],
         getMembersDocuments, {
         onSuccess: (data: any) => {
             setDocumentList(data)
-        }
+        },
+        enabled: isAuthenticated
     })
 
     useEffect(() => {
@@ -106,7 +107,7 @@ function Dashboard() {
                             }} />
 
                             <div>
-                                <Input type='file' name='images' label='Select images' onChange={handleImage} />
+                                <Input type='file' name='images' label='Select images (format:jpeg, jpg)' onChange={handleImage} />
                                 <p className='text-red-500 text-sm'>{errors?.image}</p>
                             </div>
                             <Button

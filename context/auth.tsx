@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { booleanCheck, checkSubset } from "@/utils";
-import { getCookie, deleteCookie, setCookie } from "cookies-next";
+import { getCookie, deleteCookie, setCookie, removeCookies } from "cookies-next";
 import { apiClient } from "@/api";
 
 interface UserType {
@@ -68,17 +68,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const getUserDetails = async () => {
         apiClient.defaults.headers.common["Authorization"] = `${access_token}`;
-        let { status, data } = await apiClient.post("get-user");
-        if (status == 200) {
-            let { email, name, role, canPublish, contactNumber, currentPublishedAds, remainingAds, profileImage } = data
-            setUser(prev => ({
-                ...prev, name, email, canPublish: booleanCheck(canPublish), contactNumber, currentPublishedAds, remainingAds, profileImage
-            }))
-            setRoles([role]);
-            setIsAuthenticated(true)
+        try {
+            let { status, data } = await apiClient.post("get-user");
+            if (status == 200) {
+                let { email, name, role, canPublish, contactNumber, currentPublishedAds, remainingAds, profileImage } = data
+                setUser(prev => ({
+                    ...prev, name, email, canPublish: booleanCheck(canPublish), contactNumber, currentPublishedAds, remainingAds, profileImage
+                }))
+                setRoles([role]);
+                setIsAuthenticated(true)
+            }
+        } catch (error) {
+            setIsAuthenticated(false)
+            setAccessToken('')
+            deleteCookie('token')
         }
     };
-
 
     const signin = (
         role: string,

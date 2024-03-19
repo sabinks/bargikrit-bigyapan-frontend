@@ -50,6 +50,7 @@ export default function Login() {
             });
         },
         onError: ({ response }: any) => {
+
             (response.status === 422 || response.status === 401) &&
                 setError(response.data);
         },

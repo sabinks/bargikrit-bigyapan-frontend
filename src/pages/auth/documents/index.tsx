@@ -27,7 +27,8 @@ function MemberDocuments() {
         getMembersDocuments, {
         onSuccess: (data: any) => {
             setDocumentList(data)
-        }
+        },
+        enabled: isAuthenticated
     })
 
     useEffect(() => {

@@ -30,7 +30,7 @@ export default function CheckBox({
                 type='checkbox'
                 checked={checked}
                 className={classNames(
-                    "h-4 w-4 text-primary1 focus:ring-transparent border-primary rounded cursor-pointer",
+                    "h-4 w-4 text-primary focus:ring-transparent border-primary rounded cursor-pointer",
                     className,
                 )}
                 placeholder={placeholder}

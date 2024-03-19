@@ -5,6 +5,7 @@ import Dashboard from './dashboard';
 import AdminDashboard from './adminDashboard';
 import Modal from '@/components/modal';
 import Head from 'next/head';
+import Link from 'next/link';
 
 function Index() {
     const { roles, isAuthenticated, user: { canPublish, email }, getUserDetails } = useAuth()
@@ -34,13 +35,22 @@ function Index() {
                 checkSubset(['PARTNER', 'USER'], roles) &&
                 <Modal isVisible={isOpen} onClose={() => setIsOpen(false)} isPrimaryButtonVisible={false} isSecondaryButtonVisible={false}
                     bodyAlign='text-center'
-                    title='Dear valued User / Partner'>
+                    title=''>
                     <div className=" tracking-wide py-2 text-gray-dark text-sm">
+                        <h1 className='text-4xl tracking-wider pb-2'>Dear valued User/Partner</h1>
+                        <p className='text-2xl'>To post Ads, please verify yourself, upload one of the following documents</p>
+                        <ul className='text-secondary'>
+                            <li>Citizenship ID</li>
+                            <li>Driving License</li>
+                            <li>Passport</li>
+                            <li>Driving License</li>
+                            <li>Company Registration</li>
+                        </ul>
                         <p className='text-sm py-1 text-gray-dark'>
-                            We kindly request that you upload the following documents for verification purposes: Citizenship ID, Passport, Driving License, or Company Registration.
-                            Our administrative team will review the submitted documents, and upon verification, we will grant permission for advertisement publication through your dashboard.
+                            {/* We kindly request that you upload the following id documents for verification purposes: Citizenship ID, Passport, Driving License, or Company Registration. */}
+                            Our administrative team will review the submitted documents, and upon verification, we will allow permission for advertisement posts through your dashboard.
                         </p>
-                        <p className='text-sm py-1 text-gray-dark'>Please feel free to reach us if you require further information at <a className='underline text-blue-500' href="mailto:info@adzoner.com">info@adzoner.com</a>.</p>
+                        <p className='text-sm py-1 text-gray-dark'>Please feel free to reach us if you require further information at <a className='underline text-blue-500' href="mailto:info@adzoner.com">info@adzoner.com</a> or <Link href="/contact-us" className='cursor-pointer underline text-blue-500'>Contact Us</Link>.</p>
                         <div className="pt-4">
                             <p>Thank you for your cooperation and understanding.</p>
                             <p>Sincerely, Adzoner Team</p>

@@ -144,7 +144,7 @@ function Header() {
                     </div>
                 </Dialog.Panel>
             </Dialog>
-            <div className="flex bg-primary py-3">
+            <div className="flex bg-primary pt-1">
                 <div className="container mx-auto">
                     <div className="flex justify-between items-center">
                         <div className="flex flex-col justify-start md:flex-row md:space-x-4 divide-white text-white text-xs md:text-sm">
@@ -156,13 +156,16 @@ function Header() {
                             <div className="flex items-center pl-2 text-lg hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><a href="mailto:info@adzoner.com" className='pl-2'>info@adzoner.com</a></div>
                         </div>
 
-                        <Link href={isAuthenticated ? "/auth/advertisements?new=true" : "/register"} className="flex text-sm md:text-base relative px-3 md:px-5 py-1 md:py-2 font-medium text-white group">
-                            <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-purple-500 group-hover:bg-purple-700 group-hover:skew-x-12"></span>
-                            <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-purple-700 group-hover:bg-purple-500 group-hover:-skew-x-12"></span>
-                            <span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-purple-600 -rotate-12"></span>
-                            <span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-purple-400 -rotate-12"></span>
-                            <span className="relative">Post Advertisement</span>
-                        </Link>
+                        <div className="flex flex-col items-center gap-y-1">
+                            <Link href={isAuthenticated ? "/auth/advertisements?new=true" : "/register"} className="flex text-sm md:text-base relative px-3 md:px-5 py-1 md:py-2 font-medium text-white group">
+                                <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-purple-500 group-hover:bg-purple-700 group-hover:skew-x-12"></span>
+                                <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-purple-700 group-hover:bg-purple-500 group-hover:-skew-x-12"></span>
+                                <span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-purple-600 -rotate-12"></span>
+                                <span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-purple-400 -rotate-12"></span>
+                                <span className="relative">Post Advertisement</span>
+                            </Link>
+                            <p className='text-xs text-white animate-pulse'>Beta Version</p>
+                        </div>
                         <div className={`flex md:space-x-2 text-sm text-white`}>
 
                             {/* <div className="flex items-center pl-2 hover:cursor-pointer hover:text-gray-dark transition duration-500"><FaLocationPin /><span className='pl-2'> 1234 Elm Street</span></div> */}
