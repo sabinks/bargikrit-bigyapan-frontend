@@ -164,7 +164,7 @@ function Header() {
                                 <span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-purple-400 -rotate-12"></span>
                                 <span className="relative">Post Advertisement</span>
                             </Link>
-                            <p className='text-xs text-secondary animate-pulse'>Beta Version</p>
+                            <p className='text-xs text-secondary tracking-wide font-medium animate-pulse'>Beta Version</p>
                         </div>
                         <div className={`flex md:space-x-2 text-sm text-white`}>
 
