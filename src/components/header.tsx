@@ -57,7 +57,7 @@ function Header() {
                             alt=""
                             width="100"
                             height="100"
-                        />``
+                        />
                     </a>
                     <p className='text-sm font-semibold text-[#57237E]'>Platform To Post Anything</p>
                 </div>
@@ -152,11 +152,11 @@ function Header() {
                             {/* <div className="pl-4"><FaTwitter className=" hover:text-[#1DA1F2] transition duration-300 cursor-pointer" /></div> */}
                             {/* <div className="pl-4"><FaInstagram className=" hover:text-pink-600 transition duration-300 cursor-pointer" /></div>
                             <div className="pl-4"><FaYoutube className=" hover:text-[#CD201F] transition duration-300 cursor-pointer" /> </div> */}
-                            <div className="flex items-center pl-2 text-lg hover:cursor-pointer hover:text-secondary transition duration-500"><FaMobile /><a href={`tel:${country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}`} className='pl-2'> {country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}</a></div>
-                            <div className="flex items-center pl-2 text-lg hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><a href="mailto:info@adzoner.com" className='pl-2'>info@adzoner.com</a></div>
+                            <div className="flex items-center pl-2 text-sm md:text-lg hover:cursor-pointer hover:text-secondary transition duration-500"><FaMobile /><a href={`tel:${country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}`} className='pl-2'> {country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}</a></div>
+                            <div className="flex items-center pl-2 text-sm md:text-lg hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><a href="mailto:info@adzoner.com" className='pl-2'>info@adzoner.com</a></div>
                         </div>
 
-                        <div className="flex flex-col items-center gap-y-1">
+                        <div className="flex flex-row items-center gap-x-4 pb-1">
                             <Link href={isAuthenticated ? "/auth/advertisements?new=true" : "/register"} className="flex text-sm md:text-base relative px-3 md:px-5 py-1 md:py-2 font-medium text-white group">
                                 <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-purple-500 group-hover:bg-purple-700 group-hover:skew-x-12"></span>
                                 <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-purple-700 group-hover:bg-purple-500 group-hover:-skew-x-12"></span>
@@ -164,7 +164,7 @@ function Header() {
                                 <span className="absolute bottom-0 right-0 hidden w-10 h-20 transition-all duration-100 ease-out transform translate-x-10 translate-y-8 bg-purple-400 -rotate-12"></span>
                                 <span className="relative">Post Advertisement</span>
                             </Link>
-                            <p className='text-xs text-secondary tracking-wide font-medium animate-pulse'>Beta Version</p>
+                            <p className='text-xs rounded-md px-2 bg-red-200 text-accent1 tracking-wide animate-pulse'>Beta Version</p>
                         </div>
                         <div className={`flex md:space-x-2 text-sm text-white`}>
 

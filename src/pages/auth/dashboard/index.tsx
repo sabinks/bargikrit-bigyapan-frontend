@@ -6,6 +6,7 @@ import AdminDashboard from './adminDashboard';
 import Modal from '@/components/modal';
 import Head from 'next/head';
 import Link from 'next/link';
+import { inter, nunitoSans } from '@/fonts';
 
 function Index() {
     const { roles, isAuthenticated, user: { canPublish, email }, getUserDetails } = useAuth()
@@ -37,13 +38,12 @@ function Index() {
                     bodyAlign='text-center'
                     title=''>
                     <div className=" tracking-wide py-2 text-gray-dark text-sm">
-                        <h1 className='text-4xl tracking-wider pb-2'>Dear valued User/Partner</h1>
-                        <p className='text-2xl'>To post Ads, please verify yourself, upload one of the following documents</p>
-                        <ul className='text-secondary'>
+                        <h1 className={`text-4xl tracking-wider pb-2 ${nunitoSans.className}`}>Dear valued User/Partner</h1>
+                        <p className={`text-2xl ${nunitoSans.className}`}>To post Ads, please verify yourself, upload one of the following documents</p>
+                        <ul className='text-secondary py-4'>
                             <li>Citizenship ID</li>
                             <li>Driving License</li>
                             <li>Passport</li>
-                            <li>Driving License</li>
                             <li>Company Registration</li>
                         </ul>
                         <p className='text-sm py-1 text-gray-dark'>

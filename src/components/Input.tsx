@@ -11,6 +11,7 @@ interface InputProps {
     className?: string;
     value?: string | number;
     onChange?: any;
+    multiple?: boolean;
     error?: string[] | string | undefined | any;
 }
 const Input = ({
@@ -22,6 +23,7 @@ const Input = ({
     className = "",
     value,
     onChange,
+    multiple = false,
     error,
     ...rest
 }: InputProps) => {
@@ -66,7 +68,7 @@ const Input = ({
                         onChange={onChange}
                         name={name}
                         value={value}
-                        multiple
+                        multiple={multiple}
                         placeholder={placeholder}
                         autoComplete="off"
                         className={classNames(className,

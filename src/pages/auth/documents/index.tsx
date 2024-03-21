@@ -74,16 +74,18 @@ function MemberDocuments() {
                         <p className='text-accent1 text-sm'>(Document locked, cannot edit/delete)</p>
                     }
                 </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-1 xl:grid-cols-3 gap-8">
                     {
                         images && images.map((image: any) => {
-                            return <div className="flex flex-row justify-center border items-center">
-                                <ImageZoom className='object-center' src={`data:image/jpeg;base64,${image?.data}`} width={400} height={400} alt="Documents" />
-                                {
-                                    !canPublish &&
-                                    < Button buttonType='danger' className='w-8 h-8 relative left-2' icon={<TrashIcon className='w-5 h-5 self-center'
-                                        onClick={(e: any) => handleDocumentDelete(image?.filename)} />} />
-                                }
+                            return <div className="p-2 border rounded-md mx-auto">
+                                <div className="flex flex-row items-center py-4">
+                                    <ImageZoom className='object-center pr-8' src={`data:image/jpeg;base64,${image?.data}`} width={400} height={400} alt="Documents" />
+                                    {
+                                        !canPublish &&
+                                        < Button buttonType='danger' className='w-8 h-8' icon={<TrashIcon className='w-5 h-5 self-center'
+                                            onClick={(e: any) => handleDocumentDelete(image?.filename)} />} />
+                                    }
+                                </div>
                             </div>
                         })
                     }

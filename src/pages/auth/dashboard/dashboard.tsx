@@ -1,4 +1,5 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useMemo, useState } from 'react'
+import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import { useAuth } from '../../../../hooks/auth'
 import Dropdown from '../../../components/dropDown';
 import { useQuery } from '@tanstack/react-query';
@@ -8,19 +9,61 @@ import Image from 'next/image';
 import Zoom from 'react-medium-image-zoom'
 import { Button, Input } from '@/components';
 import Head from 'next/head';
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+type InputType = {
+    documentTypeId?: string;
+    images?: [];
+}
 
 function Dashboard() {
     const { user: { canPublish, remainingAds, currentPublishedAds }, isAuthenticated } = useAuth()
     const [documentTypeList, setDocumentTypeList] = useState<any>([])
-    const [documentList, setDocumentList] = useState<any>([])
-    const [image, setImage] = useState<any>({})
-    const [images, setImages] = useState<any>([])
     const [state, setState] = useState<any>({
-        documentTypeId: "",
-        images: null
+        documentType: null,
     });
-    const [errors, setErrors] = useState<any>({})
     const [loading, setLoading] = useState<boolean>(false)
+    const validationSchema = useMemo(
+        () =>
+            yup.object().shape(
+                {
+                    documentTypeId: yup.mixed().test({ name: 'documentTypeId', message: 'Document type required', test: (value: any) => value != "" }),
+                    images: yup.mixed()
+                        .test({
+                            name: 'images', message: 'Document(s) is required', test: (value: any) => {
+                                return value.length > 0
+                            }
+                        })
+                        .test("fileType", "Unsupported File Format", (value: any) => {
+                            for (let i = 0; i < value.length; i++) {
+                                if (value[i].type != "image/png" && value[i].type != "image/jpg" && value[i].type != "image/jpeg") {
+                                    return false;
+                                }
+                            }
+                            return true
+                        })
+                }),
+        []
+    );
+    const {
+        register,
+        handleSubmit,
+        setValue, reset,
+        formState: { errors },
+    } = useForm<InputType>({
+        resolver: yupResolver<yup.AnyObject>(validationSchema),
+        defaultValues: { documentTypeId: '', images: [] }
+    })
+
+    const onSubmit: SubmitHandler<InputType> = async (state) => {
+        try {
+            const response = await uploadPartnerDocuments(state);
+            reset()
+            setState((prev: any) => ({ ...prev, documentType: null }))
+        } catch (error: any) {
+        }
+    }
 
     const { refetch } = useQuery(
         ["document-type-list"],
@@ -30,58 +73,21 @@ function Dashboard() {
         },
         enabled: isAuthenticated
     })
-    const { refetch: partnerDocumentsRefetch } = useQuery(
-        ["member-documents"],
-        getMembersDocuments, {
-        onSuccess: (data: any) => {
-            setDocumentList(data)
-        },
-        enabled: isAuthenticated
-    })
-
-    useEffect(() => {
-        if (documentList.length) {
-            setImages([])
-            for (let index = 0; index < documentList.length; index++) {
-                const element = documentList[index];
-                loadImages(element?.documentName)
-            }
-        }
-    }, [documentList])
-
-    const loadImages = async (filename: string) => {
-        try {
-            const { data } = await apiClient.get(`member-document/${filename}`)
-            setImages((prev: any) => (
-                [...prev, { filename, data }]
-            ))
-        } catch (error) {
-            console.log('error occured for image fetch');
-        }
-    }
 
     const handleImage = (e: any) => {
         const { name, files } = e.target
         setState((prev: any) => ({ ...prev, images: files }))
     }
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setErrors({});
-        try {
-            const response = await uploadPartnerDocuments(state);
-            setState((prev: any) => ({
-                ...prev, message: response.data
-            }))
-            setState({ images: null, documentTypeId: 0 });
-            setLoading(false)
-            setImages([])
-            partnerDocumentsRefetch()
-        } catch (error: any) {
-            const { data } = error.response;
-            setErrors(data);
-            setLoading(false);
+
+    const handleSubmit1 = async (e: FormEvent) => {
+        for (let index = 0; index < state.images?.length; index++) {
+            const file = state.images[index];
+            // if (file.size > imageRequirement.fileSize) {
+            //     setImageErrors((prev: any) => ({
+            //         ...prev, fileSize: 'File upload size limit is 2MB.'
+            //     }))
+            // }
         }
     };
 
@@ -99,20 +105,40 @@ function Dashboard() {
                 <div className="border rounded-md py-2 px-4 text-gray-dark">
                     <h1>Please uploaded required documents!</h1>
                     <div className="">
-                        <form onSubmit={handleSubmit} className=" flex flex-col space-y-4">
-                            <Dropdown label='Document Type' data={documentTypeList} selectedValue={state?.documentType} onChange={(documentType: any) => {
-                                setState((prev: any) => ({
-                                    ...prev, documentTypeId: documentType?.id, documentType
-                                }))
-                            }} />
-
-                            <div>
-                                <Input type='file' name='images' label='Select images (format:jpeg, jpg)' onChange={handleImage} />
-                                <p className='text-red-500 text-sm'>{errors?.image}</p>
+                        <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col space-y-4">
+                            <Dropdown
+                                label='Document Type' {...register('documentTypeId')}
+                                data={documentTypeList}
+                                selectedValue={state?.documentType}
+                                onChange={(documentType: any) => {
+                                    setState((prev: any) => ({
+                                        ...prev, documentType
+                                    }))
+                                    setValue('documentTypeId', documentType?.id, { shouldDirty: true, shouldValidate: true, shouldTouch: true })
+                                }} />
+                            <p className='text-red-500 text-sm'>{errors?.documentTypeId?.message}</p>
+                            <div className='flex flex-col'>
+                                <label className="text-sm text-gray-700 font-bold py-1">Upload Document(s): (File Format: jpg, png) </label>
+                                <input type='file' {...register('images')} onChange={(e: any) => handleImage(e)} multiple />
                             </div>
+                            <p className='text-red-500 text-sm'>{errors?.images?.message}</p>
+                            {/* <Controller
+                                name="images"
+                                control={control}
+                                defaultValue={[]}
+                                render={({ field }) => (
+                                    <input
+                                        type="file"
+                                        onChange={(e) => {
+                                            field.onChange(e.target.files);
+                                        }}
+                                        multiple
+                                    />
+                                )}
+                            /> */}
                             <Button
                                 label="Submit"
-                                // buttonType="submit"
+                                buttonType="submit"
                                 loading={loading}
                                 type="submit"
                                 className="my-6 py-2 bg-primary hover:text-white rounded-md w-96"
