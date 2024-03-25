@@ -1,20 +1,20 @@
-import { montserrat, nunitoSans } from '@/fonts'
+import { montserrat } from '@/fonts'
 import React, { useState } from 'react'
 import { checkSubset } from '@/utils'
 import { useAuth } from '../../hooks/auth'
-import { ArrowDownLeftIcon, ArrowLeftIcon, PencilIcon, PencilSquareIcon, PhoneIcon, StarIcon } from '@heroicons/react/24/outline'
+import { PencilSquareIcon, PhoneIcon, StarIcon } from '@heroicons/react/24/outline'
 import Button from '@/components/Button'
-import CheckBox from './checkbox'
 import { useMutation } from '@tanstack/react-query'
 import { advertisementStatusChange } from '../../api/advertisement'
 import { MdEmail } from 'react-icons/md'
 import { FaIcons, FaSms } from 'react-icons/fa'
 import { userFavouriteAdsChange } from '@/api'
-import { BsFillStarFill, BsStarFill } from 'react-icons/bs'
+import { BsFillStarFill } from 'react-icons/bs'
 import { BiGlobe } from 'react-icons/bi'
 import Image from 'next/image'
 import { BACKEND_URL } from '@/constants'
 import Modal from './modal'
+import { format } from 'date-fns'
 
 function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refetch, isFrontPage = false, handleFavCheck }: any) {
     const { advertisementImages, categories } = advertisement
@@ -138,8 +138,9 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                             </div>
                         </div>
 
-                        <div className="flex md:justify-between pt-2">
+                        <div className="flex flex-col md:justify-between pt-2">
                             <p className=''>Province: {advertisement?.province?.name}</p>
+                            <p className=''>Published On:  {format(new Date(advertisement?.createdAt), "do MMM, yyyy")}</p>
                             {/* <p className=''>District: {advertisement?.district?.name}</p> */}
                         </div>
                     </div>
