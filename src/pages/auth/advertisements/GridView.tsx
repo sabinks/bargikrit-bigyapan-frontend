@@ -146,11 +146,11 @@ export default function GridView({ }: any) {
     })
     useQuery(['advertisements', updatedAdId], showAdvertisement, {
         onSuccess: (res) => {
-            const { name, data, id, advertisementType, categories, country, province, district, companyName, email, user, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber } = res.data
+            const { name, data, id, advertisementType, categories, country, province, district, companyName, email, user, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber, createdAt } = res.data
             const newAds = advertisements.map((ad: any) => {
                 if (ad.id == id) {
                     return {
-                        name, data, id, advertisementType, categories, country, province, district, companyName, email, user, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber
+                        name, data, id, advertisementType, categories, country, province, district, companyName, email, user, contactNumber, website, advertisementImages, showWebsite, showEmail, showContactNumber, createdAt
                     }
                 } else {
                     return ad
