@@ -17,7 +17,7 @@ import Modal from './modal'
 import { format } from 'date-fns'
 
 function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refetch, isFrontPage = false, handleFavCheck }: any) {
-    const { advertisementImages, categories } = advertisement
+    const { advertisementImages, categories, id } = advertisement
     const { roles, user: { email }, isAuthenticated } = useAuth()
     const handleAdsPublishStatus = (e: any, publish: boolean, id: number) => {
         changeAdsPublishStatus({ id, status: publish })
@@ -53,7 +53,7 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
     );
 
     return (
-        <div className="p-2 bg-white">
+        <div className="p-2 bg-white" key={id}>
             <div className="relative">
                 <div className="absolute right-2 -bottom-10">
                     <div className="flex items-center space-x-2 pb-1">
@@ -134,13 +134,13 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                                     }
                                 </div>
                                 <h3 className='text-sm'>Categories</h3>
-                                <div className='flex flex-wrap gap-2 text-black text-xs font-semibold'>{categories?.map(({ name }: any) => <span className="bg-secondary px-2 py-0.5 rounded-md">{name}</span>)}</div>
+                                <div className='flex flex-wrap gap-2 text-black text-xs font-semibold'>{categories?.map(({ name }: any, index: number) => <span key={index} className="bg-secondary px-2 py-0.5 rounded-md">{name}</span>)}</div>
                             </div>
                         </div>
 
                         <div className="flex flex-col md:justify-between pt-2">
                             <p className=''>Province: {advertisement?.province?.name}</p>
-                            <p className=''>Published On:  {format(new Date(advertisement?.createdAt), "do MMM, yyyy")}</p>
+                            <p className=''>Published On:  {advertisement?.createdAt && format(new Date(advertisement?.createdAt), "do MMM, yyyy")}</p>
                             {/* <p className=''>District: {advertisement?.district?.name}</p> */}
                         </div>
                     </div>
@@ -208,11 +208,12 @@ function AdvertisementCard({ advertisement, setAdvertisements, handleClick, refe
                             <h3 className='text-center bg-gray-dark text-white py-1 rounded-tr-2xl rounded-bl-2xl'>{advertisement?.name}</h3>
                             <div dangerouslySetInnerHTML={{ __html: advertisement?.data }} className='py-2'></div>
                             <h3 className='text-sm'>Categories</h3>
-                            <div className='flex flex-wrap gap-2 text-black text-xs font-semibold'>{categories?.map(({ name }: any) => <span className="bg-secondary px-2 py-0.5 rounded-md">{name}</span>)}</div>
+                            <div className='flex flex-wrap gap-2 text-black text-xs font-semibold'>{categories?.map(({ name }: any, index: number) => <span key={index} className="bg-secondary px-2 py-0.5 rounded-md">{name}</span>)}</div>
                         </div>
 
                         <div className="flex md:justify-between pt-2">
                             <p className=''>Province: {advertisement?.province?.name}</p>
+                            <p className=''>Published On:  {advertisement?.createdAt && format(new Date(advertisement?.createdAt), "do MMM, yyyy")}</p>
                             {/* <p className=''>District: {advertisement?.district?.name}</p> */}
                         </div>
                         <div className="flex flex-col justify-between space-y-1 text-xs">
