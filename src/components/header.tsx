@@ -13,17 +13,19 @@ import { useRouter } from 'next/router';
 import { useMutation } from '@tanstack/react-query';
 import Image from 'next/image';
 import { setCookie } from 'cookies-next';
+import { usePathname } from 'next/navigation'
 import { useAuth } from '../../hooks/auth';
 import { logout } from '../../api/auth';
 import { useApplication } from '../../hooks/application';
+import { classNames } from '@/utils';
 function Header() {
     const { isAuthenticated, signout, setIsAuthenticated, setAccessToken } = useAuth()
     const { appState: { country } } = useApplication()
     const router = useRouter()
+    const pathname = usePathname()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navigation = [
         { name: 'Home', href: '/' },
-        // { name: 'About Us', href: '/about-us' },
         { name: 'Contact Us', href: '/contact-us' },
     ]
     const { mutate } = useMutation<any, Error>(logout,
@@ -226,10 +228,20 @@ function Header() {
                             </div>
                             <p className='text-xs font-semibold text-[#57237E]'>Platform To Post Anything</p>
                         </div>
-                        <div className={`flex items-center text-gray-dark ${montserratRegular.className}`}>
-                            <Link href="/" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary py-5 px-5 transition duration-300 cursor-pointer">HOME</Link>
+                        <div className={`flex items-center space-x-1 text-gray-dark ${montserratRegular.className}`}>
+                            {
+                                navigation.map((link: any) => {
+                                    const isActive = link.href == pathname
+
+                                    return <Link href={link?.href}
+                                        className={classNames(" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary py-5 px-5 transition duration-300 cursor-pointer",
+                                            isActive ? "text-white bg-primary border-secondary border-t-4 transition duration-300" : "")}
+                                    >{link.name}</Link>
+                                })
+                            }
+                            {/* <Link href="/" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary py-5 px-5 transition duration-300 cursor-pointer">HOME</Link> */}
                             {/* <Link href="/about-us" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-t-yellow-600 hover:outline-t-4 py-5 px-5 transition duration-200 cursor-pointer">ABOUT US</Link> */}
-                            <Link href="/contact-us" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary hover:outline-t-4 py-5 px-5 transition duration-300 cursor-pointer">CONTACT US</Link>
+                            {/* <Link href="/contact-us" className=" hover:text-white text-sm hover:bg-primary border-t-4 border-white hover:border-secondary hover:outline-t-4 py-5 px-5 transition duration-300 cursor-pointer">CONTACT US</Link> */}
                         </div>
                     </div>
                 </div>

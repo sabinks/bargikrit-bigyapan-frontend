@@ -13,7 +13,6 @@ import {
 } from "@heroicons/react/24/outline";
 import dynamic from 'next/dynamic'
 import { useMutation } from "@tanstack/react-query";
-
 import NewButton from "../new-button";
 import { logout } from "../../../api/auth";
 import { classNames } from "@/utils";
@@ -27,14 +26,11 @@ export default function NavBar() {
     const [navShow, setNavShow] = useState(false);
     const router = useRouter();
     const { pathname } = router;
-
-
     const baseUrl = process.env.NEXT_PUBLIC_VITE_DASHBOARD_URL;
 
     const capitalizeFirst = (str: string) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
-
 
     const { mutate } = useMutation<any, Error>(logout,
         {
