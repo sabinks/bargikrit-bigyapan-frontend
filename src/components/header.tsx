@@ -154,7 +154,7 @@ function Header() {
                             {/* <div className="pl-4"><FaTwitter className=" hover:text-[#1DA1F2] transition duration-300 cursor-pointer" /></div> */}
                             {/* <div className="pl-4"><FaInstagram className=" hover:text-pink-600 transition duration-300 cursor-pointer" /></div>
                             <div className="pl-4"><FaYoutube className=" hover:text-[#CD201F] transition duration-300 cursor-pointer" /> </div> */}
-                            <div className="flex items-center pl-2 text-sm md:text-lg hover:cursor-pointer hover:text-secondary transition duration-500"><FaMobile /><a href={`tel:${country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}`} className='pl-2'> {country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}</a></div>
+                            {/* <div className="flex items-center pl-2 text-sm md:text-lg hover:cursor-pointer hover:text-secondary transition duration-500"><FaMobile /><a href={`tel:${country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}`} className='pl-2'> {country == "Nepal" ? "+977 9861168333" : " + 61 402 941 594"}</a></div> */}
                             <div className="flex items-center pl-2 text-sm md:text-lg hover:cursor-pointer hover:text-secondary transition duration-500"><FaMessage /><a href="mailto:info@adzoner.com" className='pl-2'>info@adzoner.com</a></div>
                         </div>
 
