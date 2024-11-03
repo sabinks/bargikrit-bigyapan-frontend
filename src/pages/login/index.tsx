@@ -1,18 +1,16 @@
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
-import { useAuth } from "../../../hooks/auth";
-import { Button, CheckBox, Input } from "../../components";
-import Link from "next/link";
-import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/outline";
-import { userLogin } from "../../../api/auth";
 import { setCookie } from "cookies-next";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { userLogin } from "../../../api/auth";
+import { useAuth } from "../../../hooks/auth";
+import { Button, Input } from "../../components";
 
-import dynamic from "next/dynamic";
 import { APP_NAME } from "@/constants";
-import { montserrat, nunitoSans, playFair, poppins } from "@/fonts";
+import { montserrat } from "@/fonts";
 import Image from "next/image";
-import Head from "next/head";
 
 // const SocialLogin = dynamic(
 //     () => import("../../../components/socialLogin"),

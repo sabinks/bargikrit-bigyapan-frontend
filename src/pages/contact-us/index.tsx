@@ -1,12 +1,11 @@
 "use client";
-import { useState, FormEvent, useRef, Fragment } from "react";
-import { Inter } from 'next/font/google'
-import { Dialog, Transition } from '@headlessui/react'
+import { Dialog, Transition } from '@headlessui/react';
+import { Inter } from 'next/font/google';
 import Image from "next/image";
+import { FormEvent, Fragment, useRef, useState } from "react";
 import { sendContact } from "../../api";
-import { playFair } from "@/fonts";
-import Input from "../../components/Input";
 import Button from "../../components/Button";
+import Input from "../../components/Input";
 const inter = Inter({ subsets: ['latin'] })
 
 interface ContactType {
@@ -66,7 +65,7 @@ const Contact = () => {
             <div className="container mx-auto mt-8 mb-36">
                 <div className="flex flex-col items-center justify-center md:justify-normal ">
                     <div className="mt-8 mb-8 flex flex-col  px-4 md:px-0">
-                        <h2 id="slide-left" className={`${playFair.className} text-5xl md:text-7xl font-extrabold mb-6 text-center`}>Contact Us</h2>
+                        <h2 id="slide-left" className={`${inter.className} text-5xl md:text-7xl font-extrabold mb-6 text-center`}>Contact Us</h2>
                         <form onSubmit={handleSubmit} className=" flex flex-col space-y-4">
                             <Input
                                 type="text"
